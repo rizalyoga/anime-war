@@ -5,6 +5,7 @@ export const GoesToCityButton = ({ characterId, characterName }) => {
 
   const goToCity = () => {
     // navigate(`/city/${characterId}/${characterName}`);
+    router.push(`/city/${characterId}?hero=${characterName}`);
     console.log(router);
   };
 

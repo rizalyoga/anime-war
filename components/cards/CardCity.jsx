@@ -1,15 +1,15 @@
 import React from "react";
 import styles from "./card-city.module.css";
-import { useParams, useNavigate } from "react-router-dom";
+import { useRouter } from "next/router";
 
 function CardCity({ dataCity }) {
-  const { idCharacter, nameCharacter } = useParams();
-
-  const navigate = useNavigate();
+  const router = useRouter();
+  const { idCharacter, hero } = router.query;
 
   // GOES TO VILAIN PAGE HANDLER
   const goesToVillain = (idCharacter, nameCharacter, cityName) => {
-    navigate(`/villains/${idCharacter}/${nameCharacter}/${cityName}`);
+    // navigate(`/villains/${idCharacter}/${nameCharacter}/${cityName}`);
+    console.log(id, hero);
   };
 
   return (
