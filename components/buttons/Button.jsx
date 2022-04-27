@@ -1,10 +1,11 @@
-import { useNavigate } from "react-router-dom";
+import { useRouter } from "next/router";
 
 export const GoesToCityButton = ({ characterId, characterName }) => {
-  const navigate = useNavigate();
+  const router = useRouter();
 
   const goToCity = () => {
-    navigate(`/city/${characterId}/${characterName}`);
+    // navigate(`/city/${characterId}/${characterName}`);
+    console.log(router);
   };
 
   return (
