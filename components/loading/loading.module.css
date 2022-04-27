@@ -1,0 +1,9 @@
+.container-loading {
+  width: 100%;
+  margin: auto;
+}
+
+.loading {
+  color: white;
+  text-align: center;
+}
