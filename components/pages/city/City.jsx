@@ -9,7 +9,7 @@ function City() {
   const [loading, setLoading] = useState();
 
   const router = useRouter();
-  const { hero, id } = router.query;
+  const { hero, idCharacter } = router.query;
 
   //Get City Data
   useEffect(() => {
@@ -26,8 +26,7 @@ function City() {
 
   //Goes to Skill Character Page
   const goesToSkill = () => {
-    // router.push(`/skill/${params.idCharacter}/${params.nameCharacter}`);
-    console.log(hero, id);
+    router.push(`/skill/${idCharacter}?hero=${hero}`);
   };
 
   return (
