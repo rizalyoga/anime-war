@@ -1,5 +1,4 @@
 import Swal from "sweetalert2";
-// import backgroundSwal from "../../assets/all_star_sweet.jpg";
 
 export const resultAlert = (status) => {
   return Swal.fire({

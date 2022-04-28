@@ -1,5 +1,5 @@
 import React from "react";
-import City from "../../components/pages/city/City";
+import City from "@/components/pages/city/City";
 
 const Citys = () => {
   return (

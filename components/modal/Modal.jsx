@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import styles from "./modal.module.css";
 import { RiCloseLine } from "react-icons/ri";
-import { getSelectedVillain, postFight, loadings } from "../../data/api";
+import { getSelectedVillain, postFight, loadings } from "@/data/api";
 import { useRouter } from "next/router";
 import { useGetCity } from "../../hooks/useGetCity";
 import { resultAlert } from "../alerts/alert";

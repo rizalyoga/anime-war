@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { useRouter } from "next/router";
-import { getSkill, loadings } from "../../../data/api";
-import CardSkill from "../../cards/Card";
-import { GoesToCityButton } from "../../buttons/Button";
-import LoadingComponent from "../../loading/Loading";
-import Layout from "../../../layout/Layout";
+import { getSkill, loadings } from "@/data/api";
+import CardSkill from "@/components/cards/Card";
+import { GoesToCityButton } from "@/components/buttons/Button";
+import LoadingComponent from "@/components/loading/Loading";
+import Layout from "@/layout/Layout";
 
 function Skill() {
   const [dataSkill, setDataSkill] = useState({});

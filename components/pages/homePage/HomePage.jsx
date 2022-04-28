@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react";
-import { getAllData, loadings } from "../../../data/api";
-import Card from "../../cards/Card";
-import { GoesToCityButton } from "../../buttons/Button";
-import { confirmationtAlert } from "../../alerts/alert";
-import LoadingComponent from "../../loading/Loading";
-import Layout from "../../../layout/Layout";
+import { getAllData, loadings } from "@/data/api";
+import Card from "@/components/cards/Card";
+import { GoesToCityButton } from "@/components/buttons/Button";
+import { confirmationtAlert } from "@/components/alerts/alert";
+import LoadingComponent from "@/components/loading/Loading";
+import Layout from "@/layout/Layout";
 
 const HomePage = () => {
   const [dataCharacter, setDataCharacter] = useState([]);

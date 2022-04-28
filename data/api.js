@@ -1,6 +1,6 @@
 export let loadings = true;
 
-const url = "https://materi-thrive-demo.vercel.app";
+const url = process.env.NEXT_PUBLIC_APP_LINK_API;
 
 // Get Data Hero
 export const getAllData = async () => {

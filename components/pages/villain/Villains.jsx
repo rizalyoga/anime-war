@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { useRouter } from "next/router";
-import { GoesToCityButton } from "../../buttons/Button";
-import { getVillains, loadings } from "../../../data/api";
-import LoadingComponent from "../../loading/Loading";
-import CardVillains from "../../cards/CardVillains";
-import { useGetCity } from "../../../hooks/useGetCity";
-import Layout from "../../../layout/Layout";
+import { GoesToCityButton } from "@/components/buttons/Button";
+import { getVillains, loadings } from "@/data/api";
+import LoadingComponent from "@/components/loading/Loading";
+import CardVillains from "@/components/cards/CardVillains";
+import { useGetCity } from "@/hooks/useGetCity";
+import Layout from "@/layout/Layout";
 
 function Villains() {
   const [dataVillains, setDataVillains] = useState([]);

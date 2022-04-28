@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { useRouter } from "next/router";
-import { getCity, loadings } from "../../../data/api";
-import CardCity from "../../cards/CardCity";
-import LoadingComponent from "../../loading/Loading";
-import Layout from "../../../layout/Layout";
+import { getCity, loadings } from "@/data/api";
+import CardCity from "@/components/cards/CardCity";
+import LoadingComponent from "@/components/loading/Loading";
+import Layout from "@/layout/Layout";
 
 function City() {
   const [dataCity, setDataCity] = useState([]);
