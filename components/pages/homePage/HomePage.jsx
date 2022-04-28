@@ -4,6 +4,7 @@ import Card from "../../cards/Card";
 import { GoesToCityButton } from "../../buttons/Button";
 import { confirmationtAlert } from "../../alerts/alert";
 import LoadingComponent from "../../loading/Loading";
+import Layout from "../../../layout/Layout";
 
 const HomePage = () => {
   const [dataCharacter, setDataCharacter] = useState([]);
@@ -37,29 +38,31 @@ const HomePage = () => {
   };
 
   return (
-    <div className="container">
-      <div className="header">
-        <div className="desc-header">
-          <h1 className="title-page">Choose Your Hero</h1>
+    <Layout>
+      <div className="container">
+        <div className="header">
+          <div className="desc-header">
+            <h1 className="title-page">Choose Your Hero</h1>
+          </div>
+          <div className="button-control">
+            <button className="choose-btn" onClick={resetGame}>
+              Reset Game
+            </button>
+          </div>
         </div>
-        <div className="button-control">
-          <button className="choose-btn" onClick={resetGame}>
-            Reset Game
-          </button>
-        </div>
-      </div>
-      {loading ? (
-        <LoadingComponent />
-      ) : (
-        <div className="card-container">
-          <Card dataCharacter={dataCharacter} background={idCaracter} updateChoosing={chooseTheCharacter} skill={dataSkill} />
-        </div>
-      )}
+        {loading ? (
+          <LoadingComponent />
+        ) : (
+          <div className="card-container">
+            <Card dataCharacter={dataCharacter} background={idCaracter} updateChoosing={chooseTheCharacter} skill={dataSkill} />
+          </div>
+        )}
 
-      <div className="button-wrap">
-        <GoesToCityButton characterId={idCaracter} characterName={chooseCharacter} />
+        <div className="button-wrap">
+          <GoesToCityButton characterId={idCaracter} characterName={chooseCharacter} />
+        </div>
       </div>
-    </div>
+    </Layout>
   );
 };
 

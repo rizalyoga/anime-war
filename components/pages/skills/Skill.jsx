@@ -4,6 +4,7 @@ import { getSkill, loadings } from "../../../data/api";
 import CardSkill from "../../cards/Card";
 import { GoesToCityButton } from "../../buttons/Button";
 import LoadingComponent from "../../loading/Loading";
+import Layout from "../../../layout/Layout";
 
 function Skill() {
   const [dataSkill, setDataSkill] = useState({});
@@ -23,15 +24,17 @@ function Skill() {
   }, [idCharacter]);
 
   return (
-    <div className="container">
-      <h1 className="title-page">
-        <span>{hero} </span> skills
-      </h1>
-      {loading ? <LoadingComponent /> : <div className="card-container">{dataSkill && <CardSkill skill={dataSkill} />}</div>}
-      <div className="button-wrap">
-        <GoesToCityButton characterId={dataSkill.id} characterName={dataSkill.name} />
+    <Layout>
+      <div className="container">
+        <h1 className="title-page">
+          <span>{hero} </span> skills
+        </h1>
+        {loading ? <LoadingComponent /> : <div className="card-container">{dataSkill && <CardSkill skill={dataSkill} />}</div>}
+        <div className="button-wrap">
+          <GoesToCityButton characterId={dataSkill.id} characterName={dataSkill.name} />
+        </div>
       </div>
-    </div>
+    </Layout>
   );
 }
 
