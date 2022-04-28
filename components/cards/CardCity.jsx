@@ -9,7 +9,7 @@ function CardCity({ dataCity }) {
   // GOES TO VILAIN PAGE HANDLER
   const goesToVillain = (idCharacter, nameCharacter, cityName) => {
     // navigate(`/villains/${idCharacter}/${nameCharacter}/${cityName}`);
-    console.log(id, hero);
+    router.push(`/villains/${idCharacter}?hero=${nameCharacter}&city=${cityName}`);
   };
 
   return (
@@ -24,13 +24,13 @@ function CardCity({ dataCity }) {
               ? data.heroes
                   .filter((el) => el.id == idCharacter)
                   .map((el) => (
-                    <button key={el.id} className="choose-btn" onClick={() => goesToVillain(idCharacter, nameCharacter, data.name)}>
+                    <button key={el.id} className="choose-btn" onClick={() => goesToVillain(idCharacter, hero, data.name)}>
                       Battle in {data.name}
                     </button>
                   ))
               : data.heroes.map((el) =>
                   el.id == idCharacter ? (
-                    <button key={el.id} className="choose-btn" onClick={() => goesToVillain(idCharacter, nameCharacter, data.name)}>
+                    <button key={el.id} className="choose-btn" onClick={() => goesToVillain(idCharacter, hero, data.name)}>
                       Battle in {data.name}
                     </button>
                   ) : (

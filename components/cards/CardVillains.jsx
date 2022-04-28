@@ -1,14 +1,14 @@
 import React, { useState } from "react";
-import Modal from "../modal/Modal";
-import { useParams } from "react-router-dom";
-import { ButtonLose, ButtonWin } from "../Button/Button";
+// import Modal from "../modal/Modal";
+import { useRouter } from "next/router";
+import { ButtonLose, ButtonWin } from "../buttons/Button";
 
 function CardVillain({ dataVillains, dataCity }) {
   const [isOpen, setIsOpen] = useState(false);
   const [idVillain, setIdVillain] = useState("");
 
-  const { nameCharacter } = useParams();
-  const { nameCity } = useParams();
+  const router = useRouter();
+  const { hero, city } = router.query;
 
   // Choose villain Handler
   const choosingVillain = (id) => {
@@ -19,14 +19,14 @@ function CardVillain({ dataVillains, dataCity }) {
   return (
     <>
       {dataCity?.map((el) =>
-        el.name == nameCity
+        el.name == city
           ? el.villains.map((data) => (
               <div className="card" key={data.id}>
                 <img className="image" src={data.imgSrc} alt="avatar" />
                 <h1>{data.name}</h1>
-                {JSON.parse(localStorage.getItem(`${nameCharacter}VS${data.name}`))?.villainHP == 0 ? (
+                {JSON.parse(localStorage.getItem(`${hero}VS${data.name}`))?.villainHP == 0 ? (
                   <ButtonWin />
-                ) : JSON.parse(localStorage.getItem(`${nameCharacter}VS${data.name}`))?.heroHP == 0 ? (
+                ) : JSON.parse(localStorage.getItem(`${hero}VS${data.name}`))?.heroHP == 0 ? (
                   <ButtonLose />
                 ) : (
                   <button className="choose-btn" onClick={() => choosingVillain(data.id)}>
@@ -37,7 +37,7 @@ function CardVillain({ dataVillains, dataCity }) {
             ))
           : null
       )}
-      {isOpen && <Modal setIsOpen={setIsOpen} idVillain={idVillain} />}
+      {/* {isOpen && <Modal setIsOpen={setIsOpen} idVillain={idVillain} />} */}
     </>
   );
 }
