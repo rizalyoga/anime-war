@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-// import Modal from "../modal/Modal";
+import Modal from "../modal/Modal";
 import { useRouter } from "next/router";
 import { ButtonLose, ButtonWin } from "../buttons/Button";
 
@@ -12,6 +12,8 @@ function CardVillain({ dataVillains, dataCity }) {
 
   // Choose villain Handler
   const choosingVillain = (id) => {
+    console.log(isOpen);
+    console.log(idVillain);
     setIsOpen(true);
     setIdVillain(id);
   };
@@ -37,7 +39,7 @@ function CardVillain({ dataVillains, dataCity }) {
             ))
           : null
       )}
-      {/* {isOpen && <Modal setIsOpen={setIsOpen} idVillain={idVillain} />} */}
+      {isOpen && <Modal setIsOpen={setIsOpen} idVillain={idVillain} />}
     </>
   );
 }
