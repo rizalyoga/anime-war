@@ -8,7 +8,7 @@ export const resultAlert = (status) => {
     color: "#FFF",
     background: `linear-gradient(rgba(4,9,30,0.7), rgba(4,9,30,0.7)), url(/assets/all_star_sweet.jpg)`,
     backdrop: `
-    rgba(167, 167, 167, 0.432)
+    rgba(4,9,30,0.5)
           left top
           no-repeat
         `,

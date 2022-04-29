@@ -89,7 +89,6 @@ span {
 }
 
 .card {
-  background-color: #222831;
   height: 100%;
   width: 100%;
   border-radius: 5px;
@@ -100,10 +99,18 @@ span {
   color: white;
   margin: 20px 0;
   padding-top: 20px;
+
+  backdrop-filter: blur(16px) saturate(98%);
+  -webkit-backdrop-filter: blur(16px) saturate(98%);
+  background-color: rgba(34, 40, 49, 0.76);
+  border: 1px solid rgba(122, 122, 122, 0.3);
 }
 
 .active {
-  background-color: #224ead;
+  backdrop-filter: blur(16px) saturate(98%);
+  -webkit-backdrop-filter: blur(16px) saturate(98%);
+  background-color: rgba(34, 78, 173, 0.75);
+  border: 1px solid rgba(122, 122, 122, 0.3);
 }
 
 .image {
