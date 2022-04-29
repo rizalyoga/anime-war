@@ -8,7 +8,7 @@ export const GoesToCityButton = ({ characterId, characterName }) => {
   };
 
   return (
-    <button disabled={characterId ? false : true} id="visible-btn" className={characterId && "choose-btn"} onClick={goToCity}>
+    <button disabled={characterId ? false : true} id="visible-btn" className={characterId && "goto-city"} onClick={goToCity}>
       Goes To City
     </button>
   );
