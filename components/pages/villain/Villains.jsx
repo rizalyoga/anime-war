@@ -12,7 +12,7 @@ function Villains() {
   const [loading, setLoading] = useState();
 
   const router = useRouter();
-  const { idCharacter, hero } = router.query;
+  const { idCharacter, hero, city } = router.query;
 
   //Get Villains Data
   useEffect(() => {
@@ -29,7 +29,9 @@ function Villains() {
       <div className="container">
         <div className="header">
           <div className="desc-header">
-            <h1>Villain List</h1>
+            <h1>
+              Villain List in <span>{city}</span>
+            </h1>
             <h2>Choose your Villain !</h2>
           </div>
           <div className="control-button">

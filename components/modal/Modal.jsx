@@ -152,7 +152,7 @@ const Modal = ({ setIsOpen, idVillain }) => {
                     }
                   ></div>
                 </div>
-                <h3>- {hero} -</h3>
+                <h3>- {hero?.toUpperCase()} -</h3>
 
                 {/*  ----------------------------- Action Control -----------------------------  */}
                 <div className={styles.modalActions}>

@@ -97,11 +97,11 @@ span {
   box-shadow: 0 10px 50px rgb(128, 128, 128);
 }
 
-.choose-btn {
+.choose-btn,
+.goto-city {
   padding: 8px 16px;
-  background-color: rgba(235, 25, 110, 1);
+  border: 1.5px solid rgba(202, 202, 202, 0.3);
   color: white;
-  border: none;
   cursor: pointer;
   border-radius: 3px;
   margin: 0 5px;
@@ -110,17 +110,12 @@ span {
   transition: ease-in 0.2s;
 }
 
+.choose-btn {
+  background-color: rgba(235, 25, 110, 1);
+}
+
 .goto-city {
-  padding: 8px 16px;
-  background-color: #f58845;
-  color: white;
-  border: none;
-  cursor: pointer;
-  border-radius: 3px;
-  margin: 0 5px;
-  font-weight: bolder;
-  min-width: 150px;
-  transition: ease-in 0.2s;
+  background-color: rgba(34, 78, 173, 0.8);
 }
 
 .choose-btn:last-child {

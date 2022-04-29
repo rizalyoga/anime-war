@@ -27,7 +27,7 @@ function Skill() {
     <Layout>
       <div className="container">
         <h1 className="title-page">
-          <span>{hero} </span> skills
+          <span>{hero?.toUpperCase()} </span> skills
         </h1>
         {loading ? <LoadingComponent /> : <div className="card-container">{dataSkill && <CardSkill skill={dataSkill} />}</div>}
         <div className="button-wrap">
