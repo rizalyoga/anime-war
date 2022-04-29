@@ -22,7 +22,7 @@ function City() {
 
   //Back to Home Handler
   const goesToHome = () => {
-    router.push("/");
+    router.push("/home");
   };
 
   //Goes to Skill Character Page
