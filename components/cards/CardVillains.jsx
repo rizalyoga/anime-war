@@ -12,8 +12,6 @@ function CardVillain({ dataVillains, dataCity }) {
 
   // Choose villain Handler
   const choosingVillain = (id) => {
-    console.log(isOpen);
-    console.log(idVillain);
     setIsOpen(true);
     setIdVillain(id);
   };
