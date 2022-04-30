@@ -14,6 +14,7 @@ body {
   /* background: linear-gradient(310deg, rgba(27, 214, 255, 1) 0%, rgba(77, 143, 221, 1) 34%, rgba(148, 187, 233, 1) 86%); */
   background-image: url("/assets/bg.jpg");
   background-size: cover;
+  padding-bottom: 20px;
 }
 
 .container {
