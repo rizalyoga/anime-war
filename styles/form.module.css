@@ -23,7 +23,8 @@
 
 .username,
 .password,
-.submit {
+.submit,
+.email {
   display: flex;
   flex-direction: column;
   margin: 10px;
@@ -48,6 +49,7 @@
 }
 
 .username input,
+.email input,
 .password input {
   outline: none;
   border: none;
