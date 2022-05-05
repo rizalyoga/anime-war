@@ -6,6 +6,11 @@
   box-sizing: border-box;
   font-family: "Baloo Paaji 2", cursive;
 }
+
+a {
+  text-decoration: none;
+}
+
 body {
   /* first-gradient */
   /* background: linear-gradient(to bottom right, #224ead 0%, #c01821 50%, #224ead 100%); */
