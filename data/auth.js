@@ -8,13 +8,14 @@ export const registerAccount = async (payload) => {
 
   const data = await response.json();
 
-  if (data.statusCode == 400) {
-    return <p style={{ color: "red" }}>{data.message[0].messages[0].message}</p>;
-  } else {
+  if (data.user?.confirmed === true) {
     let auththentication = true;
     localStorage.setItem("userAuth", data.jwt);
-    localStorage.setItem("username", data.user.username);
+    localStorage.setItem("username", data?.user?.username);
+
     return auththentication;
+  } else {
+    return <p style={{ color: "red" }}>{data.message[0].messages[0].message}</p>;
   }
 };
 
@@ -28,12 +29,13 @@ export const loginAccount = async (payload) => {
 
   const data = await response.json();
 
-  if (data.statusCode == 400) {
-    return <p style={{ color: "red" }}>{data.message[0].messages[0].message}</p>;
-  } else {
+  if (data.user?.confirmed === true) {
     let auththentication = true;
     localStorage.setItem("userAuth", data.jwt);
-    localStorage.setItem("username", data.user.username);
+    localStorage.setItem("username", data?.user?.username);
+
     return auththentication;
+  } else {
+    return <p style={{ color: "red" }}>{data.message[0].messages[0].message}</p>;
   }
 };

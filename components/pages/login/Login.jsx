@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styles from "@/styles/form.module.css";
 import Layout from "@/layout/Layout";
 import { useRouter } from "next/router";
@@ -11,6 +11,13 @@ const Login = () => {
   const [loading, setLoading] = useState(false);
 
   const router = useRouter();
+
+  useEffect(() => {
+    const token = localStorage.getItem("userAuth");
+    if (token) {
+      router.push("/home");
+    }
+  }, []);
 
   const handleLogin = (e) => {
     e.preventDefault();
@@ -52,7 +59,7 @@ const Login = () => {
               <p>
                 Don't have an account yet ?<a href="/register"> Register</a>
               </p>
-              <button className="submit-button">{loading ? "please wait ... " : "Register"}</button>
+              <button className="submit-button">{loading ? "please wait ... " : "Login"}</button>
             </div>
           </form>
         </div>

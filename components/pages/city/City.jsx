@@ -15,10 +15,13 @@ function City() {
 
   //Get City Data
   useEffect(() => {
-    getCity()
-      .then((response) => setDataCity(response))
-      .then(() => setLoading(false));
-    setLoading(loadings);
+    const authUser = localStorage.getItem("userAuth");
+    if (authUser) {
+      getCity()
+        .then((response) => setDataCity(response))
+        .then(() => setLoading(false));
+      setLoading(loadings);
+    }
   }, []);
 
   //Back to Home Handler

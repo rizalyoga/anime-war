@@ -6,6 +6,7 @@ import LoadingComponent from "@/components/loading/Loading";
 import CardVillains from "@/components/cards/CardVillains";
 import { useGetCity } from "@/hooks/useGetCity";
 import Layout from "@/layout/Layout";
+import Private from "@/layout/PrivateLayout";
 
 function Villains() {
   const [dataVillains, setDataVillains] = useState([]);
@@ -16,30 +17,35 @@ function Villains() {
 
   //Get Villains Data
   useEffect(() => {
-    getVillains()
-      .then((response) => setDataVillains(response))
-      .then(() => setLoading(false));
-    setLoading(loadings);
+    const authUser = localStorage.getItem("userAuth");
+    if (authUser) {
+      getVillains()
+        .then((response) => setDataVillains(response))
+        .then(() => setLoading(false));
+      setLoading(loadings);
+    }
   }, []);
 
   const { dataCity } = useGetCity();
 
   return (
     <Layout>
-      <div className="container">
-        <div className="header">
-          <div className="desc-header">
-            <h1>
-              Villain List in <span>{city}</span>
-            </h1>
-            <h2>Choose your Villain !</h2>
+      <Private>
+        <div className="container">
+          <div className="header">
+            <div className="desc-header">
+              <h1>
+                Villain List in <span>{city}</span>
+              </h1>
+              <h2>Choose your Villain !</h2>
+            </div>
+            <div className="control-button">
+              <GoesToCityButton characterId={idCharacter} characterName={hero} />
+            </div>
           </div>
-          <div className="control-button">
-            <GoesToCityButton characterId={idCharacter} characterName={hero} />
-          </div>
+          {loading ? <LoadingComponent /> : <div className="card-container">{dataVillains && <CardVillains dataVillains={dataVillains} dataCity={dataCity} />}</div>}
         </div>
-        {loading ? <LoadingComponent /> : <div className="card-container">{dataVillains && <CardVillains dataVillains={dataVillains} dataCity={dataCity} />}</div>}
-      </div>
+      </Private>
     </Layout>
   );
 }

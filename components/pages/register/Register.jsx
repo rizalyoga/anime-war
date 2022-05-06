@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Layout from "@/layout/Layout";
 import styles from "@/styles/form.module.css";
 import { useRouter } from "next/router";
@@ -12,6 +12,13 @@ const Register = () => {
   const [loading, setLoading] = useState(false);
 
   const router = useRouter();
+
+  useEffect(() => {
+    const token = localStorage.getItem("userAuth");
+    if (token) {
+      router.push("/home");
+    }
+  }, []);
 
   const handleRegister = (e) => {
     e.preventDefault();
@@ -57,7 +64,7 @@ const Register = () => {
               <p>
                 Alredy have an account ?<a href="/login"> Login</a>
               </p>
-              <button className="submit-button">{loading ? "please wait ... " : "Login"}</button>
+              <button className="submit-button">{loading ? "please wait ... " : "Register"}</button>
             </div>
           </form>
         </div>
