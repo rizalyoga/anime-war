@@ -8,7 +8,7 @@ const Layout = ({ children }) => {
         <title>Anime War</title>
         <link rel="icon" href="/swords.png" type="image/x-icon" />
       </Head>
-      {children}
+      <main>{children}</main>
     </>
   );
 };

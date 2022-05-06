@@ -36,3 +36,22 @@ export const confirmationtAlert = () => {
     }
   });
 };
+
+export const logoutConfirm = () => {
+  return Swal.fire({
+    title: "Are you sure to Logout?",
+    color: "#fff",
+    icon: "warning",
+    showCancelButton: true,
+    confirmButtonColor: "#3085d6",
+    cancelButtonColor: "#224ead",
+    confirmButtonText: "Log out",
+    background: `linear-gradient(rgba(4,9,30,0.5), rgba(4,9,30,0.5)), url(/assets/all_star_sweet.jpg)`,
+  }).then((result) => {
+    if (result.isConfirmed) {
+      localStorage.removeItem("userAuth");
+      localStorage.removeItem("username");
+      window.location.href = "/";
+    }
+  });
+};
