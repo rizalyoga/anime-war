@@ -5,6 +5,7 @@ import { GoesToCityButton } from "@/components/buttons/Button";
 import { confirmationtAlert } from "@/components/alerts/alert";
 import LoadingComponent from "@/components/loading/Loading";
 import Layout from "@/layout/Layout";
+import Private from "@/layout/PrivateLayout";
 
 const HomePage = () => {
   const [dataCharacter, setDataCharacter] = useState([]);
@@ -21,47 +22,47 @@ const HomePage = () => {
 
   //  GET ALL DATA HEROES
   useEffect(() => {
-    getAllData()
-      .then((response) => setDataCharacter(response))
-      .then(() => setLoading(false));
-    setLoading(loadings);
+    const authUser = localStorage.getItem("userAuth");
+    if (authUser) {
+      getAllData()
+        .then((response) => setDataCharacter(response))
+        .then(() => setLoading(false));
+      setLoading(loadings);
+    }
   }, []);
 
   // RESET GAME HANDLER
   const resetGame = () => {
     confirmationtAlert();
-    // const confirmReset = confirm("Are You Sure to Reset Game ?");
-    // if (confirmReset) {
-    //   localStorage.clear();
-    //   alert("reset success ...");
-    // }
   };
 
   return (
     <Layout>
-      <div className="container">
-        <div className="header">
-          <div className="desc-header">
-            <h1 className="title-page">Choose Your Hero</h1>
+      <Private>
+        <div className="container">
+          <div className="header">
+            <div className="desc-header">
+              <h1 className="title-page">Choose Your Hero</h1>
+            </div>
+            <div className="button-control">
+              <button className="choose-btn" onClick={resetGame}>
+                Reset Game
+              </button>
+            </div>
           </div>
-          <div className="button-control">
-            <button className="choose-btn" onClick={resetGame}>
-              Reset Game
-            </button>
-          </div>
-        </div>
-        {loading ? (
-          <LoadingComponent />
-        ) : (
-          <div className="card-container">
-            <Card dataCharacter={dataCharacter} background={idCaracter} updateChoosing={chooseTheCharacter} skill={dataSkill} />
-          </div>
-        )}
+          {loading ? (
+            <LoadingComponent />
+          ) : (
+            <div className="card-container">
+              <Card dataCharacter={dataCharacter} background={idCaracter} updateChoosing={chooseTheCharacter} skill={dataSkill} />
+            </div>
+          )}
 
-        <div className="button-wrap">
-          <GoesToCityButton characterId={idCaracter} characterName={chooseCharacter} />
+          <div className="button-wrap">
+            <GoesToCityButton characterId={idCaracter} characterName={chooseCharacter} />
+          </div>
         </div>
-      </div>
+      </Private>
     </Layout>
   );
 };

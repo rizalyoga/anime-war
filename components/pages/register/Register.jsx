@@ -2,20 +2,36 @@ import React, { useState } from "react";
 import Layout from "@/layout/Layout";
 import styles from "@/styles/form.module.css";
 import { useRouter } from "next/router";
+import { registerAccount } from "@/data/auth";
 
 const Register = () => {
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
 
   const router = useRouter();
 
   const handleRegister = (e) => {
     e.preventDefault();
-    console.log(username);
-    console.log(email);
-    console.log(password);
-    router.push("/login");
+    setLoading((prev) => !prev);
+
+    const payload = {
+      username,
+      email,
+      password,
+    };
+    registerAccount(payload).then((res) => {
+      setLoading((prev) => !prev);
+      if (res == true) {
+        setTimeout(() => {
+          router.push("/home");
+        }, 500);
+      } else {
+        setError(res);
+      }
+    });
   };
 
   return (
@@ -37,10 +53,11 @@ const Register = () => {
               <input type="password" placeholder="password" onChange={(e) => setPassword(e.target.value)} required />
             </div>
             <div className={styles.submit}>
+              {error}
               <p>
                 Alredy have an account ?<a href="/login"> Login</a>
               </p>
-              <input type="submit" />
+              <button className="submit-button">{loading ? "please wait ... " : "Login"}</button>
             </div>
           </form>
         </div>

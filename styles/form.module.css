@@ -32,7 +32,7 @@
   color: #eb196e;
 }
 
-.submit input {
+.submit button {
   margin-top: 10px;
   border-radius: 5px;
   padding: 5px;
@@ -44,8 +44,13 @@
   cursor: pointer;
 }
 
-.submit input:hover {
+.submit button:hover {
   background: #ec347e;
+}
+
+.submit p {
+  font-size: 1rem;
+  color: #000;
 }
 
 .username input,
