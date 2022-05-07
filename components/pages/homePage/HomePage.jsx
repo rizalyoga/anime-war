@@ -28,6 +28,9 @@ const HomePage = () => {
         .then((response) => setDataCharacter(response))
         .then(() => setLoading(false));
       setLoading(loadings);
+
+      // const jwtPayload = JSON.parse(window.atob(authUser.split(".")[1]));
+      // console.log(jwtPayload.exp);
     }
   }, []);
 

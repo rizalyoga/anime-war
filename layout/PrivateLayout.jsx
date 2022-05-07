@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
 import { useRouter } from "next/router";
+import Navbar from "@/components/navbar/Navbar";
 
 const PrivateLayout = ({ children }) => {
   const router = useRouter();
@@ -11,7 +12,12 @@ const PrivateLayout = ({ children }) => {
     }
   }, []);
 
-  return <>{children}</>;
+  return (
+    <>
+      <Navbar />
+      {children}
+    </>
+  );
 };
 
 export default PrivateLayout;
