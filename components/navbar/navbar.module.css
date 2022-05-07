@@ -1,7 +1,6 @@
 .navbarContainer {
   width: 100%;
   background: white;
-
   padding: 10px 0;
 }
 
@@ -24,6 +23,7 @@
   font-weight: 500;
   color: #000;
   cursor: pointer;
+  transition: 0.3s;
 }
 
 .content-right p:hover {

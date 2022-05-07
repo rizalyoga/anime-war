@@ -40,6 +40,10 @@ const Login = () => {
     });
   };
 
+  const toHomePage = () => {
+    router.push("/");
+  };
+
   return (
     <Layout>
       <div className="container">
@@ -60,6 +64,9 @@ const Login = () => {
                 Don't have an account yet ?<a href="/register"> Register</a>
               </p>
               <button className="submit-button">{loading ? "please wait ... " : "Login"}</button>
+              <button className="submit-button" onClick={toHomePage}>
+                Home Page
+              </button>
             </div>
           </form>
         </div>
