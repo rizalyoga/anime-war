@@ -1,28 +1,47 @@
 import React, { useState, useEffect } from "react";
 import styles from "./navbar.module.css";
-import { logoutConfirm } from "../alerts/alert";
+import { logoutConfirm, createGameTag } from "../alerts/alert";
 
 const Navbar = () => {
   const [username, setUsername] = useState("");
+  const [nickname, setNickname] = useState("");
 
   useEffect(() => {
     const username = localStorage.getItem("username");
+    const nicknames = localStorage.getItem("nickname");
+
     if (username) {
       setUsername(username.toUpperCase());
     }
-  }, []);
+
+    if (nicknames) {
+      setNickname(nicknames);
+    }
+  }, [nickname]);
 
   const doLogout = () => {
     logoutConfirm();
+  };
+
+  const toLeadBoard = () => {
+    console.log("kaka");
+  };
+
+  const createNickname = () => {
+    createGameTag();
   };
 
   return (
     <div className={styles.navbarContainer}>
       <div className={styles.content}>
         <div className={styles["content-left"]}>
-          <p>{username}</p>
+          <p>
+            {username} {nickname != "" ? `| ${nickname}` : null}
+          </p>
         </div>
         <div className={styles["content-right"]}>
+          <p onClick={toLeadBoard}>Leadboard</p>
+          {nickname === "" ? <p onClick={createNickname}>Nickname</p> : null}
           <p onClick={doLogout}>Log out</p>
         </div>
       </div>

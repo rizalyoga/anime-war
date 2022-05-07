@@ -18,6 +18,11 @@
   color: #eb196e;
 }
 
+.content-right {
+  display: flex;
+  gap: 10px;
+}
+
 .content-right p {
   font-size: 1.2rem;
   font-weight: 500;
