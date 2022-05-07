@@ -32,7 +32,10 @@ export const loginAccount = async (payload) => {
   if (data.user?.confirmed === true) {
     let auththentication = true;
     localStorage.setItem("userAuth", data.jwt);
-    localStorage.setItem("username", data?.user?.username);
+    localStorage.setItem("username", data.user?.username);
+    if (data.user.gametag?.name) {
+      localStorage.setItem("nickname", data.user?.gametag?.name);
+    }
 
     return auththentication;
   } else {

@@ -1,5 +1,7 @@
 import Swal from "sweetalert2";
+import { newGameTag } from "@/data/gameTags";
 
+// Modal for show result of battle
 export const resultAlert = (status) => {
   return Swal.fire({
     title: status,
@@ -15,6 +17,7 @@ export const resultAlert = (status) => {
   });
 };
 
+// Modal for reset game
 export const confirmationtAlert = () => {
   return Swal.fire({
     title: "Are you sure to reset game?",
@@ -37,6 +40,7 @@ export const confirmationtAlert = () => {
   });
 };
 
+// Modal for Logout confirmation
 export const logoutConfirm = () => {
   return Swal.fire({
     title: "Are you sure to Logout?",
@@ -51,7 +55,42 @@ export const logoutConfirm = () => {
     if (result.isConfirmed) {
       localStorage.removeItem("userAuth");
       localStorage.removeItem("username");
+      localStorage.removeItem("nickname");
       window.location.href = "/";
     }
+  });
+};
+
+// Modal for create game Tag
+export const createGameTag = () => {
+  Swal.fire({
+    title: "Create your game nickname",
+    input: "text",
+    inputAttributes: {
+      autocapitalize: "off",
+    },
+    showCancelButton: true,
+    confirmButtonText: "Create",
+    showLoaderOnConfirm: true,
+    preConfirm: (nickname) => {
+      const payload = { name: nickname };
+      const token = localStorage.getItem("userAuth");
+
+      newGameTag(payload, token).then((response) => {
+        if (response.statusCode == 400) {
+          Swal.fire({
+            title: `Sorry, ${response.message}`,
+          });
+        } else {
+          console.log(response);
+
+          localStorage.setItem("nickname", response.name);
+
+          Swal.fire({
+            title: `nickname success created`,
+          });
+        }
+      });
+    },
   });
 };
