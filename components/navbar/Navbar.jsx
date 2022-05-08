@@ -1,10 +1,13 @@
 import React, { useState, useEffect } from "react";
 import styles from "./navbar.module.css";
 import { logoutConfirm, createGameTag } from "../alerts/alert";
+import { useRouter } from "next/router";
 
 const Navbar = () => {
   const [username, setUsername] = useState("");
   const [nickname, setNickname] = useState("");
+
+  const router = useRouter();
 
   useEffect(() => {
     const username = localStorage.getItem("username");
@@ -24,7 +27,7 @@ const Navbar = () => {
   };
 
   const toLeadBoard = () => {
-    console.log("kaka");
+    router.push("/leaderboard");
   };
 
   const createNickname = () => {
