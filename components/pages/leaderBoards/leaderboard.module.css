@@ -1,0 +1,13 @@
+.leaderboard-header {
+  display: flex;
+  justify-content: center;
+  color: white;
+  margin: 20px 0;
+}
+
+.table-container {
+  display: flex;
+  justify-content: center;
+  color: white;
+  overflow-x: auto;
+}
