@@ -1,6 +1,7 @@
 import React from "react";
 import styles from "./table.module.css";
 import { headerTitle } from "./header";
+import { AiOutlineSearch } from "react-icons/ai";
 
 const Table = ({ datas }) => {
   const data = [
@@ -35,6 +36,7 @@ const Table = ({ datas }) => {
     <div className={styles.container}>
       <div className={styles["top-content"]}>
         <div className={styles["left-content"]}>
+          <AiOutlineSearch className={styles.icon} />
           <input type="text" placeholder="input search" />
         </div>
         <div className={styles["right-content"]}>

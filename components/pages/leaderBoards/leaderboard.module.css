@@ -1,8 +1,22 @@
 .leaderboard-header {
   display: flex;
   justify-content: center;
+  align-items: center;
+  flex-direction: column;
   color: white;
   margin: 20px 0;
+  border-bottom: 2px solid white;
+}
+
+.directions {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  cursor: pointer;
+}
+
+.directions h3:hover {
+  color: #fae62e;
 }
 
 .table-container {

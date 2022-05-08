@@ -43,6 +43,18 @@
   margin-bottom: 1rem;
 }
 
+.left-content {
+  display: flex;
+  align-items: center;
+}
+
+.icon {
+  position: absolute;
+  color: gray;
+  z-index: 2;
+  margin-left: 10px;
+}
+
 .top-content input {
   outline: none;
   border: rgb(224, 67, 130, 0.8);

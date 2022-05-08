@@ -10,6 +10,10 @@ const LandingPage = () => {
   const startGame = () => {
     router.push("/home");
   };
+
+  const toLeaderboard = () => {
+    router.push("/leaderboard");
+  };
   return (
     <Layout>
       <div className={styles.container}>
@@ -31,6 +35,9 @@ const LandingPage = () => {
           </div>
           <button className={styles["start-game"]} role="button" onClick={startGame}>
             START GAME
+          </button>
+          <button className={styles["start-game"]} role="button" onClick={toLeaderboard}>
+            Leader Board
           </button>
         </div>
       </div>
