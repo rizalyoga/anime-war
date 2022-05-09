@@ -81,6 +81,11 @@
   background: #fff;
 }
 
+.date-moment {
+  display: flex;
+  justify-content: center;
+}
+
 @media (max-width: 430px) {
   .top-content {
     display: block;

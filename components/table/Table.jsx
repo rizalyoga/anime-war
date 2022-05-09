@@ -35,18 +35,39 @@ const Table = ({ datas }) => {
 
   const [titleFiltered, setTitleFiltered] = useState([]);
 
+  console.log(datas.data);
+
   const router = useRouter();
   const filterBy = router.query.filter;
 
+  // Filter table header title
   useEffect(() => {
     if (!filterBy) {
-      const headers = headerTitle.filter((data) => data.title != "Score" && data.title != "Total Score");
+      const headers = headerTitle.filter((data) => data.title != "Score" && data.title != "Date");
+      setTitleFiltered(headers);
+    } else if (filterBy == "villain" || "hero") {
+      const headers = headerTitle.filter((data) => data.title != "Total Score" && data.title != "Detail");
       setTitleFiltered(headers);
     } else {
       setTitleFiltered(headerTitle);
     }
   }, [filterBy]);
 
+  // Funtion for sum the total score
+  const sumScore = (arr) => {
+    if (arr.length == 0) {
+      return 0;
+    } else {
+      const sumTotal = 0;
+      arr.forEach((el) => {
+        sumTotal += el.score;
+      });
+
+      return sumTotal;
+    }
+  };
+
+  // Funtion for show modal detail
   const showModal = (id) => {
     alert(`Modal Detail :=> ${id}`);
   };
@@ -67,15 +88,15 @@ const Table = ({ datas }) => {
             <tr key={idx}>
               <td> {idx + 1} </td>
               <td>{data.name}</td>
-              <td>{data?.total_score}</td>
-              <td>{data?.score}</td>
-              <td>
-                <Moment format="DD-MM-YYYY">{data.created_at}</Moment>
-              </td>
-              <td>
-                <button className={styles["detail-button"]} onClick={() => showModal(data.id)}>
-                  Detail
-                </button>
+              <td>{!filterBy ? sumScore(data.leaderboards) : data.score}</td>
+              <td className={styles["date-moment"]}>
+                {!filterBy ? (
+                  <button className={styles["detail-button"]} onClick={() => showModal(data.id)}>
+                    Detail
+                  </button>
+                ) : (
+                  <Moment format="DD-MM-YYYY">{data.created_at}</Moment>
+                )}
               </td>
             </tr>
           ))}
