@@ -39,7 +39,7 @@ const Navbar = () => {
       <div className={styles.content}>
         <div className={styles["content-left"]}>
           <p>
-            {username} {nickname != "" ? `| ${nickname}` : null}
+            {username} {nickname != "" ? `| Id: ${nickname.toUpperCase()}` : null}
           </p>
         </div>
         <div className={styles["content-right"]}>
