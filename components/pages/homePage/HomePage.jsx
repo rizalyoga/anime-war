@@ -6,6 +6,7 @@ import { confirmationtAlert } from "@/components/alerts/alert";
 import LoadingComponent from "@/components/loading/Loading";
 import Layout from "@/layout/Layout";
 import Private from "@/layout/PrivateLayout";
+import getToken from "../../../utils/getCookies";
 
 const HomePage = () => {
   const [dataCharacter, setDataCharacter] = useState([]);
@@ -22,15 +23,12 @@ const HomePage = () => {
 
   //  GET ALL DATA HEROES
   useEffect(() => {
-    const authUser = localStorage.getItem("userAuth");
+    const authUser = getToken();
     if (authUser) {
       getAllData()
         .then((response) => setDataCharacter(response))
         .then(() => setLoading(false));
       setLoading(loadings);
-
-      // const jwtPayload = JSON.parse(window.atob(authUser.split(".")[1]));
-      // console.log(jwtPayload.exp);
     }
   }, []);
 

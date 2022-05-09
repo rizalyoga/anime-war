@@ -7,6 +7,7 @@ import CardVillains from "@/components/cards/CardVillains";
 import { useGetCity } from "@/hooks/useGetCity";
 import Layout from "@/layout/Layout";
 import Private from "@/layout/PrivateLayout";
+import getToken from "../../../utils/getCookies";
 
 function Villains() {
   const [dataVillains, setDataVillains] = useState([]);
@@ -17,7 +18,7 @@ function Villains() {
 
   //Get Villains Data
   useEffect(() => {
-    const authUser = localStorage.getItem("userAuth");
+    const authUser = getToken();
     if (authUser) {
       getVillains()
         .then((response) => setDataVillains(response))

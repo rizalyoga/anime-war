@@ -5,6 +5,7 @@ import CardCity from "@/components/cards/CardCity";
 import LoadingComponent from "@/components/loading/Loading";
 import Layout from "@/layout/Layout";
 import Private from "@/layout/PrivateLayout";
+import getToken from "../../../utils/getCookies";
 
 function City() {
   const [dataCity, setDataCity] = useState([]);
@@ -15,7 +16,7 @@ function City() {
 
   //Get City Data
   useEffect(() => {
-    const authUser = localStorage.getItem("userAuth");
+    const authUser = getToken();
     if (authUser) {
       getCity()
         .then((response) => setDataCity(response))
