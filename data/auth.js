@@ -1,4 +1,9 @@
+import Cookies from "js-cookie";
+
 /* -------------------------------- Register Account -------------------------------- */
+const inTwoHours = new Date(new Date().getTime() + 120 * 60 * 1000);
+console.log(inTwoHours);
+
 export const registerAccount = async (payload) => {
   const response = await fetch("https://thrive-project-be.herokuapp.com/auth/local/register", {
     method: "POST",
@@ -10,7 +15,11 @@ export const registerAccount = async (payload) => {
 
   if (data.user?.confirmed === true) {
     let auththentication = true;
-    localStorage.setItem("userAuth", data.jwt);
+    // localStorage.setItem("userAuth", data.jwt);
+    Cookies.set("userAuth", data.jwt, {
+      expires: inTwoHours,
+    });
+
     localStorage.setItem("username", data?.user?.username);
 
     return auththentication;
@@ -31,10 +40,15 @@ export const loginAccount = async (payload) => {
 
   if (data.user?.confirmed === true) {
     let auththentication = true;
-    localStorage.setItem("userAuth", data.jwt);
+    // localStorage.setItem("userAuth", data.jwt);
+    Cookies.set("userAuth", data.jwt, {
+      expires: inTwoHours,
+    });
+
     localStorage.setItem("username", data.user?.username);
     if (data.user.gametag?.name) {
       localStorage.setItem("nickname", data.user?.gametag?.name);
+      localStorage.setItem("nicknameId", data.user?.gametag?.id);
     }
 
     return auththentication;

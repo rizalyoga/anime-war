@@ -20,7 +20,7 @@ const Navbar = () => {
     if (nicknames) {
       setNickname(nicknames);
     }
-  }, [nickname]);
+  }, []);
 
   const doLogout = () => {
     logoutConfirm();

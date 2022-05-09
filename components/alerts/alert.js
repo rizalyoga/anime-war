@@ -1,5 +1,6 @@
 import Swal from "sweetalert2";
 import { newGameTag } from "@/data/gameTags";
+import Cookies from "js-cookie";
 
 // Modal for show result of battle
 export const resultAlert = (status) => {
@@ -53,9 +54,10 @@ export const logoutConfirm = () => {
     background: `linear-gradient(rgba(4,9,30,0.5), rgba(4,9,30,0.5)), url(/assets/all_star_sweet.jpg)`,
   }).then((result) => {
     if (result.isConfirmed) {
-      localStorage.removeItem("userAuth");
+      Cookies.remove("userAuth");
       localStorage.removeItem("username");
       localStorage.removeItem("nickname");
+      localStorage.removeItem("nicknameId");
       window.location.href = "/";
     }
   });
@@ -74,7 +76,7 @@ export const createGameTag = () => {
     showLoaderOnConfirm: true,
     preConfirm: (nickname) => {
       const payload = { name: nickname };
-      const token = localStorage.getItem("userAuth");
+      const token = Cookies.get("userAuth");
 
       newGameTag(payload, token).then((response) => {
         if (response.statusCode == 400) {
@@ -82,9 +84,8 @@ export const createGameTag = () => {
             title: `Sorry, ${response.message}`,
           });
         } else {
-          console.log(response);
-
           localStorage.setItem("nickname", response.name);
+          localStorage.setItem("nicknameId", response.id);
 
           Swal.fire({
             title: `nickname success created`,
