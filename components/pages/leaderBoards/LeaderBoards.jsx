@@ -4,7 +4,7 @@ import Layout from "@/layout/Layout";
 import styles from "./leaderboard.module.css";
 import Table from "@/components/table/Table";
 
-const LeaderBoards = (props) => {
+const LeaderBoards = (data) => {
   const router = useRouter();
 
   const toHome = () => {
@@ -25,7 +25,7 @@ const LeaderBoards = (props) => {
           </div>
         </div>
         <div className={styles["table-container"]}>
-          <Table />
+          <Table datas={data} />
         </div>
       </div>
     </Layout>

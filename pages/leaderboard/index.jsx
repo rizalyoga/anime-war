@@ -1,12 +1,26 @@
 import React from "react";
 import LeaderBoards from "@/components/pages/leaderBoards/LeaderBoards";
 
-const Leaderboard = () => {
+const Leaderboard = ({ data }) => {
   return (
     <>
-      <LeaderBoards />
+      <LeaderBoards data={data} />
     </>
   );
 };
+export async function getServerSideProps(context) {
+  const { req } = context;
+  const token = req.cookies.userAuth;
+
+  const response = await fetch(`https://thrive-project-be.herokuapp.com/gametags`, {
+    method: "GET",
+    headers: { Authorization: `Bearer ${token}` },
+  });
+
+  const data = await response.json();
+
+  // Pass data to the page via props
+  return { props: { data } };
+}
 
 export default Leaderboard;
