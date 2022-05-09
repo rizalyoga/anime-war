@@ -49,22 +49,32 @@
 }
 
 .icon {
-  position: absolute;
+  /* position: absolute; */
   color: gray;
+  background: rgb(255, 255, 255);
   z-index: 2;
-  margin-left: 10px;
+  margin-left: 5px;
+  padding: 3px;
+  font-size: 26px;
+  border-radius: 3px;
+  cursor: pointer;
+}
+
+.icon:hover {
+  background: #eb196e;
+  color: #fff;
 }
 
 .top-content input {
   outline: none;
   border: rgb(224, 67, 130, 0.8);
   border-radius: 3px;
-  padding: 0 2px;
+  padding: 2px 2px;
   text-align: center;
 }
 
 .select-filter {
-  padding: 0 4px;
+  padding: 2px 4px;
   border-radius: 3px;
   border: none;
   outline: none;
@@ -75,6 +85,14 @@
   .top-content {
     display: block;
     margin-bottom: 1rem;
+  }
+
+  .left-content {
+    margin-bottom: 8px;
+  }
+
+  .icon {
+    width: 80px;
   }
 
   .select-filter,
