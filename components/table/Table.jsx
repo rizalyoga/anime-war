@@ -4,9 +4,12 @@ import { headerTitle } from "./header";
 import { useRouter } from "next/router";
 import Filter from "./filterInput/FilterInput";
 import DateMoment from "../../utils/date";
+import ModalDetail from "../modal/ModalLeaderboard";
 
 const Table = ({ datas, searchCharacter }) => {
   const [titleFiltered, setTitleFiltered] = useState([]);
+  const [selectedDetailData, setSelectedDetailData] = useState([]);
+  const [isOpen, setIsOpen] = useState(false);
 
   const router = useRouter();
   const filterBy = router.query.filter;
@@ -26,7 +29,7 @@ const Table = ({ datas, searchCharacter }) => {
 
   // Funtion for sum the total score
   const sumScore = (arr) => {
-    if (arr.length == 0) {
+    if (arr?.length == 0) {
       return 0;
     } else {
       let sumTotal = 0;
@@ -36,6 +39,12 @@ const Table = ({ datas, searchCharacter }) => {
 
       return sumTotal;
     }
+  };
+
+  // Funtion for set Selected Data and open Modal
+  const selectData = (detailData) => {
+    setIsOpen((prev) => !prev);
+    setSelectedDetailData(detailData);
   };
 
   // Funtion for show modal detail
@@ -63,11 +72,10 @@ const Table = ({ datas, searchCharacter }) => {
                 <td>{!filterBy ? sumScore(data.leaderboards) : data.score}</td>
                 <td className={styles["date-moment"]}>
                   {!filterBy ? (
-                    <button className={styles["detail-button"]} onClick={() => showModal(data.id)}>
+                    <button className={styles["detail-button"]} onClick={() => selectData(data.leaderboards)}>
                       Detail
                     </button>
                   ) : (
-                    // <Moment format="DD-MM-YYYY" >{data.created_at}</Moment>
                     <DateMoment date={data.created_at} />
                   )}
                 </td>
@@ -75,6 +83,7 @@ const Table = ({ datas, searchCharacter }) => {
             ))}
         </tbody>
       </table>
+      {isOpen && <ModalDetail selectedData={selectedDetailData} setIsOpen={setIsOpen} />}
     </div>
   );
 };

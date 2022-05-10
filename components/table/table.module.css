@@ -13,6 +13,17 @@
   border-radius: 3px;
 }
 
+.table-detail {
+  width: 100%;
+  border-bottom: 4px solid #000;
+}
+
+.table-header tr th {
+  border-bottom: solid 2px !important;
+  border-top: solid 2px !important;
+  border-color: #000 !important;
+}
+
 .table th {
   border-bottom: 2px solid #fff;
 }

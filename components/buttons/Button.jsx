@@ -14,11 +14,13 @@ export const GoesToCityButton = ({ characterId, characterName }) => {
   );
 };
 
-export const ButtonWin = () => {
+export const ButtonWin = ({ heroName, villainName }) => {
   const router = useRouter();
+  const query = router.query;
+  console.log(query);
 
-  const goToSharePage = ({ characterId, characterName }) => {
-    router.push(`/sharepage/${characterId}?hero=${characterName}`);
+  const goToSharePage = () => {
+    router.push(`/sharepage/hero=${heroName}&&villain=${villainName}`);
   };
 
   return (
