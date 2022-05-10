@@ -41,6 +41,7 @@ function FilterInput({ searchCharacter }) {
     }
   };
 
+  // Funtion for start filter by character name
   const handleSubmit = (e) => {
     e.preventDefault();
     searchCharacter(nameCharacter);

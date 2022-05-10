@@ -8,8 +8,6 @@ const FilterLeaderBoards = (props) => {
   const router = useRouter();
   const { query } = router();
 
-  console.log(query);
-
   const toHome = () => {
     router.push("/");
   };

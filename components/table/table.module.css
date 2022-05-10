@@ -70,6 +70,11 @@
   color: #fff;
 }
 
+.icon:active {
+  background: #fff;
+  color: gray;
+}
+
 .top-content input {
   outline: none;
   border: rgb(224, 67, 130, 0.8);

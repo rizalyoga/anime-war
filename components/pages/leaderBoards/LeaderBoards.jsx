@@ -21,7 +21,7 @@ const LeaderBoards = (data) => {
   // Set data byHero from CSR
   useEffect(() => {
     if (query.filter == "hero") {
-      getDataByHero(character).then((data) => setDataLeaderBoard(data));
+      getDataByHero(character.toLocaleLowerCase()).then((data) => setDataLeaderBoard(data));
       setDataLeaderBoard([]);
     }
   }, [query.filter, character]);
@@ -29,7 +29,7 @@ const LeaderBoards = (data) => {
   // Set data byVillain from CSR
   useEffect(() => {
     if (query.filter == "villain") {
-      getDataByVillain(character).then((data) => setDataLeaderBoard(data));
+      getDataByVillain(character.toLocaleLowerCase()).then((data) => setDataLeaderBoard(data));
       setDataLeaderBoard([]);
     }
   }, [query.filter, character]);
@@ -39,6 +39,7 @@ const LeaderBoards = (data) => {
     setCharacter(name);
   };
 
+  // Funtion for Direction page
   const toHome = () => {
     router.push("/");
   };

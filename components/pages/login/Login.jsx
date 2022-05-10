@@ -2,7 +2,9 @@ import React, { useState, useEffect } from "react";
 import styles from "@/styles/form.module.css";
 import Layout from "@/layout/Layout";
 import { useRouter } from "next/router";
+import Link from "next/link";
 import { loginAccount } from "@/data/auth";
+import getToken from "utils/getCookies";
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -13,7 +15,7 @@ const Login = () => {
   const router = useRouter();
 
   useEffect(() => {
-    const token = localStorage.getItem("userAuth");
+    const token = getToken();
     if (token) {
       router.push("/home");
     }
@@ -61,7 +63,10 @@ const Login = () => {
             <div className={styles.submit}>
               {error}
               <p>
-                Don't have an account yet ?<a href="/register"> Register</a>
+                Don&apos;t have an account yet ?
+                <Link href="/register">
+                  <a> Register</a>
+                </Link>
               </p>
               <button className="submit-button">{loading ? "please wait ... " : "Login"}</button>
               <button className="submit-button" onClick={toHomePage}>

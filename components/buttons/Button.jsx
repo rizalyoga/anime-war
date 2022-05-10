@@ -15,10 +15,21 @@ export const GoesToCityButton = ({ characterId, characterName }) => {
 };
 
 export const ButtonWin = () => {
+  const router = useRouter();
+
+  const goToSharePage = ({ characterId, characterName }) => {
+    router.push(`/sharepage/${characterId}?hero=${characterName}`);
+  };
+
   return (
-    <button className="disable-btn choose-btn" disabled={true} style={{ background: "green", color: "white", cursor: "default" }}>
-      You Win
-    </button>
+    <>
+      <button className="disable-btn choose-btn" disabled={true} style={{ background: "green", color: "white", cursor: "default" }}>
+        🏆
+      </button>
+      <button className="choose-btn" onClick={goToSharePage} style={{ margin: "3px 0", background: "green", color: "white", cursor: "pointer" }}>
+        add leaderborad
+      </button>
+    </>
   );
 };
 
