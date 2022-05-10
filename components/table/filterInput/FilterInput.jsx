@@ -3,11 +3,12 @@ import { useRouter } from "next/router";
 import styles from "../table.module.css";
 import { AiOutlineSearch } from "react-icons/ai";
 
-function FilterInput() {
+function FilterInput({ searchCharacter }) {
   const router = useRouter();
   const { query } = useRouter();
 
   const [filter, setFilter] = useState("gametag");
+  const [nameCharacter, setNameCharacter] = useState("");
   const [hidden, setHidden] = useState(false);
 
   useEffect(() => {
@@ -40,11 +41,21 @@ function FilterInput() {
     }
   };
 
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    searchCharacter(nameCharacter);
+  };
+
   return (
     <div className={styles["top-content"]}>
       <div className={styles["left-content"]} style={hidden ? { display: "none" } : null}>
-        <input type="text" placeholder="input search" />
-        <AiOutlineSearch className={styles.icon} />
+        <form onSubmit={handleSubmit}>
+          <input type="text" placeholder="input search" onChange={(e) => setNameCharacter(e.target.value)} />
+          <AiOutlineSearch className={styles.icon} onClick={handleSubmit} />
+        </form>
+      </div>
+      <div className={styles["mid-content"]} style={hidden ? { display: "none" } : null}>
+        <h4>{nameCharacter ? `Hasil Search : ${nameCharacter.toUpperCase()}` : "Input charcater name first"} </h4>
       </div>
       <div className={styles["right-content"]}>
         <select name="select-filter" value={filter} id="select-filter" onChange={(e) => filterBy(e.target.value)} className={styles["select-filter"]}>

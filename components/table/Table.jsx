@@ -3,39 +3,10 @@ import styles from "./table.module.css";
 import { headerTitle } from "./header";
 import { useRouter } from "next/router";
 import Filter from "./filterInput/FilterInput";
-import Moment from "react-moment";
+import DateMoment from "../../utils/date";
 
-const Table = ({ datas }) => {
-  // const data = [
-  //   {
-  //     nametag: "dragnell",
-  //     total_score: "2000",
-  //     score: "40",
-  //     date: "20-10-2022",
-  //   },
-  //   {
-  //     nametag: "leo",
-  //     total_score: "1000",
-  //     score: "20",
-  //     date: "21-10-2022",
-  //   },
-  //   {
-  //     nametag: "nwo",
-  //     total_score: "1000",
-  //     score: "50",
-  //     date: "20-11-2022",
-  //   },
-  //   {
-  //     nametag: "Gray",
-  //     total_score: "8000",
-  //     score: "100",
-  //     date: "20-12-2022",
-  //   },
-  // ];
-
+const Table = ({ datas, searchCharacter }) => {
   const [titleFiltered, setTitleFiltered] = useState([]);
-
-  console.log(datas.data);
 
   const router = useRouter();
   const filterBy = router.query.filter;
@@ -58,8 +29,8 @@ const Table = ({ datas }) => {
     if (arr.length == 0) {
       return 0;
     } else {
-      const sumTotal = 0;
-      arr.forEach((el) => {
+      let sumTotal = 0;
+      arr?.forEach((el) => {
         sumTotal += el.score;
       });
 
@@ -74,7 +45,7 @@ const Table = ({ datas }) => {
 
   return (
     <div className={styles.container}>
-      <Filter />
+      <Filter searchCharacter={searchCharacter} />
       <table className={styles.table}>
         <thead className="table-header">
           <tr>
@@ -84,22 +55,24 @@ const Table = ({ datas }) => {
           </tr>
         </thead>
         <tbody>
-          {datas?.data.map((data, idx) => (
-            <tr key={idx}>
-              <td> {idx + 1} </td>
-              <td>{data.name}</td>
-              <td>{!filterBy ? sumScore(data.leaderboards) : data.score}</td>
-              <td className={styles["date-moment"]}>
-                {!filterBy ? (
-                  <button className={styles["detail-button"]} onClick={() => showModal(data.id)}>
-                    Detail
-                  </button>
-                ) : (
-                  <Moment format="DD-MM-YYYY">{data.created_at}</Moment>
-                )}
-              </td>
-            </tr>
-          ))}
+          {datas.length > 0 &&
+            datas.map((data, idx) => (
+              <tr key={idx}>
+                <td> {idx + 1} </td>
+                <td>{!filterBy ? data.name : data.gametag?.name}</td>
+                <td>{!filterBy ? sumScore(data.leaderboards) : data.score}</td>
+                <td className={styles["date-moment"]}>
+                  {!filterBy ? (
+                    <button className={styles["detail-button"]} onClick={() => showModal(data.id)}>
+                      Detail
+                    </button>
+                  ) : (
+                    // <Moment format="DD-MM-YYYY" >{data.created_at}</Moment>
+                    <DateMoment date={data.created_at} />
+                  )}
+                </td>
+              </tr>
+            ))}
         </tbody>
       </table>
     </div>

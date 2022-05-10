@@ -43,7 +43,12 @@
   margin-bottom: 1rem;
 }
 
-.left-content {
+.left-content,
+.mid-content {
+  flex-basis: 25%;
+}
+
+.left-content form {
   display: flex;
   align-items: center;
 }
