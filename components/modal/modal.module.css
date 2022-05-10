@@ -32,6 +32,10 @@
   padding: 2rem;
   border-radius: 4px;
   min-width: 50rem;
+  max-height: 30rem;
+  overflow-y: scroll;
+  animation-name: zoom;
+  animation-duration: 0.5s;
 }
 
 @keyframes zoom {
@@ -234,6 +238,13 @@
   transform: none;
   background: #284ca8;
   color: #fcfcfc;
+}
+
+/* ---------------------------- RESPONSIVE MEDIA ---------------------------- */
+@media (max-width: 768px) {
+  .modalLeaderBoard {
+    min-width: 40rem;
+  }
 }
 
 @media (max-width: 429px) {

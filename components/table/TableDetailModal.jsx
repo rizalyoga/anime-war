@@ -1,10 +1,11 @@
 import React from "react";
 import styles from "./table.module.css";
+import DateMoment from "../../utils/date";
 
-const TableDetailModal = (datas) => {
+const TableDetailModal = ({ selectedData }) => {
   return (
     <table className={styles["table-detail"]}>
-      <thead className="table-header">
+      <thead className={styles["table-header"]}>
         <tr>
           <th>No</th>
           <th>Villain Name</th>
@@ -13,21 +14,17 @@ const TableDetailModal = (datas) => {
         </tr>
       </thead>
       <tbody>
-        <tr>
-          <td> 1 </td>
-          <td>villain Name</td>
-          <td>Score</td>
-          <td>Date</td>
-        </tr>
-        {/* {datas.length > 0 &&
-          datas.map((data, idx) => (
+        {selectedData.length > 0 &&
+          selectedData.map((data, idx) => (
             <tr key={idx}>
               <td> {idx + 1} </td>
-              <td>villain Name</td>
-              <td>Score</td>
-              <td>Date</td>
+              <td>{data.villain}</td>
+              <td>{data.score}</td>
+              <td>
+                <DateMoment date={data?.updated_at} />
+              </td>
             </tr>
-          ))} */}
+          ))}
       </tbody>
     </table>
   );
