@@ -169,12 +169,12 @@ span {
 }
 
 #nprogress .bar {
-  background: #006eff !important;
+  background: #350287 !important;
   height: 6px !important;
 }
 
 #nprogress .peg {
-  box-shadow: 0 0 10px #006eff, 0 0 5px #006eff !important;
+  box-shadow: 0 0 10px #350287, 0 0 5px #350287 !important;
 }
 
 @media (max-width: 885px) {

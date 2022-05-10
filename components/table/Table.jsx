@@ -4,9 +4,11 @@ import { headerTitle } from "./header";
 import { useRouter } from "next/router";
 import Filter from "./filterInput/FilterInput";
 import DateMoment from "../../utils/date";
+import ModalDetail from "../modal/ModalLeaderboard";
 
 const Table = ({ datas, searchCharacter }) => {
   const [titleFiltered, setTitleFiltered] = useState([]);
+  const [isOpen, setIsOpen] = useState(false);
 
   const router = useRouter();
   const filterBy = router.query.filter;
@@ -63,7 +65,7 @@ const Table = ({ datas, searchCharacter }) => {
                 <td>{!filterBy ? sumScore(data.leaderboards) : data.score}</td>
                 <td className={styles["date-moment"]}>
                   {!filterBy ? (
-                    <button className={styles["detail-button"]} onClick={() => showModal(data.id)}>
+                    <button className={styles["detail-button"]} onClick={() => setIsOpen(true)}>
                       Detail
                     </button>
                   ) : (
@@ -75,6 +77,7 @@ const Table = ({ datas, searchCharacter }) => {
             ))}
         </tbody>
       </table>
+      {isOpen && <ModalDetail setIsOpen={setIsOpen} />}
     </div>
   );
 };

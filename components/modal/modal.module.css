@@ -27,6 +27,13 @@
   animation-duration: 1.8s;
 }
 
+.modalLeaderBoard {
+  background: #fff;
+  padding: 2rem;
+  border-radius: 4px;
+  min-width: 50rem;
+}
+
 @keyframes zoom {
   from {
     transform: scale(0);
@@ -53,6 +60,15 @@
   text-align: center;
 }
 
+.headingLeaderBoard {
+  color: #eb196e;
+  margin: 0;
+  padding: 10px;
+  font-weight: 500;
+  font-size: 18px;
+  text-align: center;
+}
+
 .loadingModal {
   margin-top: 35%;
 }
@@ -67,6 +83,7 @@
   justify-content: center;
   align-items: center;
   flex-direction: column;
+  overflow-x: auto;
 }
 
 .villainAvatar {
@@ -229,6 +246,11 @@
     box-shadow: 0 5px 20px 0 rgba(0, 0, 0, 0.04);
     animation-name: zoom;
     animation-duration: 1.8s;
+  }
+
+  .modalLeaderBoard {
+    min-width: 23rem;
+    padding: 1rem;
   }
 
   .boxStatus {
