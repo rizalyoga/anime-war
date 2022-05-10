@@ -2,7 +2,6 @@ import Cookies from "js-cookie";
 
 /* -------------------------------- Register Account -------------------------------- */
 const inTwoHours = new Date(new Date().getTime() + 120 * 60 * 1000);
-console.log(inTwoHours);
 
 export const registerAccount = async (payload) => {
   const response = await fetch("https://thrive-project-be.herokuapp.com/auth/local/register", {

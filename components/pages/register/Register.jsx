@@ -2,7 +2,9 @@ import React, { useState, useEffect } from "react";
 import Layout from "@/layout/Layout";
 import styles from "@/styles/form.module.css";
 import { useRouter } from "next/router";
+import Link from "next/link";
 import { registerAccount } from "@/data/auth";
+import getToken from "utils/getCookies";
 
 const Register = () => {
   const [username, setUsername] = useState("");
@@ -14,7 +16,7 @@ const Register = () => {
   const router = useRouter();
 
   useEffect(() => {
-    const token = localStorage.getItem("userAuth");
+    const token = getToken();
     if (token) {
       router.push("/home");
     }
@@ -66,7 +68,10 @@ const Register = () => {
             <div className={styles.submit}>
               {error}
               <p>
-                Alredy have an account ?<a href="/login"> Login</a>
+                Alredy have an account ?
+                <Link href="/login">
+                  <a>Login</a>
+                </Link>
               </p>
               <button className="submit-button">{loading ? "please wait ... " : "Register"}</button>
               <button className="submit-button" onClick={toHomePage}>

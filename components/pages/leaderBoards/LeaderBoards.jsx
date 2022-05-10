@@ -1,15 +1,49 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import Layout from "@/layout/Layout";
 import styles from "./leaderboard.module.css";
 import Table from "@/components/table/Table";
+import { getDataByHero, getDataByVillain } from "@/data/leaderBoadrs";
 
-const LeaderBoards = (props) => {
+const LeaderBoards = (data) => {
+  const [dataLeaderBoard, setDataLeaderBoard] = useState([]);
+  const [character, setCharacter] = useState("");
   const router = useRouter();
+  const { query } = useRouter();
 
+  // Set data byGametag from SSR
+  useEffect(() => {
+    if (data.data.length > 0 && !query.filter) {
+      setDataLeaderBoard(data.data);
+    }
+  }, [data]);
+
+  // Set data byHero from CSR
+  useEffect(() => {
+    if (query.filter == "hero") {
+      getDataByHero(character.toLocaleLowerCase()).then((data) => setDataLeaderBoard(data));
+      setDataLeaderBoard([]);
+    }
+  }, [query.filter, character]);
+
+  // Set data byVillain from CSR
+  useEffect(() => {
+    if (query.filter == "villain") {
+      getDataByVillain(character.toLocaleLowerCase()).then((data) => setDataLeaderBoard(data));
+      setDataLeaderBoard([]);
+    }
+  }, [query.filter, character]);
+
+  // Function for search character
+  const searchCharacter = (name) => {
+    setCharacter(name);
+  };
+
+  // Funtion for Direction page
   const toHome = () => {
     router.push("/");
   };
+
   const toHero = () => {
     router.push("/home");
   };
@@ -25,7 +59,7 @@ const LeaderBoards = (props) => {
           </div>
         </div>
         <div className={styles["table-container"]}>
-          <Table />
+          <Table searchCharacter={searchCharacter} datas={dataLeaderBoard} />
         </div>
       </div>
     </Layout>

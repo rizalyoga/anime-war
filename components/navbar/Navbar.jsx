@@ -44,7 +44,8 @@ const Navbar = () => {
         </div>
         <div className={styles["content-right"]}>
           <p onClick={toLeadBoard}>Leadboard</p>
-          {nickname === "" ? <p onClick={createNickname}>Nickname</p> : null}
+          {/* {nickname === "" ? <p onClick={createNickname}>Nickname</p> : null} */}
+          {<p onClick={createNickname}>Nickname</p>}
           <p onClick={doLogout}>Log out</p>
         </div>
       </div>

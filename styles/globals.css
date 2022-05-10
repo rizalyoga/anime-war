@@ -155,6 +155,28 @@ span {
   max-width: 95%;
 }
 
+/* -------------------------------- NProgress ------------------------------- */
+#nprogress .bar {
+  background: #29d;
+
+  position: fixed;
+  z-index: 1031;
+  top: 0;
+  left: 0;
+
+  width: 100%;
+  height: 2px;
+}
+
+#nprogress .bar {
+  background: #006eff !important;
+  height: 6px !important;
+}
+
+#nprogress .peg {
+  box-shadow: 0 0 10px #006eff, 0 0 5px #006eff !important;
+}
+
 @media (max-width: 885px) {
   .container {
     margin: 0 10px;
