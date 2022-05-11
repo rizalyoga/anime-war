@@ -11,6 +11,7 @@ function FilterInput({ searchCharacter }) {
   const [nameCharacter, setNameCharacter] = useState("");
   const [hidden, setHidden] = useState(false);
 
+  // Funtion for initialize value in searchCharacter
   const initializeCharacter = () => {
     if (query.filter == "hero") {
       setNameCharacter("Doraemon");
@@ -21,6 +22,7 @@ function FilterInput({ searchCharacter }) {
     }
   };
 
+  // Run Initialize funtion
   useEffect(() => {
     initializeCharacter();
   }, [query]);
