@@ -21,14 +21,16 @@ const LeaderBoards = (data) => {
   // Set data byHero from CSR
   useEffect(() => {
     if (query.filter == "hero") {
-      getDataByHero(character.toLocaleLowerCase()).then((data) => setDataLeaderBoard(data));
+      const nameChar = character.charAt(0).toUpperCase() + character.slice(1);
+      getDataByHero(nameChar).then((data) => setDataLeaderBoard(data));
     }
   }, [query.filter, character]);
 
   // Set data byVillain from CSR
   useEffect(() => {
     if (query.filter == "villain") {
-      getDataByVillain(character.toLocaleLowerCase()).then((data) => setDataLeaderBoard(data));
+      const nameChar = character.charAt(0).toUpperCase() + character.slice(1);
+      getDataByVillain(nameChar).then((data) => setDataLeaderBoard(data));
     }
   }, [query.filter, character]);
 

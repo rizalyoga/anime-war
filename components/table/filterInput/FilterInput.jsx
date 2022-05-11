@@ -14,11 +14,11 @@ function FilterInput({ searchCharacter }) {
   // Funtion for initialize value in searchCharacter
   const initializeCharacter = () => {
     if (query.filter == "hero") {
-      setNameCharacter("Doraemon");
-      searchCharacter("Doraemon");
+      setNameCharacter("Goku");
+      searchCharacter("Goku");
     } else if (query.filter == "villain") {
-      setNameCharacter("Giant");
-      searchCharacter("Giant");
+      setNameCharacter("Frieza");
+      searchCharacter("Frieza");
     }
   };
 

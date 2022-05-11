@@ -21,7 +21,13 @@ export const ButtonWin = ({ heroName, villainName }) => {
   const router = useRouter();
 
   const goToSharePage = () => {
-    createNewLeaderboard(heroName, villainName).then((response) => router.push(`/share/${response.id}`));
+    createNewLeaderboard(heroName, villainName).then((response) => {
+      if (response.statusCode) {
+        alert(response.message);
+      } else {
+        router.push(`/share/${response.id}`);
+      }
+    });
   };
 
   return (
