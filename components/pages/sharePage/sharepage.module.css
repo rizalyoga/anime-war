@@ -29,6 +29,16 @@
   padding-bottom: 2rem;
 }
 
+.desc-content span {
+  font-size: 1.3rem;
+  text-decoration: underline;
+  color: #f8c10f;
+}
+
+.desc-content h2 span {
+  font-size: 2rem;
+}
+
 .desc-content input {
   width: 80%;
   text-align: center;

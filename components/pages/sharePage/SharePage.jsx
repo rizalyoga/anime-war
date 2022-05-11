@@ -5,7 +5,7 @@ import Image from "next/image";
 import { useRouter } from "next/router";
 import Swal from "sweetalert2";
 
-const SharePage = () => {
+const SharePage = ({ data }) => {
   const [curentLink, setCurentLink] = useState("");
 
   // Funtion for get curent link page
@@ -54,9 +54,13 @@ const SharePage = () => {
               <Image src={"/swords.png"} width={200} height={150} alt="villain-image" />
             </div>
             <div className={styles["desc-content"]}>
-              <h3>Game-player berhasil mengalahkan Villain name menggunakan hero-name</h3>
-              <h2>Score : 80</h2>
-              <input type="text" value={curentLink} />
+              <h3>
+                Player <span>{data.gametag?.name.toUpperCase()}</span> berhasil mengalahkan Villain <span>{data.villain.toUpperCase()}</span> menggunakan hero <span>{data.hero.toUpperCase()}</span>
+              </h3>
+              <h2>
+                Score : <span>{data.score}</span>
+              </h2>
+              <input type="text" placeholder={curentLink} disabled />
             </div>
             <div className={styles.buttons}>
               <button onClick={copyLink} className="choose-btn">
