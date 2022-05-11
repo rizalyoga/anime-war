@@ -12,11 +12,11 @@ const LeaderBoards = (data) => {
   const { query } = useRouter();
 
   // Set data byGametag from SSR
-  useEffect(() => {
-    if (data.data && !query.filter) {
-      setDataLeaderBoard(data.data);
-    }
-  }, [data, query]);
+  // useEffect(() => {
+  //   if (data.data?.length > 0 && !query.filter) {
+  //     setDataLeaderBoard(data.data);
+  //   }
+  // }, [data]);
 
   // Set data byHero from CSR
   useEffect(() => {
@@ -24,7 +24,7 @@ const LeaderBoards = (data) => {
       const nameChar = character.charAt(0).toUpperCase() + character.slice(1);
       getDataByHero(nameChar).then((data) => setDataLeaderBoard(data));
     }
-  }, [query.filter, character]);
+  }, [character]);
 
   // Set data byVillain from CSR
   useEffect(() => {
@@ -32,7 +32,7 @@ const LeaderBoards = (data) => {
       const nameChar = character.charAt(0).toUpperCase() + character.slice(1);
       getDataByVillain(nameChar).then((data) => setDataLeaderBoard(data));
     }
-  }, [query.filter, character]);
+  }, [character]);
 
   // Function for search character
   const searchCharacter = (name) => {
@@ -59,7 +59,7 @@ const LeaderBoards = (data) => {
           </div>
         </div>
         <div className={styles["table-container"]}>
-          <Table searchCharacter={searchCharacter} datas={dataLeaderBoard} />
+          <Table searchCharacter={searchCharacter} datas={data.data?.length > 0 && !query.filter ? data.data : dataLeaderBoard} />
         </div>
       </div>
     </Layout>
