@@ -1,4 +1,5 @@
 import { useRouter } from "next/router";
+import { createNewLeaderboard } from "@/data/leaderBoadrs";
 
 // Button for goes to city page
 export const GoesToCityButton = ({ characterId, characterName }) => {
@@ -18,10 +19,15 @@ export const GoesToCityButton = ({ characterId, characterName }) => {
 // Button show when palyer win the battle
 export const ButtonWin = ({ heroName, villainName }) => {
   const router = useRouter();
-  // const query = router.query;
 
   const goToSharePage = () => {
-    router.push(`/share/hero=${heroName}&&villain=${villainName}`);
+    createNewLeaderboard(heroName, villainName).then((response) => {
+      if (response.statusCode) {
+        alert(response.message);
+      } else {
+        router.push(`/share/${response.id}`);
+      }
+    });
   };
 
   return (

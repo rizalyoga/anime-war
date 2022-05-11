@@ -1,0 +1,72 @@
+.sharepage-container {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  min-height: 92vh;
+  color: #fff;
+  margin-top: 1.5rem;
+}
+
+.main-content {
+  backdrop-filter: blur(16px) saturate(98%);
+  -webkit-backdrop-filter: blur(16px) saturate(98%);
+  background-color: rgba(34, 40, 49, 0.76);
+  border: 1px solid rgba(122, 122, 122, 0.3);
+  padding: 3rem;
+  border-radius: 3px;
+  width: 90%;
+}
+
+.images {
+  display: flex;
+  justify-content: center;
+  padding: 2rem;
+}
+
+.desc-content {
+  text-align: center;
+  padding-bottom: 2rem;
+}
+
+.desc-content span {
+  font-size: 1.3rem;
+  text-decoration: underline;
+  color: #f8c10f;
+}
+
+.desc-content h2 span {
+  font-size: 2rem;
+}
+
+.desc-content input {
+  width: 80%;
+  text-align: center;
+  outline-color: rgb(255, 22, 119);
+}
+
+.buttons {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+@media (max-width: 428px) {
+  .desc-content input {
+    width: 100%;
+    text-align: center;
+  }
+}
+
+@media (max-width: 360px) {
+  .buttons {
+    flex-direction: column;
+  }
+  .buttons button {
+    margin: 5px 0;
+  }
+  .desc-content input {
+    width: 100%;
+    text-align: center;
+  }
+}
