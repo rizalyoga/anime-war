@@ -13,16 +13,15 @@ const LeaderBoards = (data) => {
 
   // Set data byGametag from SSR
   useEffect(() => {
-    if (data.data.length > 0 && !query.filter) {
+    if (data.data && !query.filter) {
       setDataLeaderBoard(data.data);
     }
-  }, [data]);
+  }, [data, query]);
 
   // Set data byHero from CSR
   useEffect(() => {
     if (query.filter == "hero") {
       getDataByHero(character.toLocaleLowerCase()).then((data) => setDataLeaderBoard(data));
-      setDataLeaderBoard([]);
     }
   }, [query.filter, character]);
 
@@ -30,7 +29,6 @@ const LeaderBoards = (data) => {
   useEffect(() => {
     if (query.filter == "villain") {
       getDataByVillain(character.toLocaleLowerCase()).then((data) => setDataLeaderBoard(data));
-      setDataLeaderBoard([]);
     }
   }, [query.filter, character]);
 

@@ -47,11 +47,6 @@ const Table = ({ datas, searchCharacter }) => {
     setSelectedDetailData(detailData);
   };
 
-  // Funtion for show modal detail
-  const showModal = (id) => {
-    alert(`Modal Detail :=> ${id}`);
-  };
-
   return (
     <div className={styles.container}>
       <Filter searchCharacter={searchCharacter} />
@@ -66,7 +61,7 @@ const Table = ({ datas, searchCharacter }) => {
         <tbody>
           {datas.length > 0 &&
             datas.map((data, idx) => (
-              <tr key={idx}>
+              <tr key={data.id}>
                 <td> {idx + 1} </td>
                 <td>{!filterBy ? data.name : data.gametag?.name}</td>
                 <td>{!filterBy ? sumScore(data.leaderboards) : data.score}</td>
