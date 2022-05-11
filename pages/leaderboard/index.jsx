@@ -11,20 +11,17 @@ const Leaderboard = ({ data }) => {
 export async function getServerSideProps(context) {
   const { req } = context;
   const query = context.query;
-  const token = req.cookies.userAuth;
+  // const token = req.cookies.userAuth;
 
   if (!query.filter) {
-    const response = await fetch(`https://thrive-project-be.herokuapp.com/gametags`, {
-      method: "GET",
-      headers: { Authorization: `Bearer ${token}` },
-    });
+    const response = await fetch(`https://thrive-project-be.herokuapp.com/gametags`);
 
     const data = await response.json();
     return { props: { data } };
   }
 
   // Pass data to the page via props
-  return { props: { data: [] } };
+  return { props: {} };
 }
 
 export default Leaderboard;
