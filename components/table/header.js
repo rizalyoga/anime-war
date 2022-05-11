@@ -1,6 +1,6 @@
 export const headerTitle = [
   {
-    title: "Rank",
+    title: "No",
   },
   {
     title: "Gametag Player",

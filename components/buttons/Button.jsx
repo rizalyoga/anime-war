@@ -1,5 +1,6 @@
 import { useRouter } from "next/router";
 
+// Button for goes to city page
 export const GoesToCityButton = ({ characterId, characterName }) => {
   const router = useRouter();
 
@@ -14,13 +15,13 @@ export const GoesToCityButton = ({ characterId, characterName }) => {
   );
 };
 
+// Button show when palyer win the battle
 export const ButtonWin = ({ heroName, villainName }) => {
   const router = useRouter();
-  const query = router.query;
-  console.log(query);
+  // const query = router.query;
 
   const goToSharePage = () => {
-    router.push(`/sharepage/hero=${heroName}&&villain=${villainName}`);
+    router.push(`/share/hero=${heroName}&&villain=${villainName}`);
   };
 
   return (
@@ -35,6 +36,7 @@ export const ButtonWin = ({ heroName, villainName }) => {
   );
 };
 
+// Button show when palyer lose the battle
 export const ButtonLose = () => {
   return (
     <button className="disable-btn choose-btn" disabled={true} style={{ background: "red", color: "white", cursor: "default" }}>

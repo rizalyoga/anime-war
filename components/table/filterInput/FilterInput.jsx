@@ -7,9 +7,25 @@ function FilterInput({ searchCharacter }) {
   const router = useRouter();
   const { query } = useRouter();
 
-  const [filter, setFilter] = useState("gametag");
+  const [filter, setFilter] = useState(query.filter ? query.filter : "gametag");
   const [nameCharacter, setNameCharacter] = useState("");
   const [hidden, setHidden] = useState(false);
+
+  // Funtion for initialize value in searchCharacter
+  const initializeCharacter = () => {
+    if (query.filter == "hero") {
+      setNameCharacter("Doraemon");
+      searchCharacter("Doraemon");
+    } else if (query.filter == "villain") {
+      setNameCharacter("Giant");
+      searchCharacter("Giant");
+    }
+  };
+
+  // Run Initialize funtion
+  useEffect(() => {
+    initializeCharacter();
+  }, [query]);
 
   useEffect(() => {
     // Funtion for hidden input filter when page leaderboard default
@@ -51,7 +67,7 @@ function FilterInput({ searchCharacter }) {
     <div className={styles["top-content"]}>
       <div className={styles["left-content"]} style={hidden ? { display: "none" } : null}>
         <form onSubmit={handleSubmit}>
-          <input type="text" placeholder="input search" onChange={(e) => setNameCharacter(e.target.value)} />
+          <input type="text" value={nameCharacter} placeholder="input search" onChange={(e) => setNameCharacter(e.target.value)} />
           <AiOutlineSearch className={styles.icon} onClick={handleSubmit} />
         </form>
       </div>
