@@ -49,7 +49,7 @@ const LeaderBoards = (data) => {
   };
 
   return (
-    <Layout>
+    <Layout title={"Leaderboard"}>
       <div className="container">
         <div className={styles["leaderboard-header"]}>
           <h1>LEADERBOARDS</h1>

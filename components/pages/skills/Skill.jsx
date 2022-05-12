@@ -29,7 +29,7 @@ function Skill() {
   }, [idCharacter]);
 
   return (
-    <Layout>
+    <Layout title={`Skills ${hero}`}>
       <Private>
         <div className="container">
           <h1 className="title-page">

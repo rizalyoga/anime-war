@@ -30,7 +30,7 @@ function Villains() {
   const { dataCity } = useGetCity();
 
   return (
-    <Layout>
+    <Layout title={"Villains"}>
       <Private>
         <div className="container">
           <div className="header">

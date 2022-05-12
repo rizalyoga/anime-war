@@ -47,7 +47,7 @@ const SharePage = ({ data }) => {
   };
 
   return (
-    <Layout>
+    <Layout title={"Sharepage"}>
       <div className="container">
         <div className={styles["sharepage-container"]}>
           {/* <div className={styles.header}>
@@ -69,7 +69,7 @@ const SharePage = ({ data }) => {
             <div className={styles.buttons}>
               <button onClick={goToHome}>Home</button>
               <button onClick={copyLink}>Share Result</button>
-              <button onClick={goToLeaderboard}>Show Leaderboard</button>
+              <button onClick={goToLeaderboard}>Leaderboard</button>
             </div>
           </div>
         </div>
