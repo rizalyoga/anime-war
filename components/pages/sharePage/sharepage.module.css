@@ -51,17 +51,45 @@
   align-items: center;
 }
 
+.buttons button {
+  min-width: 130px;
+  padding: 4px 8px;
+  margin: 4px;
+  background: rgb(255, 22, 119);
+  color: #fff;
+  font-weight: bold;
+  border: none;
+  border-radius: 2px;
+  cursor: pointer;
+  transition: ease 0.3s;
+}
+
+.buttons button:hover {
+  background: #f8c10f;
+  color: #532f3e;
+}
+
+.buttons button:active {
+  background: rgb(255, 22, 119);
+  color: #fff;
+}
+
 @media (max-width: 428px) {
+  .main-content {
+    width: 100%;
+  }
+
   .desc-content input {
     width: 100%;
     text-align: center;
   }
-}
 
-@media (max-width: 360px) {
   .buttons {
     flex-direction: column;
   }
+}
+
+@media (max-width: 360px) {
   .buttons button {
     margin: 5px 0;
   }

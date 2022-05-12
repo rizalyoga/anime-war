@@ -9,7 +9,7 @@ const SharesPage = ({ data }) => {
   );
 };
 
-export async function getStaticPaths(context) {
+export async function getStaticPaths() {
   const res = await fetch(`https://thrive-project-be.herokuapp.com/leaderboards`);
   const data = await res.json();
 
@@ -18,7 +18,7 @@ export async function getStaticPaths(context) {
 
   return {
     paths: allPathId,
-    fallback: false, // false or 'blocking'
+    fallback: false, // true or 'blocking'
   };
 }
 

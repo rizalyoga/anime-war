@@ -6,6 +6,7 @@ import { GoesToCityButton } from "@/components/buttons/Button";
 import LoadingComponent from "@/components/loading/Loading";
 import Layout from "@/layout/Layout";
 import Private from "@/layout/PrivateLayout";
+import getToken from "../../../utils/getCookies";
 
 function Skill() {
   const [dataSkill, setDataSkill] = useState({});
@@ -16,7 +17,7 @@ function Skill() {
 
   //Get Skills Data
   useEffect(() => {
-    const authUser = localStorage.getItem("userAuth");
+    const authUser = getToken();
     if (authUser) {
       if (idCharacter) {
         getSkill(idCharacter)

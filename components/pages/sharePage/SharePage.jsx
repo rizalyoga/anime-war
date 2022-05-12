@@ -17,9 +17,13 @@ const SharePage = ({ data }) => {
     }
   }, []);
 
-  // Function for direct to leaderboard page
+  // Function for direct page
   const goToLeaderboard = () => {
     router.push("/leaderboard");
+  };
+
+  const goToHome = () => {
+    router.push("/home");
   };
 
   // Funtion for copied curent link to clipboard
@@ -46,12 +50,12 @@ const SharePage = ({ data }) => {
     <Layout>
       <div className="container">
         <div className={styles["sharepage-container"]}>
-          <div className={styles.header}>
-            <h1>SharePage</h1>
-          </div>
+          {/* <div className={styles.header}>
+            <h1>Share Page</h1>
+          </div> */}
           <div className={styles["main-content"]}>
             <div className={styles.images}>
-              <Image src={"/swords.png"} width={200} height={150} alt="villain-image" />
+              <Image src={"/swords.png"} width={170} height={150} alt="villain-image" />
             </div>
             <div className={styles["desc-content"]}>
               <h3>
@@ -60,15 +64,12 @@ const SharePage = ({ data }) => {
               <h2>
                 Score : <span>{data.score}</span>
               </h2>
-              <input type="text" placeholder={curentLink} disabled />
+              <input type="text" placeholder={curentLink} value={curentLink} onBlur={() => setCurentLink(window.location.href)} onChange={(e) => setCurentLink(e.target.value)} />
             </div>
             <div className={styles.buttons}>
-              <button onClick={copyLink} className="choose-btn">
-                Share Result
-              </button>
-              <button onClick={goToLeaderboard} className="choose-btn">
-                Show Dashboard
-              </button>
+              <button onClick={goToHome}>Home</button>
+              <button onClick={copyLink}>Share Result</button>
+              <button onClick={goToLeaderboard}>Show Leaderboard</button>
             </div>
           </div>
         </div>
