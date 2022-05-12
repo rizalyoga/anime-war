@@ -30,21 +30,21 @@ export async function getStaticProps(context) {
   const data = await res.json();
 
   const seos = {
-    title: `${data.gametag.name} - ${data.hero} VS ${data.villain}`,
-    description: `Player ${data.gametag.name} berhasil mengalahkan Villain ${data.villain} menggunakan hero ${data.hero}`,
-    author: data.gametag.name,
-    keywords: [data.gametag.name, data.villain, data.hero],
+    title: `${data.gametag?.name || null} - ${data.hero} VS ${data.villain}`,
+    description: `Player ${data.gametag?.name || null} berhasil mengalahkan Villain ${data.villain} menggunakan hero ${data.hero}`,
+    author: data.gametag?.name || null,
+    keywords: [data.gametag?.name || null, data.villain, data.hero],
     canonicalUrl: `https://anime-war-rizalyoga.vercel.app/share/${params.idLeaderboard}`,
-    ogTitle: `${data.gametag.name} - ${data.hero} VS ${data.villain}`,
-    ogDescription: `Player ${data.gametag.name} berhasil mengalahkan Villain ${data.villain} menggunakan hero ${data.hero}`,
+    ogTitle: `${data.gametag?.name || null} - ${data.hero} VS ${data.villain}`,
+    ogDescription: `Player ${data.gametag?.name || null} berhasil mengalahkan Villain ${data.villain} menggunakan hero ${data.hero}`,
     ogImageUrl: `https://anime-war-rizalyoga.vercel.app/_next/image?url=%2Fswords.png&w=384&q=100`,
     ogImageWidth: 1200,
     ogImageHeight: 630,
     ogType: "information",
     ogUrl: `https://anime-war-rizalyoga.vercel.app/share/${params.idLeaderboard}`,
     twitterCard: "summary",
-    twitterTitle: `${data.gametag.name} - ${data.hero} VS ${data.villain}`,
-    twitterDescription: `Player ${data.gametag.name} berhasil mengalahkan Villain ${data.villain} menggunakan hero ${data.hero}`,
+    twitterTitle: `${data.gametag?.name || null} - ${data.hero} VS ${data.villain}`,
+    twitterDescription: `Player ${data.gametag?.name || null} berhasil mengalahkan Villain ${data.villain} menggunakan hero ${data.hero}`,
     twitterUrl: `https://anime-war-rizalyoga.vercel.app/share/${params.idLeaderboard}`,
   };
 
