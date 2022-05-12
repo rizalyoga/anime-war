@@ -59,10 +59,10 @@ const SharePage = ({ data }) => {
             </div>
             <div className={styles["desc-content"]}>
               <h3>
-                Player <span>{data.gametag?.name.toUpperCase()}</span> berhasil mengalahkan Villain <span>{data.villain.toUpperCase()}</span> menggunakan hero <span>{data.hero.toUpperCase()}</span>
+                Player <span>{data?.gametag?.name.toUpperCase()}</span> berhasil mengalahkan Villain <span>{data?.villain.toUpperCase()}</span> menggunakan hero <span>{data?.hero.toUpperCase()}</span>
               </h3>
               <h2>
-                Score : <span>{data.score}</span>
+                Score : <span>{data?.score}</span>
               </h2>
               <input type="text" placeholder={curentLink} value={curentLink} onBlur={() => setCurentLink(window.location.href)} onChange={(e) => setCurentLink(e.target.value)} />
             </div>
