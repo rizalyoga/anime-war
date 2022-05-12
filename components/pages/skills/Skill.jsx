@@ -5,6 +5,8 @@ import CardSkill from "@/components/cards/Card";
 import { GoesToCityButton } from "@/components/buttons/Button";
 import LoadingComponent from "@/components/loading/Loading";
 import Layout from "@/layout/Layout";
+import Private from "@/layout/PrivateLayout";
+import getToken from "../../../utils/getCookies";
 
 function Skill() {
   const [dataSkill, setDataSkill] = useState({});
@@ -15,25 +17,30 @@ function Skill() {
 
   //Get Skills Data
   useEffect(() => {
-    if (idCharacter) {
-      getSkill(idCharacter)
-        .then((response) => setDataSkill(response))
-        .then(() => setLoading(false));
+    const authUser = getToken();
+    if (authUser) {
+      if (idCharacter) {
+        getSkill(idCharacter)
+          .then((response) => setDataSkill(response))
+          .then(() => setLoading(false));
+      }
+      setLoading(loadings);
     }
-    setLoading(loadings);
   }, [idCharacter]);
 
   return (
     <Layout>
-      <div className="container">
-        <h1 className="title-page">
-          <span>{hero?.toUpperCase()} </span> skills
-        </h1>
-        {loading ? <LoadingComponent /> : <div className="card-container">{dataSkill && <CardSkill skill={dataSkill} />}</div>}
-        <div className="button-wrap">
-          <GoesToCityButton characterId={dataSkill.id} characterName={dataSkill.name} />
+      <Private>
+        <div className="container">
+          <h1 className="title-page">
+            <span>{hero?.toUpperCase()} </span> skills
+          </h1>
+          {loading ? <LoadingComponent /> : <div className="card-container">{dataSkill && <CardSkill skill={dataSkill} />}</div>}
+          <div className="button-wrap">
+            <GoesToCityButton characterId={dataSkill.id} characterName={dataSkill.name} />
+          </div>
         </div>
-      </div>
+      </Private>
     </Layout>
   );
 }

@@ -6,6 +6,11 @@
   box-sizing: border-box;
   font-family: "Baloo Paaji 2", cursive;
 }
+
+a {
+  text-decoration: none;
+}
+
 body {
   /* first-gradient */
   /* background: linear-gradient(to bottom right, #224ead 0%, #c01821 50%, #224ead 100%); */
@@ -148,6 +153,28 @@ span {
   padding: 8px 16px;
   margin-bottom: 20px;
   max-width: 95%;
+}
+
+/* -------------------------------- NProgress ------------------------------- */
+#nprogress .bar {
+  background: #29d;
+
+  position: fixed;
+  z-index: 1031;
+  top: 0;
+  left: 0;
+
+  width: 100%;
+  height: 2px;
+}
+
+#nprogress .bar {
+  background: #350287 !important;
+  height: 6px !important;
+}
+
+#nprogress .peg {
+  box-shadow: 0 0 10px #350287, 0 0 5px #350287 !important;
 }
 
 @media (max-width: 885px) {

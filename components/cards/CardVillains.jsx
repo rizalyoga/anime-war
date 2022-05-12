@@ -25,7 +25,7 @@ function CardVillain({ dataVillains, dataCity }) {
                 <img className="image" src={data.imgSrc} alt="avatar" />
                 <h1>{data.name}</h1>
                 {JSON.parse(localStorage.getItem(`${hero}VS${data.name}`))?.villainHP == 0 ? (
-                  <ButtonWin />
+                  <ButtonWin heroName={hero} villainName={data.name} />
                 ) : JSON.parse(localStorage.getItem(`${hero}VS${data.name}`))?.heroHP == 0 ? (
                   <ButtonLose />
                 ) : (

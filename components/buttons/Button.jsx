@@ -1,5 +1,7 @@
 import { useRouter } from "next/router";
+import { createNewLeaderboard } from "@/data/leaderBoadrs";
 
+// Button for goes to city page
 export const GoesToCityButton = ({ characterId, characterName }) => {
   const router = useRouter();
 
@@ -14,14 +16,33 @@ export const GoesToCityButton = ({ characterId, characterName }) => {
   );
 };
 
-export const ButtonWin = () => {
+// Button show when palyer win the battle
+export const ButtonWin = ({ heroName, villainName }) => {
+  const router = useRouter();
+
+  const goToSharePage = () => {
+    createNewLeaderboard(heroName, villainName).then((response) => {
+      if (response.statusCode) {
+        alert(response.message);
+      } else {
+        router.push(`/share/${response.id}`);
+      }
+    });
+  };
+
   return (
-    <button className="disable-btn choose-btn" disabled={true} style={{ background: "green", color: "white", cursor: "default" }}>
-      You Win
-    </button>
+    <>
+      <button className="disable-btn choose-btn" disabled={true} style={{ background: "green", color: "white", cursor: "default" }}>
+        🏆
+      </button>
+      <button className="choose-btn" onClick={goToSharePage} style={{ margin: "3px 0", background: "green", color: "white", cursor: "pointer" }}>
+        add leaderborad
+      </button>
+    </>
   );
 };
 
+// Button show when palyer lose the battle
 export const ButtonLose = () => {
   return (
     <button className="disable-btn choose-btn" disabled={true} style={{ background: "red", color: "white", cursor: "default" }}>

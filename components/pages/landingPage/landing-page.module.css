@@ -138,8 +138,9 @@
 .start-game:after {
   cursor: pointer;
   min-width: 250px;
-  height: 76px;
-  line-height: 78px;
+  height: 56px;
+  line-height: 30px;
+  margin-bottom: 20px;
   font-size: 1.5rem;
   background: linear-gradient(45deg, transparent 5%, #350287 5%);
   border: none;
@@ -171,13 +172,10 @@
   background: linear-gradient(45deg, transparent 3%, #f60029 3%, #dd1738 5%, #faac0b 5%);
   text-shadow: -3px -3px 0px #f8f005, 3px 3px 0px #00e6f6;
   clip-path: var(--slice-0);
-  animation: 1.5s glitch infinite;
+  animation: 1.5s glitch;
 }
 
 .start-game:hover:after {
-  animation: none;
-}
-.start-game:hover {
   animation: none;
 }
 
