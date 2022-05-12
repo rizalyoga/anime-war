@@ -3,7 +3,7 @@ export const headerTitle = [
     title: "No",
   },
   {
-    title: "Gametag Player",
+    title: "Player",
   },
   {
     title: "Total Score",
