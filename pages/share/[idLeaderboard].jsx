@@ -18,7 +18,7 @@ export async function getStaticPaths() {
 
   return {
     paths: allPathId,
-    fallback: false, // true or 'blocking'
+    fallback: "blocking", // true, false or 'blocking'
   };
 }
 
@@ -35,7 +35,7 @@ export async function getStaticProps(context) {
     // Next.js will attempt to re-generate the page:
     // - When a request comes in
     // - At most once every 10 seconds
-    revalidate: 5, // In seconds
+    revalidate: 1, // In seconds
   };
 }
 
