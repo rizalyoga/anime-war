@@ -47,7 +47,7 @@ const Login = () => {
   };
 
   return (
-    <Layout>
+    <Layout title={"Login"}>
       <div className="container">
         <div className={styles["form-container"]}>
           <h1>Login Form</h1>

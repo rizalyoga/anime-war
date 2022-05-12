@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import styles from "./navbar.module.css";
 import { logoutConfirm, createGameTag } from "../alerts/alert";
 import { useRouter } from "next/router";
+import Cookies from "js-cookie";
 
 const Navbar = () => {
   const [username, setUsername] = useState("");
@@ -10,7 +11,7 @@ const Navbar = () => {
   const router = useRouter();
 
   useEffect(() => {
-    const username = localStorage.getItem("username");
+    const username = Cookies.get("username");
     const nicknames = localStorage.getItem("nickname");
 
     if (username) {
@@ -45,7 +46,7 @@ const Navbar = () => {
         <div className={styles["content-right"]}>
           <p onClick={toLeadBoard}>Leadboard</p>
           {/* {nickname === "" ? <p onClick={createNickname}>Nickname</p> : null} */}
-          {<p onClick={createNickname}>Nickname</p>}
+          {<p onClick={createNickname}>Gametag</p>}
           <p onClick={doLogout}>Log out</p>
         </div>
       </div>

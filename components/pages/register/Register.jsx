@@ -31,6 +31,7 @@ const Register = () => {
       email,
       password,
     };
+
     registerAccount(payload).then((res) => {
       setLoading((prev) => !prev);
       if (res == true) {
@@ -48,7 +49,7 @@ const Register = () => {
   };
 
   return (
-    <Layout>
+    <Layout title={"Register"}>
       <div className="container">
         <div className={styles["form-container"]}>
           <h1>Register Form</h1>

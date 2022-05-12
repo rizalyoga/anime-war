@@ -36,7 +36,7 @@ function City() {
   };
 
   return (
-    <Layout>
+    <Layout title={"City"}>
       <Private>
         <div className="container">
           <div className="header">

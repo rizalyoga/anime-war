@@ -55,7 +55,7 @@ export const logoutConfirm = () => {
   }).then((result) => {
     if (result.isConfirmed) {
       Cookies.remove("userAuth");
-      localStorage.removeItem("username");
+      Cookies.remove("username");
       localStorage.removeItem("nickname");
       localStorage.removeItem("nicknameId");
       window.location.href = "/";
@@ -66,7 +66,9 @@ export const logoutConfirm = () => {
 // Modal for create game Tag
 export const createGameTag = () => {
   Swal.fire({
-    title: "Create your game nickname",
+    icon: "warning",
+    title: "Create your game Gametag",
+    text: "If the gametag is already available and you create a new gametag, then all battle data will be removed from memory",
     input: "text",
     inputAttributes: {
       autocapitalize: "off",
@@ -81,11 +83,13 @@ export const createGameTag = () => {
       newGameTag(payload, token).then((response) => {
         if (response.statusCode == 400) {
           Swal.fire({
-            title: `Sorry, ${response.message}`,
+            title: `Oops, Sorry gametag gagal dibuat, ${response.message}`,
           });
         } else {
+          localStorage.clear();
           localStorage.setItem("nickname", response.name);
           localStorage.setItem("nicknameId", response.id);
+          location.reload();
 
           Swal.fire({
             title: `nickname success created`,
