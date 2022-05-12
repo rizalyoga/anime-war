@@ -15,7 +15,7 @@ const LandingPage = () => {
     router.push("/leaderboard");
   };
   return (
-    <Layout>
+    <Layout title={""}>
       <div className={styles.container}>
         <div className={styles.area}>
           <ul className={styles.circles}>

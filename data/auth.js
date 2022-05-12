@@ -43,8 +43,11 @@ export const loginAccount = async (payload) => {
     Cookies.set("userAuth", data.jwt, {
       expires: inTwoHours,
     });
+    Cookies.set("username", data.user?.username, {
+      expires: inTwoHours,
+    });
 
-    localStorage.setItem("username", data.user?.username);
+    // localStorage.setItem("username", data.user?.username);
     if (data.user.gametag?.name) {
       localStorage.setItem("nickname", data.user?.gametag?.name);
       localStorage.setItem("nicknameId", data.user?.gametag?.id);

@@ -1,0 +1,35 @@
+/* ------------------------------ // Win button ----------------------------- */
+.win-btn,
+.lose-btn,
+.disable-btn {
+  padding: 8px 16px;
+  border: 1.5px solid rgba(202, 202, 202, 0.3);
+  color: white;
+  cursor: pointer;
+  border-radius: 3px;
+  margin: 3px 0;
+  font-weight: bolder;
+  min-width: 150px;
+  transition: ease-in 0.2s;
+}
+
+.win-btn {
+  background-color: rgb(23, 180, 23);
+}
+
+.win-btn:hover {
+  background-color: #eb196e;
+}
+
+.win-btn:active {
+  background-color: green;
+}
+
+.disable-btn,
+.lose-btn {
+  cursor: default;
+}
+
+.lose-btn {
+  background-color: red;
+}

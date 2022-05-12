@@ -38,7 +38,7 @@ const HomePage = () => {
   };
 
   return (
-    <Layout>
+    <Layout title={"Hero-Character"}>
       <Private>
         <div className="container">
           <div className="header">

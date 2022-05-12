@@ -4,8 +4,9 @@ import styles from "./sharepage.module.css";
 import Image from "next/image";
 import { useRouter } from "next/router";
 import Swal from "sweetalert2";
+import SharepageLayout from "@/layout/SharepageLayout";
 
-const SharePage = ({ data }) => {
+const SharePage = ({ data, seos }) => {
   const [curentLink, setCurentLink] = useState("");
 
   // Funtion for get curent link page
@@ -47,33 +48,35 @@ const SharePage = ({ data }) => {
   };
 
   return (
-    <Layout>
-      <div className="container">
-        <div className={styles["sharepage-container"]}>
-          {/* <div className={styles.header}>
+    <Layout title={"Sharepage"}>
+      <SharepageLayout seos={seos}>
+        <div className="container">
+          <div className={styles["sharepage-container"]}>
+            {/* <div className={styles.header}>
             <h1>Share Page</h1>
           </div> */}
-          <div className={styles["main-content"]}>
-            <div className={styles.images}>
-              <Image src={"/swords.png"} width={170} height={150} alt="villain-image" />
-            </div>
-            <div className={styles["desc-content"]}>
-              <h3>
-                Player <span>{data?.gametag?.name.toUpperCase()}</span> berhasil mengalahkan Villain <span>{data?.villain.toUpperCase()}</span> menggunakan hero <span>{data?.hero.toUpperCase()}</span>
-              </h3>
-              <h2>
-                Score : <span>{data?.score}</span>
-              </h2>
-              <input type="text" placeholder={curentLink} value={curentLink} onBlur={() => setCurentLink(window.location.href)} onChange={(e) => setCurentLink(e.target.value)} />
-            </div>
-            <div className={styles.buttons}>
-              <button onClick={goToHome}>Home</button>
-              <button onClick={copyLink}>Share Result</button>
-              <button onClick={goToLeaderboard}>Show Leaderboard</button>
+            <div className={styles["main-content"]}>
+              <div className={styles.images}>
+                <Image src={"/swords.png"} width={170} height={150} alt="villain-image" />
+              </div>
+              <div className={styles["desc-content"]}>
+                <h3>
+                  Player <span>{data?.gametag?.name.toUpperCase()}</span> berhasil mengalahkan Villain <span>{data?.villain.toUpperCase()}</span> menggunakan hero <span>{data?.hero.toUpperCase()}</span>
+                </h3>
+                <h2>
+                  Score : <span>{data?.score}</span>
+                </h2>
+                <input type="text" placeholder={curentLink} value={curentLink} onBlur={() => setCurentLink(window.location.href)} onChange={(e) => setCurentLink(e.target.value)} />
+              </div>
+              <div className={styles.buttons}>
+                <button onClick={goToHome}>Home</button>
+                <button onClick={copyLink}>Share Result</button>
+                <button onClick={goToLeaderboard}>Leaderboard</button>
+              </div>
             </div>
           </div>
         </div>
-      </div>
+      </SharepageLayout>
     </Layout>
   );
 };

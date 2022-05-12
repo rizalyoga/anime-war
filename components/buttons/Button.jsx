@@ -1,5 +1,6 @@
 import { useRouter } from "next/router";
 import { createNewLeaderboard } from "@/data/leaderBoadrs";
+import styles from "./buttons.module.css";
 
 // Button for goes to city page
 export const GoesToCityButton = ({ characterId, characterName }) => {
@@ -32,10 +33,10 @@ export const ButtonWin = ({ heroName, villainName }) => {
 
   return (
     <>
-      <button className="disable-btn choose-btn" disabled={true} style={{ background: "green", color: "white", cursor: "default" }}>
-        🏆
+      <button className={styles[("win-btn", "disable-btn")]} disabled={true}>
+        You Win 🏆
       </button>
-      <button className="choose-btn" onClick={goToSharePage} style={{ margin: "3px 0", background: "green", color: "white", cursor: "pointer" }}>
+      <button className={styles["win-btn"]} onClick={goToSharePage}>
         add leaderborad
       </button>
     </>
@@ -45,7 +46,7 @@ export const ButtonWin = ({ heroName, villainName }) => {
 // Button show when palyer lose the battle
 export const ButtonLose = () => {
   return (
-    <button className="disable-btn choose-btn" disabled={true} style={{ background: "red", color: "white", cursor: "default" }}>
+    <button className={styles[("disable-btn", "lose-btn")]} disabled={true}>
       You Lose
     </button>
   );
