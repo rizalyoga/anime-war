@@ -45,6 +45,12 @@
   outline-color: rgb(255, 22, 119);
 }
 
+.share-medsos {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 10px;
+}
+
 .buttons {
   display: flex;
   justify-content: center;

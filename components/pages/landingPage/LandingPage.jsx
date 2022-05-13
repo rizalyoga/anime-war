@@ -31,14 +31,14 @@ const LandingPage = () => {
             <li></li>
           </ul>
           <div className={styles["image-container"]}>
-            <Image src="/assets/anime-war.png" alt="logo" height={350} width={850} />
+            <Image src="/assets/anime-war.webp" alt="logo" height={350} width={850} />
           </div>
           <button className={styles["start-game"]} role="button" onClick={startGame}>
             START GAME
           </button>
-          <button className={styles["start-game"]} role="button" onClick={toLeaderboard}>
+          {/* <button className={styles["start-game"]} role="button" onClick={toLeaderboard}>
             Leader Board
-          </button>
+          </button> */}
         </div>
       </div>
     </Layout>
