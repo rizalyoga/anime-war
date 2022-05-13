@@ -19,6 +19,7 @@ const LandingPage = () => {
     <>
       <Head>
         <title>Anime War</title>
+        <link rel="icon" href="/swords.png" type="image/x-icon" />
         <meta title="Anime War" />
         <meta name="description" title={"Game pertempuran antara bertemakan Anime"} />
         <meta name="keywords" content={["Anime", "War", "Game"]} />
