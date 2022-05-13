@@ -28,13 +28,13 @@ const LandingPage = () => {
         <meta name="twitter:url" content={"https://anime-war-rizalyoga.vercel.app/"} />
         <meta name="twitter:title" content={"Anime War"} />
         <meta name="twitter:description" content={"Game pertempuran antara bertemakan Anime"} />
-        <meta property="og:url" content={"https://anime-war-rizalyoga.vercel.app/_next/image?url=%2Fswords.png&w=384&q=100"} />
+        <meta property="og:url" content={"https://anime-war-rizalyoga.vercel.app/"} />
         <meta property="og:image:width" content={1200} />
         <meta property="og:image:height" content={630} />
         <meta property="og:type" content={"Information"} />
         <meta property="og:title" content={"Anime War"} />
         <meta property="og:description" content={"Game pertempuran antara bertemakan Anime"} />
-        <meta property="og:image" content={"https://anime-war-rizalyoga.vercel.app/"} />
+        <meta property="og:image" content={"https://anime-war-rizalyoga.vercel.app/_next/image?url=%2Fswords.png&w=384&q=100"} />
         <meta property="og:image:secure_url" content={"https://anime-war-rizalyoga.vercel.app/_next/image?url=%2Fswords.png&w=384&q=100"} />
       </Head>
       <div className={styles.container}>
