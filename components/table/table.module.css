@@ -1,6 +1,7 @@
 .container {
   width: 100%;
   overflow-x: auto;
+  overflow: hidden;
 }
 
 .table {
@@ -105,6 +106,48 @@
 .date-moment {
   display: flex;
   justify-content: center;
+}
+
+/* ------------------------------- PAGINATION ------------------------------- */
+
+.pagination ul {
+  display: flex;
+  justify-content: center;
+  flex-direction: row;
+  gap: 15px;
+  margin-top: 20px;
+  cursor: pointer;
+  list-style: none;
+  padding: 5px 0;
+}
+
+.pagination a {
+  border: 1px solid #fff;
+  background: #eb196e;
+  font-size: 1rem;
+  padding: 3px 12px;
+  transition: ease 0.3s;
+  outline: none;
+  text-decoration: none;
+}
+
+.pagination li a:hover {
+  background: #fff;
+  color: #eb196e;
+}
+
+.pagination li a:focus {
+  outline: none;
+  border: none;
+  background: #fff;
+  color: #eb196e;
+}
+
+.pagination li:active {
+  outline: none;
+  border: none;
+  background: #eb196e;
+  color: #fff;
 }
 
 @media (max-width: 430px) {
