@@ -3,6 +3,7 @@ import Image from "next/image";
 import { useRouter } from "next/router";
 import styles from "./landing-page.module.css";
 import Layout from "@/layout/Layout";
+import Head from "next/head";
 
 const LandingPage = () => {
   const router = useRouter();
@@ -15,7 +16,26 @@ const LandingPage = () => {
     router.push("/leaderboard");
   };
   return (
-    <Layout title={""}>
+    <>
+      <Head>
+        <title>Anime War</title>
+        <meta title="Anime War" />
+        <meta name="description" title={"Game pertempuran antara bertemakan Anime"} />
+        <meta name="keywords" content={["Anime", "War", "Game"]} />
+        <link rel="canonical" href={"https://anime-war-rizalyoga.vercel.app/"} />
+        <meta name="twitter:card" content={"summary"} />
+        <meta name="twitter:url" content={"https://anime-war-rizalyoga.vercel.app/"} />
+        <meta name="twitter:title" content={"Anime War"} />
+        <meta name="twitter:description" content={"Game pertempuran antara bertemakan Anime"} />
+        <meta property="og:url" content={"https://anime-war-rizalyoga.vercel.app/_next/image?url=%2Fswords.png&w=384&q=100"} />
+        <meta property="og:image:width" content={1200} />
+        <meta property="og:image:height" content={630} />
+        <meta property="og:type" content={"Information"} />
+        <meta property="og:title" content={"Anime War"} />
+        <meta property="og:description" content={"Game pertempuran antara bertemakan Anime"} />
+        <meta property="og:image" content={"https://anime-war-rizalyoga.vercel.app/"} />
+        <meta property="og:image:secure_url" content={"https://anime-war-rizalyoga.vercel.app/_next/image?url=%2Fswords.png&w=384&q=100"} />
+      </Head>
       <div className={styles.container}>
         <div className={styles.area}>
           <ul className={styles.circles}>
@@ -41,7 +61,7 @@ const LandingPage = () => {
           </button> */}
         </div>
       </div>
-    </Layout>
+    </>
   );
 };
 

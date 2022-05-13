@@ -11,6 +11,7 @@ const Table = ({ datas, searchCharacter }) => {
   const [titleFiltered, setTitleFiltered] = useState([]);
   const [selectedDetailData, setSelectedDetailData] = useState([]);
   const [isOpen, setIsOpen] = useState(false);
+  const [filterGametag, setFilterGametag] = useState();
 
   const router = useRouter();
   const filterBy = router.query.filter;
@@ -18,7 +19,7 @@ const Table = ({ datas, searchCharacter }) => {
   // States for pagination
   const [offset, setOffset] = useState(0);
   const [data, setData] = useState([]);
-  const [perPage] = useState(15);
+  const [perPage] = useState(12);
   const [pageCount, setPageCount] = useState(0);
 
   // Filter table header title
@@ -71,9 +72,14 @@ const Table = ({ datas, searchCharacter }) => {
     setSelectedDetailData(detailData);
   };
 
+  // Funtion for set filter data by gametag
+  const filterByGametag = (gametag) => {
+    setFilterGametag(gametag);
+  };
+
   return (
     <div className={styles.container}>
-      <Filter searchCharacter={searchCharacter} />
+      <Filter searchCharacter={searchCharacter} filterByGametag={filterByGametag} />
       <table className={styles.table}>
         <thead className="table-header">
           <tr>
@@ -84,22 +90,24 @@ const Table = ({ datas, searchCharacter }) => {
         </thead>
         <tbody>
           {data.length > 0 &&
-            data.map((data) => (
-              <tr key={data.id}>
-                <td> {data.num} </td>
-                <td>{!filterBy ? data.name : data.gametag?.name}</td>
-                <td>{!filterBy ? sumScore(data.leaderboards) : data.score}</td>
-                <td className={styles["date-moment"]}>
-                  {!filterBy ? (
-                    <button className={styles["detail-button"]} onClick={() => selectData(data.leaderboards)}>
-                      Detail
-                    </button>
-                  ) : (
-                    <DateMoment date={data.created_at} />
-                  )}
-                </td>
-              </tr>
-            ))}
+            data
+              .filter((data) => data.name?.toLowerCase().includes(filterGametag.toLowerCase()) || data.gametag?.name.toLowerCase().includes(filterGametag.toLowerCase()))
+              .map((data) => (
+                <tr key={data.id}>
+                  <td> {data.num} </td>
+                  <td>{!filterBy ? data.name : data.gametag?.name}</td>
+                  <td>{!filterBy ? sumScore(data.leaderboards) : data.score}</td>
+                  <td className={styles["date-moment"]}>
+                    {!filterBy ? (
+                      <button className={styles["detail-button"]} onClick={() => selectData(data.leaderboards)}>
+                        Detail
+                      </button>
+                    ) : (
+                      <DateMoment date={data.created_at} />
+                    )}
+                  </td>
+                </tr>
+              ))}
         </tbody>
       </table>
       <div className={styles.pagination}>

@@ -34,7 +34,7 @@ export const ButtonWin = ({ heroName, villainName }) => {
   return (
     <>
       <button className={styles[("win-btn", "disable-btn")]} disabled={true}>
-        You Win 🏆
+        🏆
       </button>
       <button className={styles["win-btn"]} onClick={goToSharePage}>
         add leaderborad
