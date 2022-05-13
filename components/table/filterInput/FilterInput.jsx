@@ -3,13 +3,14 @@ import { useRouter } from "next/router";
 import styles from "../table.module.css";
 import { AiOutlineSearch } from "react-icons/ai";
 
-function FilterInput({ searchCharacter }) {
+function FilterInput({ searchCharacter, filterByGametag }) {
   const router = useRouter();
   const { query } = useRouter();
 
   const [filter, setFilter] = useState(query.filter ? query.filter : "gametag");
   const [nameCharacter, setNameCharacter] = useState("");
   const [hidden, setHidden] = useState(false);
+  const [gametag, setGametag] = useState("");
 
   // Funtion for initialize value in searchCharacter
   const initializeCharacter = () => {
@@ -63,17 +64,23 @@ function FilterInput({ searchCharacter }) {
     searchCharacter(nameCharacter);
   };
 
+  // Funtion for start filter by game name
+  useEffect(() => {
+    filterByGametag(gametag);
+  }, [gametag]);
+
   return (
     <div className={styles["top-content"]}>
       <div className={styles["left-content"]} style={hidden ? { display: "none" } : null}>
         <form onSubmit={handleSubmit}>
-          <input type="text" value={nameCharacter} placeholder="input search" onChange={(e) => setNameCharacter(e.target.value)} />
+          <input type="search" value={nameCharacter} placeholder="input search" onChange={(e) => setNameCharacter(e.target.value)} />
           <AiOutlineSearch className={styles.icon} onClick={handleSubmit} />
         </form>
       </div>
       <div className={styles["mid-content"]} style={hidden ? { display: "none" } : null}>
         <h4>{nameCharacter ? `Hasil Search : ${nameCharacter.toUpperCase()}` : "Input charcater name first"} </h4>
       </div>
+      {/* <input type="search" value={gametag} onChange={(e) => setGametag(e.target.value)} placeholder="player name" /> */}
       <div className={styles["right-content"]}>
         <select name="select-filter" value={filter} id="select-filter" onChange={(e) => filterBy(e.target.value)} className={styles["select-filter"]}>
           <option value="gametag">By Gametag</option>
