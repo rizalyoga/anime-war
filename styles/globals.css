@@ -39,7 +39,7 @@ body {
 }
 
 span {
-  color: #4742a1;
+  color: #fff;
   font-size: 2.5rem;
   /* border: 2px solid #fff; */
   text-decoration: underline;
@@ -185,7 +185,7 @@ span {
   }
 }
 
-@media (max-width: 428px) {
+@media (max-width: 429px) {
   .container {
     margin: 0 5px;
   }
@@ -197,6 +197,11 @@ span {
     flex-direction: column;
     text-align: center;
     margin-bottom: -10px;
+  }
+
+  .header .control-button {
+    margin-top: 15px;
+    /* margin-bottom: -10px; */
   }
 
   .card-container {

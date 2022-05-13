@@ -269,6 +269,12 @@
   }
 }
 
+@media (max-width: 376px) {
+  .modalLeaderBoard {
+    min-width: 21rem;
+  }
+}
+
 @media (max-width: 360px) {
   .modal {
     min-width: 20rem;
@@ -296,6 +302,10 @@
     box-shadow: 0 5px 20px 0 rgba(0, 0, 0, 0.04);
     animation-name: zoom;
     animation-duration: 1.8s;
+  }
+
+  .modalLeaderBoard {
+    min-width: 19.5rem;
   }
 
   .boxStatus h2 {
