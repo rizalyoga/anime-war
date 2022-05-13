@@ -9,7 +9,7 @@ export const resultAlert = (status) => {
     width: 600,
     padding: "3em",
     color: "#FFF",
-    background: `linear-gradient(rgba(4,9,30,0.7), rgba(4,9,30,0.7)), url(/assets/all_star_sweet.jpg)`,
+    background: `linear-gradient(rgba(4,9,30,0.7), rgba(4,9,30,0.7)), url(/assets/all_star_sweet.webp)`,
     backdrop: `
     rgba(4,9,30,0.5)
           left top
@@ -28,13 +28,13 @@ export const confirmationtAlert = () => {
     confirmButtonColor: "#3085d6",
     cancelButtonColor: "#224ead",
     confirmButtonText: "Reset",
-    background: `linear-gradient(rgba(4,9,30,0.5), rgba(4,9,30,0.5)), url(/assets/all_star_sweet.jpg)`,
+    background: `linear-gradient(rgba(4,9,30,0.5), rgba(4,9,30,0.5)), url(/assets/all_star_sweet.webp)`,
   }).then((result) => {
     if (result.isConfirmed) {
       localStorage.clear();
       Swal.fire({
         title: "Battle data has been reset",
-        background: `linear-gradient(rgba(4,9,30,0.5), rgba(4,9,30,0.5)), url(/assets/all_star_sweet.jpg)`,
+        background: `linear-gradient(rgba(4,9,30,0.5), rgba(4,9,30,0.5)), url(/assets/all_star_sweet.webp)`,
         color: "#fff",
       });
     }
@@ -51,7 +51,7 @@ export const logoutConfirm = () => {
     confirmButtonColor: "#3085d6",
     cancelButtonColor: "#224ead",
     confirmButtonText: "Log out",
-    background: `linear-gradient(rgba(4,9,30,0.5), rgba(4,9,30,0.5)), url(/assets/all_star_sweet.jpg)`,
+    background: `linear-gradient(rgba(4,9,30,0.5), rgba(4,9,30,0.5)), url(/assets/all_star_sweet.webp)`,
   }).then((result) => {
     if (result.isConfirmed) {
       Cookies.remove("userAuth");

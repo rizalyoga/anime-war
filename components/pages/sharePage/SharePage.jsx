@@ -5,6 +5,7 @@ import Image from "next/image";
 import { useRouter } from "next/router";
 import Swal from "sweetalert2";
 import SharepageLayout from "@/layout/SharepageLayout";
+import { FacebookShareButton, FacebookIcon, TwitterShareButton, TwitterIcon, WhatsappShareButton, WhatsappIcon, TelegramShareButton, TelegramIcon } from "react-share";
 
 const SharePage = ({ data, seos }) => {
   const [curentLink, setCurentLink] = useState("");
@@ -52,9 +53,6 @@ const SharePage = ({ data, seos }) => {
       <SharepageLayout seos={seos}>
         <div className="container">
           <div className={styles["sharepage-container"]}>
-            {/* <div className={styles.header}>
-            <h1>Share Page</h1>
-          </div> */}
             <div className={styles["main-content"]}>
               <div className={styles.images}>
                 <Image src={"/swords.png"} width={170} height={150} alt="villain-image" />
@@ -68,9 +66,26 @@ const SharePage = ({ data, seos }) => {
                 </h2>
                 <input type="text" placeholder={curentLink} value={curentLink} onBlur={() => setCurentLink(window.location.href)} onChange={(e) => setCurentLink(e.target.value)} />
               </div>
+              <div className={styles["share-medsos"]}>
+                <FacebookShareButton style={{ marginLeft: "5px" }} url={curentLink}>
+                  <FacebookIcon size={36} round />
+                </FacebookShareButton>
+
+                <TwitterShareButton style={{ marginLeft: "5px" }} url={curentLink}>
+                  <TwitterIcon size={36} round />
+                </TwitterShareButton>
+
+                <WhatsappShareButton style={{ marginLeft: "5px" }} separator=":: " url={curentLink}>
+                  <WhatsappIcon size={36} round />
+                </WhatsappShareButton>
+
+                <TelegramShareButton style={{ marginLeft: "5px" }} url={curentLink}>
+                  <TelegramIcon size={36} round />
+                </TelegramShareButton>
+              </div>
               <div className={styles.buttons}>
                 <button onClick={goToHome}>Home</button>
-                <button onClick={copyLink}>Share Result</button>
+                <button onClick={copyLink}>Copy Link</button>
                 <button onClick={goToLeaderboard}>Leaderboard</button>
               </div>
             </div>
