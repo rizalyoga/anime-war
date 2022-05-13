@@ -5,6 +5,7 @@ import { useRouter } from "next/router";
 import Filter from "./filterInput/FilterInput";
 import DateMoment from "../../utils/date";
 import ModalDetail from "../modal/ModalLeaderboard";
+import ReactPaginate from "react-paginate";
 
 const Table = ({ datas, searchCharacter }) => {
   const [titleFiltered, setTitleFiltered] = useState([]);
@@ -13,6 +14,12 @@ const Table = ({ datas, searchCharacter }) => {
 
   const router = useRouter();
   const filterBy = router.query.filter;
+
+  // States for pagination
+  const [offset, setOffset] = useState(0);
+  const [data, setData] = useState([]);
+  const [perPage] = useState(15);
+  const [pageCount, setPageCount] = useState(0);
 
   // Filter table header title
   useEffect(() => {
@@ -26,6 +33,23 @@ const Table = ({ datas, searchCharacter }) => {
       setTitleFiltered(headerTitle);
     }
   }, [filterBy]);
+
+  // Function for set pagination
+  const sliceData = async () => {
+    const data_ = await datas.map((data, i) => ({ ...data, num: i + 1 }));
+    const slice = data_.slice(offset, offset + perPage);
+    setData(slice);
+    setPageCount(Math.ceil(datas.length / perPage));
+  };
+
+  useEffect(() => {
+    sliceData();
+  }, [datas, offset]);
+
+  const handlePageClick = (e) => {
+    const selectedPage = e.selected;
+    setOffset(selectedPage * perPage);
+  };
 
   // Funtion for sum the total score
   const sumScore = (arr) => {
@@ -59,10 +83,10 @@ const Table = ({ datas, searchCharacter }) => {
           </tr>
         </thead>
         <tbody>
-          {datas.length > 0 &&
-            datas.map((data, idx) => (
+          {data.length > 0 &&
+            data.map((data) => (
               <tr key={data.id}>
-                <td> {idx + 1} </td>
+                <td> {data.num} </td>
                 <td>{!filterBy ? data.name : data.gametag?.name}</td>
                 <td>{!filterBy ? sumScore(data.leaderboards) : data.score}</td>
                 <td className={styles["date-moment"]}>
@@ -78,6 +102,21 @@ const Table = ({ datas, searchCharacter }) => {
             ))}
         </tbody>
       </table>
+      <div className={styles.pagination}>
+        <ReactPaginate
+          previousLabel={"Prev"}
+          nextLabel={"Next"}
+          breakLabel={"..."}
+          breakClassName={"break-me"}
+          pageCount={pageCount}
+          marginPagesDisplayed={2}
+          pageRangeDisplayed={5}
+          onPageChange={handlePageClick}
+          containerClassName={"pagination"}
+          subContainerClassName={"pages pagination"}
+          activeClassName={"active"}
+        />
+      </div>
       {isOpen && <ModalDetail selectedData={selectedDetailData} setIsOpen={setIsOpen} />}
     </div>
   );
