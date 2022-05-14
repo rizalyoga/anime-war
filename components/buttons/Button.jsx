@@ -1,13 +1,24 @@
 import { useRouter } from "next/router";
 import { createNewLeaderboard } from "@/data/leaderBoadrs";
 import styles from "./buttons.module.css";
+import Swal from "sweetalert2";
+import { icons } from "react-icons";
 
 // Button for goes to city page
 export const GoesToCityButton = ({ characterId, characterName }) => {
   const router = useRouter();
-
+  const tagname = localStorage.getItem("nickname");
   const goToCity = () => {
-    router.push(`/city/${characterId}?hero=${characterName}`);
+    if (tagname) {
+      router.push(`/city/${characterId}?hero=${characterName}`);
+    } else {
+      Swal.fire({
+        text: "Please create tagname first",
+        icon: "warning",
+        showConfirmButton: false,
+        timer: 1500,
+      });
+    }
   };
 
   return (

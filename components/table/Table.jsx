@@ -42,7 +42,7 @@ const Table = ({ datas, searchCharacter }) => {
     setData(slice);
     setPageCount(Math.ceil(datas.length / perPage));
   };
-
+  console.log(data);
   useEffect(() => {
     sliceData();
   }, [datas, offset]);
