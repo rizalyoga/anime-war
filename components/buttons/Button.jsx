@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { useRouter } from "next/router";
 import { createNewLeaderboard } from "@/data/leaderBoadrs";
 import styles from "./buttons.module.css";
@@ -29,10 +30,14 @@ export const GoesToCityButton = ({ characterId, characterName }) => {
 
 // Button show when palyer win the battle
 export const ButtonWin = ({ heroName, villainName }) => {
+  const [loading, setLoading] = useState(false);
   const router = useRouter();
 
   const goToSharePage = () => {
+    setLoading((prev) => !prev);
+
     createNewLeaderboard(heroName, villainName).then((response) => {
+      setLoading((prev) => !prev);
       if (response.statusCode) {
         alert(response.message);
       } else {
@@ -46,8 +51,8 @@ export const ButtonWin = ({ heroName, villainName }) => {
       <button className={styles[("win-btn", "disable-btn")]} disabled={true}>
         🏆
       </button>
-      <button className={styles["win-btn"]} onClick={goToSharePage}>
-        add leaderborad
+      <button className={styles["win-btn"]} onClick={goToSharePage} disabled={loading ? true : false}>
+        {loading ? "please wait..." : "add leaderboard"}
       </button>
     </>
   );

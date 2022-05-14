@@ -31,7 +31,9 @@ export const confirmationtAlert = () => {
     background: `linear-gradient(rgba(4,9,30,0.5), rgba(4,9,30,0.5)), url(/assets/all_star_sweet.webp)`,
   }).then((result) => {
     if (result.isConfirmed) {
-      localStorage.clear();
+      const tagname = localStorage.getItem("nickname");
+      localStorage.removeItem(tagname);
+
       Swal.fire({
         title: "Battle data has been reset",
         background: `linear-gradient(rgba(4,9,30,0.5), rgba(4,9,30,0.5)), url(/assets/all_star_sweet.webp)`,
@@ -83,16 +85,19 @@ export const createGameTag = () => {
       newGameTag(payload, token).then((response) => {
         if (response.statusCode == 400) {
           Swal.fire({
+            icon: "error",
             title: `Oops, Sorry gametag gagal dibuat, ${response.message}`,
           });
         } else {
-          localStorage.clear();
+          const tagname = localStorage.getItem("nickname");
+          localStorage.removeItem(tagname);
+
           localStorage.setItem("nickname", response.name);
           localStorage.setItem("nicknameId", response.id);
           location.reload();
 
           Swal.fire({
-            title: `nickname success created`,
+            title: `tagname success created`,
           });
         }
       });
