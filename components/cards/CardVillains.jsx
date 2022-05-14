@@ -36,21 +36,22 @@ const CardVillain = ({ dataVillains, dataCity }) => {
   // Check battle data in localStorage
   const checkDataReusltBattle = (value, heroName, villainName, dataId) => {
     const tagname = localStorage.getItem("nickname");
-    const dataBattleSave = JSON.parse(localStorage.getItem(tagname));
+    const dataBattleSaved = JSON.parse(localStorage.getItem(tagname));
+    const RESULT = "";
 
-    if (!dataBattleSave) return fightButton(villainName, dataId);
+    if (!dataBattleSaved) return fightButton(villainName, dataId);
 
-    dataBattleSave.forEach((data) => {
+    dataBattleSaved.map((data) => {
       if (data.versus == value) {
         if (data.villainHP == 0) {
-          console.log("win versus villain :", villainName);
-          return <ButtonWin heroName={heroName} villainName={villainName} />;
+          RESULT = "WIN";
         } else if (data.heroHP == 0) {
-          console.log("lose versus villain :", villainName);
-          return <ButtonLose />;
+          RESULT = "LOSE";
         }
       }
     });
+
+    return RESULT == "LOSE" ? loseButtonResult() : RESULT == "WIN" ? winButtonResult(heroName, villainName) : fightButton(villainName, dataId);
   };
 
   return (
@@ -64,16 +65,6 @@ const CardVillain = ({ dataVillains, dataCity }) => {
               <h1>{data.name}</h1>
 
               {checkDataReusltBattle(`${hero}VS${data.name}`, hero, data.name, data.id)}
-
-              {/* {JSON.parse(localStorage.getItem(`${hero}VS${data.name}`))?.villainHP == 0 ? (
-                <ButtonWin heroName={hero} villainName={data.name} />
-              ) : JSON.parse(localStorage.getItem(`${hero}VS${data.name}`))?.heroHP == 0 ? (
-                <ButtonLose />
-              ) : (
-                <button className="choose-btn" onClick={() => choosingVillain(data.id)}>
-                  Fight {data.name}
-                </button>
-              )} */}
             </div>
           ))
       )}

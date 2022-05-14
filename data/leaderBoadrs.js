@@ -21,11 +21,19 @@ export const getDataByVillain = async (nameCharacter) => {
 // Create New leaderboard
 export const createNewLeaderboard = async (heroName, villainName) => {
   const token = getToken();
-  const score = JSON.parse(localStorage.getItem(`${heroName}VS${villainName}`));
+  const tagname = localStorage.getItem("nickname");
+  const dataSaved = JSON.parse(localStorage.getItem(tagname));
+  const score = 0;
+
+  dataSaved &&
+    dataSaved.forEach((data) => {
+      data.versus == `${heroName}VS${villainName}` ? (score += data.heroHP) : (score += 0);
+    });
+
   const payload = {
     hero: heroName,
     villain: villainName,
-    score: score.heroHP,
+    score: score,
   };
 
   const response = await fetch(`https://thrive-project-be.herokuapp.com/leaderboards`, {

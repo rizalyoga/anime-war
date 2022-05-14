@@ -37,7 +37,7 @@ const Modal = ({ setIsOpen, idVillain }) => {
       const tagname = localStorage.getItem("nickname");
       const checkDataBattle = JSON.parse(localStorage.getItem(tagname));
 
-      const asyncData = () => {
+      const syncData = () => {
         if (checkDataBattle) {
           let dataFinded = false;
           checkDataBattle.forEach((data, i) => {
@@ -58,12 +58,7 @@ const Modal = ({ setIsOpen, idVillain }) => {
         }
       };
 
-      asyncData();
-
-      // Old Version
-      // const anyDataFight = JSON.parse(localStorage.getItem(`${hero}VS${dataVillain[0]?.name}`));
-      // setVillainHP(anyDataFight ? anyDataFight.villainHP : dataVillain[0]?.maxHP);
-      // setHeroHP(anyDataFight ? anyDataFight.heroHP : 100);
+      syncData();
 
       // Filter background Modal that match with city name and set to imageSource state
       dataCity.forEach((el) => (el.name == city ? setImageSource(el.imgSrc) : null));
