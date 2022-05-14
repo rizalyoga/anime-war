@@ -33,9 +33,37 @@ const Modal = ({ setIsOpen, idVillain }) => {
   useEffect(() => {
     if (dataVillain[0]?.name && dataCity) {
       // Check and set HP bar when there is fight data in local storage
-      const anyDataFight = JSON.parse(localStorage.getItem(`${hero}VS${dataVillain[0]?.name}`));
-      setVillainHP(anyDataFight ? anyDataFight.villainHP : dataVillain[0]?.maxHP);
-      setHeroHP(anyDataFight ? anyDataFight.heroHP : 100);
+
+      const tagname = localStorage.getItem("nickname");
+      const checkDataBattle = JSON.parse(localStorage.getItem(tagname));
+
+      const asyncData = () => {
+        if (checkDataBattle) {
+          let dataFinded = false;
+          checkDataBattle.forEach((data, i) => {
+            if (data.versus == `${hero}VS${dataVillain[0]?.name}`) {
+              dataFinded = true;
+              setVillainHP(checkDataBattle[i].villainHP);
+              setHeroHP(checkDataBattle[i].heroHP);
+            }
+
+            if (!dataFinded) {
+              setVillainHP(dataVillain[0]?.maxHP);
+              setHeroHP(100);
+            }
+          });
+        } else {
+          setVillainHP(dataVillain[0]?.maxHP);
+          setHeroHP(100);
+        }
+      };
+
+      asyncData();
+
+      // Old Version
+      // const anyDataFight = JSON.parse(localStorage.getItem(`${hero}VS${dataVillain[0]?.name}`));
+      // setVillainHP(anyDataFight ? anyDataFight.villainHP : dataVillain[0]?.maxHP);
+      // setHeroHP(anyDataFight ? anyDataFight.heroHP : 100);
 
       // Filter background Modal that match with city name and set to imageSource state
       dataCity.forEach((el) => (el.name == city ? setImageSource(el.imgSrc) : null));
@@ -85,7 +113,42 @@ const Modal = ({ setIsOpen, idVillain }) => {
           // response.heroHP == 0 ? setStatusBattle("YOU LOSE") : response.villainHP == 0 ? setStatusBattle("YOU WIN") : null;
 
           //save data battle in local storage
-          window.localStorage.setItem(`${hero}VS${dataVillain[0]?.name}`, JSON.stringify({ villainHP: response.villainHP, heroHP: response.heroHP }));
+
+          const tagname = localStorage.getItem("nickname");
+          const initialName = localStorage.getItem(tagname);
+
+          let dataSaveBattle = [];
+
+          if (initialName) {
+            dataSaveBattle = JSON.parse(localStorage.getItem(tagname));
+          }
+
+          const checkData = (newData) => {
+            if (dataSaveBattle.length == 0) {
+              dataSaveBattle.push(newData);
+            } else {
+              let finded = false;
+              dataSaveBattle.forEach((data, i) => {
+                if (data.versus == newData.versus) {
+                  dataSaveBattle[i].versus = newData.versus;
+                  dataSaveBattle[i].villainHP = newData.villainHP;
+                  dataSaveBattle[i].heroHP = newData.heroHP;
+                  finded = true;
+                }
+              });
+
+              if (finded == false) {
+                dataSaveBattle.push(newData);
+              }
+            }
+          };
+
+          checkData({ versus: `${hero}VS${dataVillain[0]?.name}`, villainHP: response.villainHP, heroHP: response.heroHP });
+          window.localStorage.setItem(tagname, JSON.stringify(dataSaveBattle));
+
+          // dataSaveBattle.push({ versus: `${hero}VS${dataVillain[0]?.name}`, villainHP: response.villainHP, heroHP: response.heroHP });
+
+          // window.localStorage.setItem(`${hero}VS${dataVillain[0]?.name}`, JSON.stringify({ villainHP: response.villainHP, heroHP: response.heroHP }));
         })
         .then(() =>
           setTimeout(() => {
