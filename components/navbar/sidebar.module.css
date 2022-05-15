@@ -1,0 +1,38 @@
+.container {
+  position: fixed;
+  height: 100%;
+  background-color: #eb196dda;
+  top: 0;
+  right: -100%;
+  z-index: 99;
+  width: 300px;
+  transition: 0.2s;
+}
+
+.container.active {
+  right: 0;
+  transition: 300ms;
+}
+
+.menu-list {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 25px;
+}
+
+.menu-list p {
+  min-width: 200px;
+  text-align: center;
+  color: #fff;
+  font-size: 1.4rem;
+  font-weight: bold;
+  padding: 0 15px;
+}
+
+.menu-list p:hover {
+  background-color: #fff;
+  color: #eb196e;
+}

@@ -4,10 +4,14 @@ import { logoutConfirm, createGameTag } from "../alerts/alert";
 import { useRouter } from "next/router";
 import Cookies from "js-cookie";
 import getTagname from "../../utils/getTagname";
+import { GiHamburgerMenu } from "react-icons/gi";
+import { CgClose } from "react-icons/cg";
+import Sidebar from "./Sidebar.jsx";
 
 const Navbar = () => {
   const [username, setUsername] = useState("");
   const [nickname, setNickname] = useState("");
+  const [isShow, setIsShow] = useState(false);
 
   const router = useRouter();
 
@@ -36,22 +40,29 @@ const Navbar = () => {
     createGameTag();
   };
 
+  const showSidebar = () => {
+    setIsShow((prev) => !prev);
+  };
+
   return (
-    <div className={styles.navbarContainer}>
-      <div className={styles.content}>
-        <div className={styles["content-left"]}>
-          <p>
-            {username} {nickname != "" ? `| Id: ${nickname.toUpperCase()}` : null}
-          </p>
-        </div>
-        <div className={styles["content-right"]}>
-          <p onClick={toLeadBoard}>Leadboard</p>
-          {/* {nickname === "" ? <p onClick={createNickname}>Nickname</p> : null} */}
-          {<p onClick={createNickname}>Gametag</p>}
-          <p onClick={doLogout}>Log out</p>
+    <>
+      <Sidebar isShow={isShow} />
+      <div className={styles.navbarContainer}>
+        <div className={styles.content}>
+          <div className={styles["content-left"]}>
+            <p>
+              {username} {nickname != "" ? `| Id: ${nickname.toUpperCase()}` : null}
+            </p>
+          </div>
+          <div className={styles["content-right"]}>
+            <p onClick={toLeadBoard}>Leadboard</p>
+            <p onClick={createNickname}>Gametag</p>
+            <p onClick={doLogout}>Log out</p>
+            {isShow ? <CgClose className={styles["close-button"]} onClick={showSidebar} /> : <GiHamburgerMenu className={styles["menu-button"]} onClick={showSidebar} />}
+          </div>
         </div>
       </div>
-    </div>
+    </>
   );
 };
 
