@@ -6,6 +6,7 @@ import Filter from "./filterInput/FilterInput";
 import DateMoment from "../../utils/date";
 import ModalDetail from "../modal/ModalLeaderboard";
 import ReactPaginate from "react-paginate";
+import sortBy from "utils/sortBy";
 
 const Table = ({ datas, searchCharacter }) => {
   const [titleFiltered, setTitleFiltered] = useState([]);
@@ -37,7 +38,17 @@ const Table = ({ datas, searchCharacter }) => {
 
   // Function for set pagination
   const sliceData = async () => {
-    const data_ = await datas.map((data, i) => ({ ...data, num: i + 1 }));
+    const _data = await datas;
+
+    let dataSort = [];
+
+    if (filterBy) {
+      dataSort = _data.sort(sortBy("score", true, parseInt));
+    } else {
+      dataSort = _data.map((data) => ({ ...data, totalScore: sumScore(data.leaderboards) })).sort(sortBy("totalScore", true, parseInt));
+    }
+
+    const data_ = await dataSort.map((data, i) => ({ ...data, num: i + 1 }));
     const slice = data_.slice(offset, offset + perPage);
     setData(slice);
     setPageCount(Math.ceil(datas.length / perPage));
@@ -96,7 +107,7 @@ const Table = ({ datas, searchCharacter }) => {
                 <tr key={data.id}>
                   <td> {data.num} </td>
                   <td>{!filterBy ? data.name : data.gametag?.name}</td>
-                  <td>{!filterBy ? sumScore(data.leaderboards) : data.score}</td>
+                  <td>{!filterBy ? data.totalScore : data.score}</td>
                   <td className={styles["date-moment"]}>
                     {!filterBy ? (
                       <button className={styles["detail-button"]} onClick={() => selectData(data.leaderboards)}>
