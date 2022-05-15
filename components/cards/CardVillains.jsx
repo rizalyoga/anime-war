@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import Modal from "../modal/Modal";
 import { useRouter } from "next/router";
 import { ButtonLose, ButtonWin } from "../buttons/Button";
+import getTagname from "../../utils/getTagname";
 
 const CardVillain = ({ dataVillains, dataCity }) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -35,7 +36,7 @@ const CardVillain = ({ dataVillains, dataCity }) => {
 
   // Check battle data in localStorage
   const checkDataReusltBattle = (value, heroName, villainName, dataId) => {
-    const tagname = localStorage.getItem("nickname");
+    const tagname = getTagname();
     const dataBattleSaved = JSON.parse(localStorage.getItem(tagname));
     const RESULT = "";
 
