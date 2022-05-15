@@ -3,12 +3,13 @@ import { useRouter } from "next/router";
 import { createNewLeaderboard } from "@/data/leaderBoadrs";
 import styles from "./buttons.module.css";
 import Swal from "sweetalert2";
+import getTagname from "../../utils/getTagname";
 
 // Button for goes to city page
 export const GoesToCityButton = ({ characterId, characterName }) => {
   const router = useRouter();
   const goToCity = () => {
-    const tagname = localStorage.getItem("nickname");
+    const tagname = getTagname();
     if (tagname) {
       router.push(`/city/${characterId}?hero=${characterName}`);
     } else {

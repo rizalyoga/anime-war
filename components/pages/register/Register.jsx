@@ -5,6 +5,7 @@ import { useRouter } from "next/router";
 import Link from "next/link";
 import { registerAccount } from "@/data/auth";
 import getToken from "utils/getCookies";
+import { BsFillEyeFill } from "react-icons/bs";
 
 const Register = () => {
   const [username, setUsername] = useState("");
@@ -12,6 +13,7 @@ const Register = () => {
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
+  const [isShow, setIsShow] = useState(false);
 
   const router = useRouter();
 
@@ -22,6 +24,12 @@ const Register = () => {
     }
   }, []);
 
+  // Funtion for set Show password
+  const showPass = () => {
+    setIsShow((prev) => !prev);
+  };
+
+  // Register hanle
   const handleRegister = (e) => {
     e.preventDefault();
     setLoading((prev) => !prev);
@@ -44,6 +52,7 @@ const Register = () => {
     });
   };
 
+  // Direction Funtion
   const toHomePage = () => {
     router.push("/");
   };
@@ -64,7 +73,10 @@ const Register = () => {
             </div>
             <div className={styles.password}>
               <label htmlFor="password">Password</label>
-              <input type="password" placeholder="password" onChange={(e) => setPassword(e.target.value)} required />
+              <div className={styles["input-pass"]}>
+                <input type={isShow ? "text" : "password"} placeholder="password" onChange={(e) => setPassword(e.target.value)} required />
+                <BsFillEyeFill className={isShow ? styles["eye-view-show"] : styles["eye-view-hidden"]} onClick={showPass} />
+              </div>
             </div>
             <div className={styles.submit}>
               {error}

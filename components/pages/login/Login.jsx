@@ -5,12 +5,14 @@ import { useRouter } from "next/router";
 import Link from "next/link";
 import { loginAccount } from "@/data/auth";
 import getToken from "utils/getCookies";
+import { BsFillEyeFill } from "react-icons/bs";
 
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
+  const [isShow, setIsShow] = useState(false);
 
   const router = useRouter();
 
@@ -21,6 +23,12 @@ const Login = () => {
     }
   }, []);
 
+  // Funtion for setShow password
+  const showPass = () => {
+    setIsShow((prev) => !prev);
+  };
+
+  // Login Handler
   const handleLogin = (e) => {
     e.preventDefault();
     setLoading((prev) => !prev);
@@ -42,6 +50,7 @@ const Login = () => {
     });
   };
 
+  // Direction Function
   const toHomePage = () => {
     router.push("/");
   };
@@ -58,7 +67,10 @@ const Login = () => {
             </div>
             <div className={styles.password}>
               <label htmlFor="password">Password</label>
-              <input type="password" placeholder="password" onChange={(e) => setPassword(e.target.value)} required />
+              <div className={styles["input-pass"]}>
+                <input type={isShow ? "text" : "password"} placeholder="password" onChange={(e) => setPassword(e.target.value)} required />
+                <BsFillEyeFill className={isShow ? styles["eye-view-show"] : styles["eye-view-hidden"]} onClick={showPass} />
+              </div>
             </div>
             <div className={styles.submit}>
               {error}
