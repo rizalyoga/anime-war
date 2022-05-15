@@ -4,12 +4,18 @@ import { useRouter } from "next/router";
 import styles from "./landing-page.module.css";
 import Layout from "@/layout/Layout";
 import Head from "next/head";
+import getToken from "utils/getCookies";
 
 const LandingPage = () => {
   const router = useRouter();
 
   const startGame = () => {
-    router.push("/home");
+    const token = getToken();
+    if (token) {
+      router.push("/home");
+    } else {
+      router.push("login");
+    }
   };
 
   const toLeaderboard = () => {
