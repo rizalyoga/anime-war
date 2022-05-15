@@ -1,8 +1,9 @@
 import Swal from "sweetalert2";
 import { newGameTag } from "@/data/gameTags";
 import Cookies from "js-cookie";
+import getTagname from "../../utils/getTagname";
 
-// Modal for show result of battle
+/* ------------------- // Modal for show result of battle ------------------- */
 export const resultAlert = (status) => {
   return Swal.fire({
     title: status,
@@ -18,7 +19,7 @@ export const resultAlert = (status) => {
   });
 };
 
-// Modal for reset game
+/* ------------------------- // Modal for reset game ------------------------ */
 export const confirmationtAlert = () => {
   return Swal.fire({
     title: "Are you sure to reset game?",
@@ -31,7 +32,7 @@ export const confirmationtAlert = () => {
     background: `linear-gradient(rgba(4,9,30,0.5), rgba(4,9,30,0.5)), url(/assets/all_star_sweet.webp)`,
   }).then((result) => {
     if (result.isConfirmed) {
-      const tagname = localStorage.getItem("nickname");
+      const tagname = getTagname();
       localStorage.removeItem(tagname);
 
       Swal.fire({
@@ -43,7 +44,7 @@ export const confirmationtAlert = () => {
   });
 };
 
-// Modal for Logout confirmation
+/* -------------------- // Modal for Logout confirmation -------------------- */
 export const logoutConfirm = () => {
   return Swal.fire({
     title: "Are you sure to Logout?",
@@ -65,7 +66,7 @@ export const logoutConfirm = () => {
   });
 };
 
-// Modal for create game Tag
+/* ---------------------- // Modal for create game Tag ---------------------- */
 export const createGameTag = () => {
   Swal.fire({
     icon: "warning",
@@ -89,7 +90,7 @@ export const createGameTag = () => {
             title: `Oops, Sorry gametag gagal dibuat, ${response.message}`,
           });
         } else {
-          const tagname = localStorage.getItem("nickname");
+          const tagname = getTagname();
           localStorage.removeItem(tagname);
 
           localStorage.setItem("nickname", response.name);

@@ -1,6 +1,7 @@
 import getToken from "../utils/getCookies";
+import getTagname from "../utils/getTagname";
 
-// Get data by villain name
+/* ----------------------- // Get data by villain name ---------------------- */
 export const getDataByHero = async (nameCharacter) => {
   const response = await fetch(`https://thrive-project-be.herokuapp.com/leaderboards?hero=${nameCharacter}`);
   const data = await response.json();
@@ -9,7 +10,7 @@ export const getDataByHero = async (nameCharacter) => {
   return data;
 };
 
-// Get data by hero name
+/* ------------------------ // Get data by hero name ------------------------ */
 export const getDataByVillain = async (nameCharacter) => {
   const response = await fetch(`https://thrive-project-be.herokuapp.com/leaderboards?villain=${nameCharacter}`);
   const data = await response.json();
@@ -18,10 +19,10 @@ export const getDataByVillain = async (nameCharacter) => {
   return data;
 };
 
-// Create New leaderboard
+/* ------------------------ // Create New leaderboard ----------------------- */
 export const createNewLeaderboard = async (heroName, villainName) => {
   const token = getToken();
-  const tagname = localStorage.getItem("nickname");
+  const tagname = getTagname();
   const dataSaved = JSON.parse(localStorage.getItem(tagname));
   const score = 0;
 

@@ -3,6 +3,7 @@ import styles from "./navbar.module.css";
 import { logoutConfirm, createGameTag } from "../alerts/alert";
 import { useRouter } from "next/router";
 import Cookies from "js-cookie";
+import getTagname from "../../utils/getTagname";
 
 const Navbar = () => {
   const [username, setUsername] = useState("");
@@ -12,7 +13,7 @@ const Navbar = () => {
 
   useEffect(() => {
     const username = Cookies.get("username");
-    const nicknames = localStorage.getItem("nickname");
+    const nicknames = getTagname();
 
     if (username) {
       setUsername(username.toUpperCase());

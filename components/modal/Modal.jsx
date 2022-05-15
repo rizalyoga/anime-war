@@ -5,6 +5,7 @@ import { getSelectedVillain, postFight, loadings } from "@/data/api";
 import { useRouter } from "next/router";
 import { useGetCity } from "../../hooks/useGetCity";
 import { resultAlert } from "../alerts/alert";
+import getTagname from "utils/getTagname";
 
 const Modal = ({ setIsOpen, idVillain }) => {
   const [dataVillain, setDataVillain] = useState([]);
@@ -34,7 +35,7 @@ const Modal = ({ setIsOpen, idVillain }) => {
     if (dataVillain[0]?.name && dataCity) {
       // Check and set HP bar when there is fight data in local storage
 
-      const tagname = localStorage.getItem("nickname");
+      const tagname = getTagname();
       const checkDataBattle = JSON.parse(localStorage.getItem(tagname));
 
       const syncData = () => {
@@ -109,7 +110,7 @@ const Modal = ({ setIsOpen, idVillain }) => {
 
           //save data battle in local storage
 
-          const tagname = localStorage.getItem("nickname");
+          const tagname = getTagname();
           const initialName = localStorage.getItem(tagname);
 
           let dataSaveBattle = [];
@@ -140,10 +141,6 @@ const Modal = ({ setIsOpen, idVillain }) => {
 
           checkData({ versus: `${hero}VS${dataVillain[0]?.name}`, villainHP: response.villainHP, heroHP: response.heroHP });
           window.localStorage.setItem(tagname, JSON.stringify(dataSaveBattle));
-
-          // dataSaveBattle.push({ versus: `${hero}VS${dataVillain[0]?.name}`, villainHP: response.villainHP, heroHP: response.heroHP });
-
-          // window.localStorage.setItem(`${hero}VS${dataVillain[0]?.name}`, JSON.stringify({ villainHP: response.villainHP, heroHP: response.heroHP }));
         })
         .then(() =>
           setTimeout(() => {

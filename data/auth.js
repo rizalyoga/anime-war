@@ -14,7 +14,6 @@ export const registerAccount = async (payload) => {
 
   if (data.user?.confirmed === true) {
     let auththentication = true;
-    // localStorage.setItem("userAuth", data.jwt);
     Cookies.set("userAuth", data.jwt, {
       expires: inTwoHours,
     });
@@ -39,7 +38,7 @@ export const loginAccount = async (payload) => {
 
   if (data.user?.confirmed === true) {
     let auththentication = true;
-    // localStorage.setItem("userAuth", data.jwt);
+
     Cookies.set("userAuth", data.jwt, {
       expires: inTwoHours,
     });
@@ -47,7 +46,6 @@ export const loginAccount = async (payload) => {
       expires: inTwoHours,
     });
 
-    // localStorage.setItem("username", data.user?.username);
     if (data.user.gametag?.name) {
       localStorage.setItem("nickname", data.user?.gametag?.name);
       localStorage.setItem("nicknameId", data.user?.gametag?.id);
