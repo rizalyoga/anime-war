@@ -15,8 +15,16 @@
   cursor: pointer;
 }
 
+.directions h3 {
+  padding: 0 8px;
+  margin: 3px 0;
+  transition: 0.2s ease-out;
+  border-radius: 3px;
+}
+
 .directions h3:hover {
-  color: #f52e6f;
+  background: #370189;
+  color: #fff;
 }
 
 .table-container {

@@ -55,7 +55,7 @@ const Navbar = () => {
             </p>
           </div>
           <div className={styles["content-right"]}>
-            <p onClick={toLeadBoard}>Leadboard</p>
+            <p onClick={toLeadBoard}>Leaderboard</p>
             <p onClick={createNickname}>Gametag</p>
             <p onClick={doLogout}>Log out</p>
             {isShow ? <CgClose className={styles["close-button"]} onClick={showSidebar} /> : <GiHamburgerMenu className={styles["menu-button"]} onClick={showSidebar} />}
