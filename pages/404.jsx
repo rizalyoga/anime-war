@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
 import { useRouter } from "next/router";
+import Layout from "@/layout/Layout";
 
 function PageNotFound() {
   const router = useRouter();
@@ -12,9 +13,11 @@ function PageNotFound() {
   }, []);
 
   return (
-    <div className="container" style={{ marginTop: "45vh" }}>
-      <h1 className="title-page">Oops, Page not Found !!!</h1>
-    </div>
+    <Layout title={"PAGE NOT FOUND"}>
+      <div className="container" style={{ marginTop: "45vh" }}>
+        <h1 className="title-page">Oops, Page not Found !!!</h1>
+      </div>
+    </Layout>
   );
 }
 

@@ -3,7 +3,6 @@ import { newGameTag } from "@/data/gameTags";
 import { updateDataLeaderboard } from "@/data/leaderBoadrs";
 import Cookies from "js-cookie";
 import getTagname from "../../utils/getTagname";
-import { useRouter } from "next/router";
 
 /* ------------------- // Modal for show result of battle ------------------- */
 export const resultAlert = (status) => {
@@ -130,7 +129,9 @@ export const updateDataBattle = (heroName, villainName, message) => {
           Swal.fire({ title: "Updated !", text: `Data pertarungan dengan ID : ${response.id}, hero ${response.hero} VS villain ${response.villain} berhasil diperbarui dengan score ${response.score}` });
         })
         .then(() => {
-          location.href = `/share/${numberId}`;
+          setTimeout(() => {
+            location.href = `/share/${numberId}`;
+          }, 700);
         });
     }
   });
