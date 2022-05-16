@@ -1,7 +1,9 @@
 import Swal from "sweetalert2";
 import { newGameTag } from "@/data/gameTags";
+import { updateDataLeaderboard } from "@/data/leaderBoadrs";
 import Cookies from "js-cookie";
 import getTagname from "../../utils/getTagname";
+import { useRouter } from "next/router";
 
 /* ------------------- // Modal for show result of battle ------------------- */
 export const resultAlert = (status) => {
@@ -104,5 +106,32 @@ export const createGameTag = () => {
       });
     },
     allowOutsideClick: () => !Swal.isLoading(),
+  });
+};
+
+/* ----------------- // Modal for Update result battle alert ---------------- */
+export const updateDataBattle = (heroName, villainName, message) => {
+  const regex = /\d+/g;
+  const numberId = message.match(regex);
+  const idBattle = parseInt(numberId[0]);
+
+  Swal.fire({
+    title: "Record Battle Alredy Exist",
+    text: `${message}. \n Jika anda ingin mengupdate data yang sudah ada dengan hasil yang baru, Silahkan tekan tombol Update.`,
+    icon: "warning",
+    showCancelButton: true,
+    confirmButtonColor: "#000",
+    cancelButtonColor: "#d33",
+    confirmButtonText: "Update",
+  }).then((result) => {
+    if (result.isConfirmed) {
+      updateDataLeaderboard(heroName, villainName, idBattle)
+        .then((response) => {
+          Swal.fire({ title: "Updated !", text: `Data pertarungan dengan ID : ${response.id}, hero ${response.hero} VS villain ${response.villain} berhasil diperbarui dengan score ${response.score}` });
+        })
+        .then(() => {
+          location.href = `/share/${numberId}`;
+        });
+    }
   });
 };
