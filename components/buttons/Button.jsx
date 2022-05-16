@@ -4,6 +4,7 @@ import { createNewLeaderboard } from "@/data/leaderBoadrs";
 import styles from "./buttons.module.css";
 import Swal from "sweetalert2";
 import getTagname from "../../utils/getTagname";
+import { updateDataBattle } from "../alerts/alert";
 
 // Button for goes to city page
 export const GoesToCityButton = ({ characterId, characterName }) => {
@@ -40,7 +41,7 @@ export const ButtonWin = ({ heroName, villainName }) => {
     createNewLeaderboard(heroName, villainName).then((response) => {
       setLoading((prev) => !prev);
       if (response.statusCode) {
-        alert(response.message);
+        updateDataBattle(heroName, villainName, response.message);
       } else {
         router.push(`/share/${response.id}`);
       }

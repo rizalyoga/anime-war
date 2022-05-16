@@ -47,3 +47,32 @@ export const createNewLeaderboard = async (heroName, villainName) => {
 
   return data;
 };
+
+/* ------------------------ // Update data leaderboard ----------------------- */
+export const updateDataLeaderboard = async (heroName, villainName, idBattle) => {
+  const token = getToken();
+  const tagname = getTagname();
+  const dataSaved = JSON.parse(localStorage.getItem(tagname));
+  const score = 0;
+
+  dataSaved &&
+    dataSaved.forEach((data) => {
+      data.versus == `${heroName}VS${villainName}` ? (score += data.heroHP) : (score += 0);
+    });
+
+  const payload = {
+    hero: heroName,
+    villain: villainName,
+    score: score,
+  };
+
+  const response = await fetch(`https://thrive-project-be.herokuapp.com/leaderboards/${idBattle}`, {
+    method: "PUT",
+    headers: { "Content-Type": "application/json", Authorization: `Bearer ${token}` },
+    body: JSON.stringify(payload),
+  });
+
+  const data = await response.json();
+
+  return data;
+};
