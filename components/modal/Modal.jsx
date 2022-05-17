@@ -6,6 +6,7 @@ import { useRouter } from "next/router";
 import { useGetCity } from "../../hooks/useGetCity";
 import { resultAlert } from "../alerts/alert";
 import getTagname from "utils/getTagname";
+import { expVillainCheck, expHeroCheck } from "../../utils/expBattleCheck";
 
 const Modal = ({ setIsOpen, idVillain }) => {
   const [dataVillain, setDataVillain] = useState([]);
@@ -176,16 +177,7 @@ const Modal = ({ setIsOpen, idVillain }) => {
                 {/*  ----------------------------- HP Bar Villain -----------------------------  */}
                 <div className={styles.progress} style={{ maxWidth: `${villainHP}%` }}>
                   <p className={styles.statusHP}>{villainHP} %</p>
-                  <div
-                    className={(styles.villainHP, styles.progressBar)}
-                    style={
-                      villainHP >= 70
-                        ? { width: `${villainHP}%`, background: "repeating-linear-gradient(135deg, #fa68a2, #fa68a2 20px, #19baeb 20px, #19baeb 40px)" }
-                        : villainHP >= 40
-                        ? { width: `${villainHP}%`, background: "repeating-linear-gradient(135deg, #fab668, #fab668 20px, #ebc519 20px, #ebc519 40px)" }
-                        : { width: `${villainHP}%`, background: "repeating-linear-gradient(135deg, #a80226, #a80226 20px, #ff3f39 20px, #ff3f39 40px)" }
-                    }
-                  ></div>
+                  <div className={styles.progressBar} style={{ width: `${villainHP}%`, background: `${expVillainCheck(villainHP)}` }}></div>
                 </div>
 
                 {/* ------------------------------ Battle Status -----------------------------  */}
@@ -196,16 +188,7 @@ const Modal = ({ setIsOpen, idVillain }) => {
                 {/*  ----------------------------- HP Bar Player -----------------------------  */}
                 <div className={styles.progress}>
                   <p className={styles.statusHP}>{heroHP} %</p>
-                  <div
-                    className={(styles.playerHP, styles.progressBar)}
-                    style={
-                      heroHP >= 70
-                        ? { width: `${heroHP}%`, background: "repeating-linear-gradient(135deg, #fa68a2, #fa68a2 20px, #19baeb 20px, #19baeb 40px)" }
-                        : heroHP >= 40
-                        ? { width: `${heroHP}%`, background: "repeating-linear-gradient(135deg, #fab668, #fab668 20px, #ebc519 20px, #ebc519 40px)" }
-                        : { width: `${heroHP}%`, background: "repeating-linear-gradient(135deg, #a80226, #a80226 20px, #ff3f39 20px, #ff3f39 40px)" }
-                    }
-                  ></div>
+                  <div className={styles.progressBar} style={{ width: `${heroHP}%`, background: `${expHeroCheck(heroHP)}` }}></div>
                 </div>
                 <h3>- {hero?.toUpperCase()} -</h3>
 
