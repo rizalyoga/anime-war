@@ -27,6 +27,11 @@ export async function getStaticProps(context) {
   const id = params.idLeaderboard;
 
   const res = await fetch(`https://thrive-project-be.herokuapp.com/leaderboards/${id}`);
+
+  if (res.status !== 200) {
+    return { notFound: true };
+  }
+
   const data = await res.json();
 
   const seos = {
