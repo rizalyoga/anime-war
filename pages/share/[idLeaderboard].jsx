@@ -18,7 +18,7 @@ export async function getStaticPaths() {
   return {
     paths: allPathId,
     // Type of fallback : true, false or 'blocking'
-    fallback: false,
+    fallback: "blocking",
   };
 }
 
@@ -27,6 +27,10 @@ export async function getStaticProps(context) {
   const id = params.idLeaderboard;
 
   const res = await fetch(`https://thrive-project-be.herokuapp.com/leaderboards/${id}`);
+  if (res.status == 404 || res.status == 500) {
+    return { notFound: true };
+  }
+
   const data = await res.json();
 
   const seos = {

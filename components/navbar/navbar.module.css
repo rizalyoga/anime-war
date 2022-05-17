@@ -3,6 +3,7 @@
   background: white;
   padding: 10px 0;
   transition: all 0.3s ease-in;
+  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2);
 }
 
 .content {
@@ -21,19 +22,21 @@
 
 .content-right {
   display: flex;
-  gap: 10px;
+  height: 100%;
 }
 
 .content-right p {
   font-size: 1.2rem;
   font-weight: 500;
-  color: #000;
+  color: rgb(36, 36, 36);
   cursor: pointer;
   transition: 0.3s;
+  padding: 0 8px;
 }
 
 .content-right p:hover {
-  color: #eb196e;
+  color: #fff;
+  background-color: #7f3af0;
 }
 
 .close-button,

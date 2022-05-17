@@ -6,6 +6,7 @@ import Link from "next/link";
 import { loginAccount } from "@/data/auth";
 import getToken from "utils/getCookies";
 import { BsFillEyeFill } from "react-icons/bs";
+import Animation from "@/components/animation/animation";
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -59,33 +60,35 @@ const Login = () => {
     <Layout title={"Login"}>
       <div className="container">
         <div className={styles["form-container"]}>
-          <h1>Login Form</h1>
-          <form className={styles.glass} onSubmit={handleLogin}>
-            <div className={styles.username}>
-              <label htmlFor="Email">Email</label>
-              <input type="email" placeholder="email" onChange={(e) => setEmail(e.target.value)} required />
-            </div>
-            <div className={styles.password}>
-              <label htmlFor="password">Password</label>
-              <div className={styles["input-pass"]}>
-                <input type={isShow ? "text" : "password"} placeholder="password" onChange={(e) => setPassword(e.target.value)} required />
-                <BsFillEyeFill className={isShow ? styles["eye-view-show"] : styles["eye-view-hidden"]} onClick={showPass} />
+          <Animation>
+            <h1>Login Form</h1>
+            <form className={styles.glass} onSubmit={handleLogin}>
+              <div className={styles.username}>
+                <label htmlFor="Email">Email</label>
+                <input type="email" placeholder="email" onChange={(e) => setEmail(e.target.value)} required />
               </div>
-            </div>
-            <div className={styles.submit}>
-              {error}
-              <p>
-                Don&apos;t have an account yet ?
-                <Link href="/register">
-                  <a> Register</a>
-                </Link>
-              </p>
-              <button className="submit-button">{loading ? "please wait ... " : "Login"}</button>
-              <button className="submit-button" onClick={toHomePage}>
-                Home Page
-              </button>
-            </div>
-          </form>
+              <div className={styles.password}>
+                <label htmlFor="password">Password</label>
+                <div className={styles["input-pass"]}>
+                  <input type={isShow ? "text" : "password"} placeholder="password" onChange={(e) => setPassword(e.target.value)} required />
+                  <BsFillEyeFill className={isShow ? styles["eye-view-show"] : styles["eye-view-hidden"]} onClick={showPass} />
+                </div>
+              </div>
+              <div className={styles.submit}>
+                {error}
+                <p>
+                  Don&apos;t have an account yet ?
+                  <Link href="/register">
+                    <a> Register</a>
+                  </Link>
+                </p>
+                <button className="submit-button">{loading ? "please wait ... " : "Login"}</button>
+                <button className="submit-button" onClick={toHomePage}>
+                  Home Page
+                </button>
+              </div>
+            </form>
+          </Animation>
         </div>
       </div>
     </Layout>
