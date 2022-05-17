@@ -119,7 +119,8 @@ span {
 }
 
 .choose-btn {
-  background-color: rgba(235, 25, 110, 1);
+  /* background-color: rgba(235, 25, 110, 1); */
+  background-color: #7f3af0;
 }
 
 .goto-city {

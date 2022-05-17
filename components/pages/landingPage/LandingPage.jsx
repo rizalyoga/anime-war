@@ -2,9 +2,9 @@ import React from "react";
 import Image from "next/image";
 import { useRouter } from "next/router";
 import styles from "./landing-page.module.css";
-import Layout from "@/layout/Layout";
 import Head from "next/head";
 import getToken from "utils/getCookies";
+import Animation from "@/components/animation/animation";
 
 const LandingPage = () => {
   const router = useRouter();
@@ -44,19 +44,7 @@ const LandingPage = () => {
         <meta property="og:image:secure_url" content={"https://anime-war-rizalyoga.vercel.app/_next/image?url=%2Fswords.png&w=384&q=100"} />
       </Head>
       <div className={styles.container}>
-        <div className={styles.area}>
-          <ul className={styles.circles}>
-            <li></li>
-            <li></li>
-            <li></li>
-            <li></li>
-            <li></li>
-            <li></li>
-            <li></li>
-            <li></li>
-            <li></li>
-            <li></li>
-          </ul>
+        <Animation>
           <div className={styles["image-container"]}>
             <Image src="/assets/anime-war.webp" alt="logo" height={350} width={850} />
           </div>
@@ -66,7 +54,7 @@ const LandingPage = () => {
           {/* <button className={styles["start-game"]} role="button" onClick={toLeaderboard}>
             Leader Board
           </button> */}
-        </div>
+        </Animation>
       </div>
     </>
   );
