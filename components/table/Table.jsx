@@ -63,7 +63,7 @@ const Table = ({ datas, searchCharacter }) => {
     setOffset(selectedPage * perPage);
   };
 
-  // Funtion for sum the total score
+  // Function for sum the total score
   const sumScore = (arr) => {
     if (arr?.length == 0) {
       return 0;
@@ -77,13 +77,13 @@ const Table = ({ datas, searchCharacter }) => {
     }
   };
 
-  // Funtion for set Selected Data and open Modal
+  // Function for set Selected Data and open Modal
   const selectData = (detailData) => {
     setIsOpen((prev) => !prev);
     setSelectedDetailData(detailData);
   };
 
-  // Funtion for set filter data by gametag
+  // Function for set filter data by gametag
   const filterByGametag = (gametag) => {
     setFilterGametag(gametag);
   };

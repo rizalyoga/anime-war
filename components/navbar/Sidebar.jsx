@@ -21,7 +21,7 @@ const Sidebar = ({ isShow }) => {
   return (
     <div className={isShow ? `${styles.container} ${styles.active}` : styles.container}>
       <div className={styles["menu-list"]}>
-        <p onClick={toLeadBoard}>Leadboard</p>
+        <p onClick={toLeadBoard}>Leaderboard</p>
         <p onClick={createNickname}>Gametag</p>
         <p onClick={doLogout}>Log out</p>
       </div>
