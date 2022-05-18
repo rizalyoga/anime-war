@@ -115,10 +115,12 @@
   justify-content: center;
   flex-direction: row;
   align-items: center;
+  flex-wrap: wrap;
   gap: 15px;
   margin-top: 20px;
   cursor: pointer;
   padding: 5px 0;
+  padding-bottom: 10px;
   list-style: none;
   outline: none;
 }
