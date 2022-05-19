@@ -81,7 +81,19 @@ export const createGameTag = () => {
     confirmButtonText: "Create",
     showLoaderOnConfirm: true,
     preConfirm: (nickname) => {
-      const payload = { name: nickname };
+      let tagname = "";
+
+      if (nickname.length <= 0) {
+        Swal.fire({ title: "Please insert tagname first", icon: "warning" });
+        return;
+      } else if (nickname.includes(" ")) {
+        Swal.fire({ title: "space character not allowed", icon: "warning" });
+        return;
+      } else if (nickname.length > 0) {
+        tagname += nickname;
+      }
+
+      const payload = { name: tagname };
       const token = Cookies.get("userAuth");
 
       newGameTag(payload, token).then((response) => {
