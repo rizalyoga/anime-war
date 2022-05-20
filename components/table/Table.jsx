@@ -55,6 +55,12 @@ const Table = ({ datas, searchCharacter }) => {
   };
 
   useEffect(() => {
+    if (offset > 0) {
+      setOffset(0);
+    }
+  }, [filterBy]);
+
+  useEffect(() => {
     sliceData();
   }, [datas, offset]);
 

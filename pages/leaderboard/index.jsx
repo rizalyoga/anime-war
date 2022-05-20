@@ -9,7 +9,6 @@ const Leaderboard = ({ data }) => {
   );
 };
 export async function getServerSideProps(context) {
-  const { req } = context;
   const query = context.query;
   // const token = req.cookies.userAuth;
 
