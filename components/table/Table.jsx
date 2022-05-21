@@ -55,7 +55,7 @@ const Table = ({ datas, searchCharacter }) => {
   };
 
   useEffect(() => {
-    if (offset > 0) {
+    if (filterBy == "villain" || filterBy == "hero") {
       setOffset(0);
     }
   }, [filterBy]);
