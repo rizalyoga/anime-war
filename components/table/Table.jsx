@@ -1,11 +1,11 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useMemo } from "react";
 import styles from "./table.module.css";
 import { headerTitle } from "./header";
 import { useRouter } from "next/router";
 import Filter from "./filterInput/FilterInput";
 import DateMoment from "../../utils/date";
 import ModalDetail from "../modal/ModalLeaderboard";
-import ReactPaginate from "react-paginate";
+import Pagination from "../paginations/Pagination";
 import sortBy from "utils/sortBy";
 
 const Table = ({ datas, searchCharacter }) => {
@@ -18,56 +18,8 @@ const Table = ({ datas, searchCharacter }) => {
   const filterBy = router.query.filter;
 
   // States for pagination
-  const [offset, setOffset] = useState(0);
-  const [data, setData] = useState([]);
-  const [perPage] = useState(12);
-  const [pageCount, setPageCount] = useState(0);
-
-  // Filter table header title
-  useEffect(() => {
-    if (!filterBy) {
-      const headers = headerTitle.filter((data) => data.title != "Score" && data.title != "Date");
-      setTitleFiltered(headers);
-    } else if (filterBy == "villain" || "hero") {
-      const headers = headerTitle.filter((data) => data.title != "Total Score" && data.title != "Detail");
-      setTitleFiltered(headers);
-    } else {
-      setTitleFiltered(headerTitle);
-    }
-  }, [filterBy]);
-
-  // Function for set pagination
-  const sliceData = async () => {
-    const _data = await datas;
-
-    let dataSort = [];
-
-    if (filterBy) {
-      dataSort = _data.sort(sortBy("score", true, parseInt));
-    } else {
-      dataSort = _data.map((data) => ({ ...data, totalScore: sumScore(data.leaderboards) })).sort(sortBy("totalScore", true, parseInt));
-    }
-
-    const data_ = await dataSort.map((data, i) => ({ ...data, num: i + 1 }));
-    const slice = data_.slice(offset, offset + perPage);
-    setData(slice);
-    setPageCount(Math.ceil(datas.length / perPage));
-  };
-
-  useEffect(() => {
-    if (filterBy == "villain" || filterBy == "hero") {
-      setOffset(0);
-    }
-  }, [filterBy]);
-
-  useEffect(() => {
-    sliceData();
-  }, [datas, offset]);
-
-  const handlePageClick = (e) => {
-    const selectedPage = e.selected;
-    setOffset(selectedPage * perPage);
-  };
+  let pageSize = 12;
+  const [currentPage, setCurrentPage] = useState(1);
 
   // Function for sum the total score
   const sumScore = (arr) => {
@@ -82,6 +34,43 @@ const Table = ({ datas, searchCharacter }) => {
       return sumTotal;
     }
   };
+
+  // Function for set pagination
+  const currentTableData = useMemo(() => {
+    const _data = datas;
+    let dataSort = [];
+
+    if (filterBy) {
+      dataSort = _data.sort(sortBy("score", true, parseInt));
+    } else {
+      dataSort = _data.map((data) => ({ ...data, totalScore: sumScore(data.leaderboards) })).sort(sortBy("totalScore", true, parseInt));
+    }
+    const data_ = dataSort.map((data, i) => ({ ...data, num: i + 1 }));
+
+    const firstPageIndex = (currentPage - 1) * pageSize;
+    const lastPageIndex = firstPageIndex + pageSize;
+
+    return data_.slice(firstPageIndex, lastPageIndex);
+  }, [datas, currentPage, filterBy]);
+
+  useEffect(() => {
+    setTimeout(() => {
+      setCurrentPage(1);
+    }, 400);
+  }, [datas, filterBy]);
+
+  // Filter table header title
+  useEffect(() => {
+    if (!filterBy) {
+      const headers = headerTitle.filter((data) => data.title != "Score" && data.title != "Date");
+      setTitleFiltered(headers);
+    } else if (filterBy == "villain" || "hero") {
+      const headers = headerTitle.filter((data) => data.title != "Total Score" && data.title != "Detail");
+      setTitleFiltered(headers);
+    } else {
+      setTitleFiltered(headerTitle);
+    }
+  }, [filterBy]);
 
   // Function for set Selected Data and open Modal
   const selectData = (detailData) => {
@@ -106,41 +95,26 @@ const Table = ({ datas, searchCharacter }) => {
           </tr>
         </thead>
         <tbody>
-          {data.length > 0 &&
-            data
-              .filter((data) => data.name?.toLowerCase().includes(filterGametag.toLowerCase()) || data.gametag?.name.toLowerCase().includes(filterGametag.toLowerCase()))
-              .map((data) => (
-                <tr key={data.id}>
-                  <td> {data.num} </td>
-                  <td>{!filterBy ? data.name : data.gametag?.name}</td>
-                  <td>{!filterBy ? data.totalScore : data.score}</td>
-                  <td className={styles["date-moment"]}>
-                    {!filterBy ? (
-                      <button className={styles["detail-button"]} onClick={() => selectData(data.leaderboards)}>
-                        Detail
-                      </button>
-                    ) : (
-                      <DateMoment date={data.created_at} />
-                    )}
-                  </td>
-                </tr>
-              ))}
+          {currentTableData.map((data) => (
+            <tr key={data.id}>
+              <td> {data.num} </td>
+              <td>{!filterBy ? data.name : data.gametag?.name}</td>
+              <td>{!filterBy ? data.totalScore : data.score}</td>
+              <td className={styles["date-moment"]}>
+                {!filterBy ? (
+                  <button className={styles["detail-button"]} onClick={() => selectData(data.leaderboards)}>
+                    Detail
+                  </button>
+                ) : (
+                  <DateMoment date={data.created_at} />
+                )}
+              </td>
+            </tr>
+          ))}
         </tbody>
       </table>
       <div className={styles.pagination}>
-        <ReactPaginate
-          previousLabel={"Prev"}
-          nextLabel={"Next"}
-          breakLabel={"..."}
-          breakClassName={"break-me"}
-          pageCount={pageCount}
-          marginPagesDisplayed={2}
-          pageRangeDisplayed={5}
-          onPageChange={handlePageClick}
-          containerClassName={"pagination"}
-          subContainerClassName={"pages pagination"}
-          activeClassName={"active"}
-        />
+        <Pagination className="pagination-bar" currentPage={currentPage} totalCount={datas.length} pageSize={pageSize} onPageChange={(page) => setCurrentPage(page)} />
       </div>
       {isOpen && <ModalDetail selectedData={selectedDetailData} setIsOpen={setIsOpen} />}
     </div>
