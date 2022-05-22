@@ -1,10 +1,10 @@
 import React from "react";
-import classnames from "classnames";
 import { usePagination, DOTS } from "@/hooks/usePagination";
-// import styles from "./pagination.scss";
+import styles from "./pagination.module.scss";
+import { GrFormPrevious, GrFormNext } from "react-icons/gr";
 
 const Pagination = (props) => {
-  const { onPageChange, totalCount, siblingCount = 1, currentPage, pageSize, className } = props;
+  const { onPageChange, totalCount, siblingCount = 2, currentPage, pageSize } = props;
 
   const paginationRange = usePagination({
     currentPage,
@@ -19,52 +19,46 @@ const Pagination = (props) => {
   }
 
   const onNext = () => {
-    onPageChange(currentPage + 1);
+    if (currentPage < lastPage) {
+      onPageChange(currentPage + 1);
+    }
   };
 
   const onPrevious = () => {
-    onPageChange(currentPage - 1);
+    if (currentPage > 1) {
+      onPageChange(currentPage - 1);
+    }
+  };
+
+  const checkCurrentPage = () => {
+    if (currentPage === 1 || currentPage === lastPage) {
+      return "styles.disabled";
+    }
   };
 
   let lastPage = paginationRange[paginationRange.length - 1];
   return (
-    <ul className={classnames("pagination-container", { [className]: className })}>
+    <ul className={`${styles["pagination-container"]} ${styles["pagination-bar"]}`}>
       {/* Left navigation arrow */}
-      <li
-        className={classnames("pagination-item", {
-          disabled: currentPage === 1,
-        })}
-        onClick={onPrevious}
-      >
-        <div className="arrow left" />
+      <li className={`${styles.arrow} ${checkCurrentPage()}`} onClick={onPrevious}>
+        <GrFormPrevious />
       </li>
       {paginationRange.map((pageNumber, i) => {
         // If the pageItem is a DOT, render the DOTS unicode character
         if (pageNumber === DOTS) {
-          return <li className="pagination-item dots">&#8230;</li>;
+          return <li className={`${styles["pagination-item"]} ${styles.dots}`}>&#8230;</li>;
         }
 
         // Render our Page Pills
         return (
-          <li
-            key={i}
-            className={classnames("pagination-item", {
-              selected: pageNumber === currentPage,
-            })}
-            onClick={() => onPageChange(pageNumber)}
-          >
+          <li key={i} className={`${styles["pagination-item"]}`} onClick={() => onPageChange(pageNumber)}>
             {pageNumber}
           </li>
         );
       })}
       {/*  Right Navigation arrow */}
-      <li
-        className={classnames("pagination-item", {
-          disabled: currentPage === lastPage,
-        })}
-        onClick={onNext}
-      >
-        <div className="arrow right" />
+      <li className={styles.arrow} onClick={onNext}>
+        <GrFormNext />
       </li>
     </ul>
   );
