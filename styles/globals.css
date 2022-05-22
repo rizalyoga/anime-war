@@ -228,3 +228,10 @@ span {
   color: #fff;
   font-size: 1rem !important;
 }
+
+.pagination-bar {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
