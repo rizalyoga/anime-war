@@ -30,17 +30,11 @@ const Pagination = (props) => {
     }
   };
 
-  const checkCurrentPage = () => {
-    if (currentPage === 1 || currentPage === lastPage) {
-      return "styles.disabled";
-    }
-  };
-
   let lastPage = paginationRange[paginationRange.length - 1];
   return (
     <ul className={`${styles["pagination-container"]} ${styles["pagination-bar"]}`}>
       {/* Left navigation arrow */}
-      <li className={`${styles.arrow} ${checkCurrentPage()}`} onClick={onPrevious}>
+      <li className={`${styles.arrow}`} onClick={onPrevious}>
         <GrFormPrevious />
       </li>
       {paginationRange.map((pageNumber, i) => {
