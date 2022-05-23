@@ -7,13 +7,15 @@
   .arrow {
     display: flex;
     align-items: center;
-    padding: 5px;
-    border-radius: 15px;
+    padding: 3px;
+    border-radius: 50%;
     font-size: 1.2rem;
     background: #fff;
+    transition: 0.3s;
 
     &:hover {
-      background: rgb(206, 206, 206);
+      background: #eb196e;
+      border: solid 2px #fff;
     }
   }
 
@@ -22,12 +24,13 @@
     align-items: center;
     padding: 0 12px;
     height: 32px;
-    color: #fff;
+    color: #000;
     font-weight: 500;
     display: flex;
     font-size: 15px;
-    background: #eb196e;
-    border: solid 1px #fff;
+    background: #fff;
+    border: solid 1.5px #000;
+    transition: 0.3;
 
     &:active {
       background-color: #fff;
@@ -44,7 +47,7 @@
       cursor: default;
     }
     &:hover {
-      background-color: #fff;
+      border: solid 1.5px #eb196e;
       color: #eb196e;
       cursor: pointer;
     }
@@ -52,13 +55,13 @@
     &.selected {
       background-color: rgba(0, 0, 0, 0.08);
     }
-
-    &.disabled {
-      pointer-events: none;
-      &:hover {
-        background-color: transparent;
-        cursor: default;
-      }
+  }
+  .disable {
+    pointer-events: none;
+    background: red;
+    &:hover {
+      background-color: transparent;
+      cursor: default;
     }
   }
 }
