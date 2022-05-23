@@ -17,8 +17,9 @@ export const registerAccount = async (payload) => {
     Cookies.set("userAuth", data.jwt, {
       expires: inTwoHours,
     });
-
-    localStorage.setItem("username", data?.user?.username);
+    Cookies.set("username", data.user?.username, {
+      expires: inTwoHours,
+    });
 
     return auththentication;
   } else {
