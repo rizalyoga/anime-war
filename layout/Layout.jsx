@@ -29,7 +29,6 @@ const Layout = ({ children, title }) => {
       <Head>
         <title>Anime War {title}</title>
         <link rel="icon" href="/swords.png" type="image/x-icon" />
-        {/* <link href="https://cdnjs.cloudflare.com/ajax/libs/nprogress/0.2.0/nprogress.min.css" /> */}
       </Head>
       <main>{children}</main>
     </>
