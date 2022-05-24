@@ -1,10 +1,12 @@
 import Cookies from "js-cookie";
 
+const url = process.env.NEXT_PUBLIC_APP_LINK_API_2;
+
 /* -------------------------------- Register Account -------------------------------- */
 const inTwoHours = new Date(new Date().getTime() + 120 * 60 * 1000);
 
 export const registerAccount = async (payload) => {
-  const response = await fetch("https://thrive-project-be.herokuapp.com/auth/local/register", {
+  const response = await fetch(`${url}/auth/local/register`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(payload),
@@ -29,7 +31,7 @@ export const registerAccount = async (payload) => {
 
 /* -------------------------------- Login Account -------------------------------- */
 export const loginAccount = async (payload) => {
-  const response = await fetch("https://thrive-project-be.herokuapp.com/auth/local", {
+  const response = await fetch(`${url}/auth/local`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(payload),

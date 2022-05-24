@@ -1,15 +1,17 @@
 import getToken from "../utils/getCookies";
 import getTagname from "../utils/getTagname";
 
+const url = process.env.NEXT_PUBLIC_APP_LINK_API_2;
+
 /* ----------------------- // Get data by villain name ---------------------- */
 export const getDataByHero = async (nameCharacter) => {
-  const response = await fetch(`https://thrive-project-be.herokuapp.com/leaderboards?hero=${nameCharacter}`);
+  const response = await fetch(`${url}/leaderboards?hero=${nameCharacter}`);
   return response.json();
 };
 
 /* ------------------------ // Get data by hero name ------------------------ */
 export const getDataByVillain = async (nameCharacter) => {
-  const response = await fetch(`https://thrive-project-be.herokuapp.com/leaderboards?villain=${nameCharacter}`);
+  const response = await fetch(`${url}/leaderboards?villain=${nameCharacter}`);
   return response.json();
 };
 
@@ -31,7 +33,7 @@ export const createNewLeaderboard = async (heroName, villainName) => {
     score: score,
   };
 
-  const response = await fetch(`https://thrive-project-be.herokuapp.com/leaderboards`, {
+  const response = await fetch(`${url}/leaderboards`, {
     method: "POST",
     headers: { "Content-Type": "application/json", Authorization: `Bearer ${token}` },
     body: JSON.stringify(payload),
@@ -58,7 +60,7 @@ export const updateDataLeaderboard = async (heroName, villainName, idBattle) => 
     score: score,
   };
 
-  const response = await fetch(`https://thrive-project-be.herokuapp.com/leaderboards/${idBattle}`, {
+  const response = await fetch(`${url}/leaderboards/${idBattle}`, {
     method: "PUT",
     headers: { "Content-Type": "application/json", Authorization: `Bearer ${token}` },
     body: JSON.stringify(payload),

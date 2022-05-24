@@ -1,16 +1,7 @@
 import React from "react";
 import SharePage from "@/components/pages/sharePage/SharePage";
-import Loading from "@/components/loading/Loading";
-import { useRouter } from "next/router";
 
 const SharesPage = ({ data, seos }) => {
-  const router = useRouter();
-  const isFallback = router.isFallback;
-
-  if (isFallback) {
-    <Loading />;
-  }
-
   return (
     <>
       <SharePage data={data} seos={seos} />
@@ -27,7 +18,7 @@ export async function getStaticPaths() {
   return {
     paths: allPathId,
     // Type of fallback : true, false or 'blocking'
-    fallback: true,
+    fallback: "blocking",
   };
 }
 
