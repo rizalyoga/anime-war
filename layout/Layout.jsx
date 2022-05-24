@@ -10,12 +10,10 @@ const Layout = ({ children, title }) => {
     NProgress.configure({ showSpinner: false });
     router.events.on("routeChangeStart", () => {
       NProgress.start();
-      // console.log("start page move");
     });
 
     router.events.on("routeChangeComplete", () => {
       NProgress.done();
-      // console.log("complete page move");
     });
 
     router.events.on("routeChangeError", () => {
