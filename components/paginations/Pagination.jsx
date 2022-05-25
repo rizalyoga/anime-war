@@ -4,7 +4,7 @@ import styles from "./pagination.module.scss";
 import { GrFormPrevious, GrFormNext } from "react-icons/gr";
 
 const Pagination = (props) => {
-  const { onPageChange, totalCount, siblingCount = 2, currentPage, pageSize } = props;
+  const { onPageChange, totalCount, siblingCount = 1, currentPage, pageSize } = props;
 
   const paginationRange = usePagination({
     currentPage,
@@ -40,7 +40,11 @@ const Pagination = (props) => {
       {paginationRange.map((pageNumber, i) => {
         // If the pageItem is a DOT, render the DOTS unicode character
         if (pageNumber === DOTS) {
-          return <li className={`${styles["pagination-item"]} ${styles.dots}`}>&#8230;</li>;
+          return (
+            <li key={i} className={`${styles["pagination-item"]} ${styles.dots}`}>
+              &#8230;
+            </li>
+          );
         }
 
         // Render our Page Pills
