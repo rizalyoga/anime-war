@@ -10,7 +10,9 @@ import { updateDataBattle } from "../alerts/alert";
 export const GoesToCityButton = ({ characterId, characterName }) => {
   const router = useRouter();
   const goToCity = () => {
+    
     const tagname = getTagname();
+
     if (tagname) {
       router.push(`/city/${characterId}?hero=${characterName}`);
     } else {
@@ -24,8 +26,12 @@ export const GoesToCityButton = ({ characterId, characterName }) => {
   };
 
   return (
-    <button disabled={characterId ? false : true} id="visible-btn" className={characterId && "goto-city"} onClick={goToCity}>
-      Goes To City
+    <button 
+      disabled={characterId ? false : true} 
+      id="visible-btn" 
+      className={characterId && "goto-city"} 
+      onClick={goToCity}>
+        Goes To City
     </button>
   );
 };
@@ -53,7 +59,10 @@ export const ButtonWin = ({ heroName, villainName }) => {
       <button className={styles[("win-btn", "disable-btn")]} disabled={true}>
         🏆
       </button>
-      <button className={styles["win-btn"]} onClick={goToSharePage} disabled={loading ? true : false}>
+      <button 
+        className={styles["win-btn"]} 
+        onClick={goToSharePage} 
+        disabled={loading ? true : false}>
         {loading ? "please wait..." : "add leaderboard"}
       </button>
     </>

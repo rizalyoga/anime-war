@@ -155,7 +155,10 @@ const Modal = ({ setIsOpen, idVillain }) => {
     <>
       <div className={styles.darkBG} onClick={closeModal} />
       <div className={styles.centered}>
-        <div className={styles.modal} style={{ backgroundImage: `linear-gradient(#b3b3b3b2, #ffffffb1),url(${imageSource})`, backgroundSize: "cover" }}>
+        <div className={styles.modal} 
+          style={
+            { backgroundImage: `linear-gradient(#b3b3b3b2, #ffffffb1),url(${imageSource})`, backgroundSize: "cover" }}
+        >
           <div className={styles.modalHeader}>
             <h5 className={styles.heading}>- BATTLE WITH {dataVillain[0]?.name.toUpperCase()} -</h5>
           </div>
@@ -177,7 +180,10 @@ const Modal = ({ setIsOpen, idVillain }) => {
                 {/*  ----------------------------- HP Bar Villain -----------------------------  */}
                 <div className={styles.progress} style={{ maxWidth: `${villainHP}%` }}>
                   <p className={styles.statusHP}>{villainHP} %</p>
-                  <div className={styles.progressBar} style={{ width: `${villainHP}%`, background: `${expVillainCheck(villainHP)}` }}></div>
+                  <div 
+                    className={styles.progressBar} 
+                    style={{ width: `${villainHP}%`, background: `${expVillainCheck(villainHP)}` }}>
+                  </div>
                 </div>
 
                 {/* ------------------------------ Battle Status -----------------------------  */}
@@ -188,16 +194,26 @@ const Modal = ({ setIsOpen, idVillain }) => {
                 {/*  ----------------------------- HP Bar Player -----------------------------  */}
                 <div className={styles.progress}>
                   <p className={styles.statusHP}>{heroHP} %</p>
-                  <div className={styles.progressBar} style={{ width: `${heroHP}%`, background: `${expHeroCheck(heroHP)}` }}></div>
+                  <div 
+                    className={styles.progressBar} 
+                    style={{ width: `${heroHP}%`, background: `${expHeroCheck(heroHP)}` }}>
+
+                </div>
                 </div>
                 <h3>- {hero?.toUpperCase()} -</h3>
 
                 {/*  ----------------------------- Action Control -----------------------------  */}
                 <div className={styles.modalActions}>
                   <div className={styles.actionsContainer}>
-                    <button className={loadingButton ? styles.disableBtn : styles.fightBtn} disabled={loadingButton ? true : false} onClick={() => startBattle(heroHP, villainHP ? villainHP : villainHP == 0 ? 0 : dataVillain[0].maxHP)}>
+
+                    <button 
+                      className={loadingButton ? styles.disableBtn : styles.fightBtn} 
+                      disabled={loadingButton ? true : false} 
+                      onClick={() => 
+                        startBattle(heroHP, villainHP ? villainHP : villainHP == 0 ? 0 : dataVillain[0].maxHP)}>
                       {loadingButton ? "Wait" : "Fight"}
                     </button>
+
                     {/* <button className="cancelBtn" onClick={closeModal}>
                       Cancel
                     </button> */}
