@@ -1,6 +1,8 @@
-export let loadings = true;
+import {ModalBattlePayload} from "@/components/modal/ModalInterfaces"
 
-const url = process.env.NEXT_PUBLIC_APP_LINK_API_1;
+export let loadings:boolean = true;
+
+const url : string | undefined = process.env.NEXT_PUBLIC_APP_LINK_API_1;
 
 // Get Data Hero
 export const getAllData = async () => {
@@ -9,7 +11,7 @@ export const getAllData = async () => {
 };
 
 // Get Data Skill
-export const getSkill = async (characterId) => {
+export const getSkill = async (characterId:string) => {
   const response = await fetch(`${url}/api/hero/${characterId}`);
   return response.json();
 };
@@ -27,13 +29,13 @@ export const getVillains = async () => {
 };
 
 // Get Data Selected Villain
-export const getSelectedVillain = async (villainId) => {
+export const getSelectedVillain = async (villainId:string) => {
   const response = await fetch(`${url}/api/villain/${villainId}`);
   return response.json();
 };
 
 // Post Fight Data
-export const postFight = async (payload) => {
+export const postFight = async (payload:ModalBattlePayload) => {
   const response = await fetch(`${url}/api/fight`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
