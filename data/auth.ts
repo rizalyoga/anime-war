@@ -5,15 +5,6 @@ import { LoginPayload } from "@/components/pages/login/Login";
 
 const url = process.env.NEXT_PUBLIC_APP_LINK_API_2;
 
-interface RegisterData{
-
-}
-
-interface LoginData{
-
-}
-
-
 /* -------------------------------- Register Account -------------------------------- */
 const inTwoHours:Date = new Date(new Date().getTime() + 120 * 60 * 1000);
 
@@ -26,7 +17,6 @@ export const registerAccount = async (payload:RegisterPayload) => {
   });
 
   const data = await response.json();
-
 
   if (data.user?.confirmed === true) {
     let auththentication:boolean = true;
@@ -52,8 +42,6 @@ export const loginAccount = async (payload:LoginPayload) => {
   });
 
   const data = await response.json();
-  console.log(data);
-  
 
   if (data.user?.confirmed === true) {
     let auththentication:boolean = true;

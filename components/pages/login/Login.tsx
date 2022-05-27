@@ -14,9 +14,9 @@ export interface LoginPayload {
 }
 
 const Login: FC = () => {
-  const [email, setEmail] = useState<string | null>("");
-  const [password, setPassword] = useState<string | null>("");
-  const [error, setError] = useState<string | null>("");
+  const [email, setEmail] = useState<string>("");
+  const [password, setPassword] = useState<string>("");
+  const [error, setError] = useState<string>("");
   const [loading, setLoading] = useState<boolean>(false);
   const [isShow, setIsShow] = useState<boolean>(false);
 
@@ -57,7 +57,7 @@ const Login: FC = () => {
   };
 
   // Direction Function
-  const toHomePage: MouseEventHandler<HTMLInputElement> = () => {
+  const toHomePage: MouseEventHandler<HTMLButtonElement> = () => {
     router.push("/");
   };
 

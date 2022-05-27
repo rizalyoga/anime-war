@@ -60,7 +60,7 @@ const Register:FC = () => {
   };
 
   // Direction Funtion
-  const toHomePage:MouseEventHandler<HTMLInputElement> = () => {
+  const toHomePage:MouseEventHandler<HTMLButtonElement> = () => {
     router.push("/");
   };
 
