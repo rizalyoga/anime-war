@@ -1,19 +1,26 @@
-import React, { useState, useEffect } from "react";
-import styles from "@/styles/form.module.css";
+import React, { useState, useEffect,FC,MouseEventHandler } from "react";
 import Layout from "@/layout/Layout";
+import styles from "@/styles/form.module.css";
 import { useRouter } from "next/router";
 import Link from "next/link";
-import { loginAccount } from "@/data/auth";
+import { registerAccount } from "@/data/auth";
 import getToken from "utils/getCookies";
 import { BsFillEyeFill } from "react-icons/bs";
 import Animation from "@/components/animation/animation";
 
-const Login = () => {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [error, setError] = useState("");
-  const [loading, setLoading] = useState(false);
-  const [isShow, setIsShow] = useState(false);
+export interface RegisterPayload {
+  username:string ;
+  email:string;
+  password:string;
+}
+
+const Register:FC = () => {
+  const [username, setUsername] = useState<string>("");
+  const [email, setEmail] = useState<string>("");
+  const [password, setPassword] = useState<string>("");
+  const [error, setError] = useState<string>("");
+  const [loading, setLoading] = useState<boolean>(false);
+  const [isShow, setIsShow] = useState<boolean>(false);
 
   const router = useRouter();
 
@@ -24,22 +31,23 @@ const Login = () => {
     }
   }, []);
 
-  // Funtion for setShow password
+  // Funtion for set Show password
   const showPass = () => {
     setIsShow((prev) => !prev);
   };
 
-  // Login Handler
-  const handleLogin = (e) => {
+  // Register hanle
+  const handleRegister = (e:any):void => {
     e.preventDefault();
     setLoading((prev) => !prev);
 
-    const payload = {
-      identifier: email,
-      password: password,
+    const payload:RegisterPayload = {
+      username,
+      email,
+      password,
     };
 
-    loginAccount(payload).then((res) => {
+    registerAccount(payload).then((res:any):void => {
       setLoading((prev) => !prev);
       if (res == true) {
         setTimeout(() => {
@@ -51,20 +59,24 @@ const Login = () => {
     });
   };
 
-  // Direction Function
-  const toHomePage = () => {
+  // Direction Funtion
+  const toHomePage:MouseEventHandler<HTMLInputElement> = () => {
     router.push("/");
   };
 
   return (
-    <Layout title={"Login"}>
+    <Layout title={"Register"}>
       <div className="container">
         <div className={styles["form-container"]}>
           <Animation>
-            <h1>Login Form</h1>
-            <form className={styles.glass} onSubmit={handleLogin}>
+            <h1>Register Form</h1>
+            <form className={styles.glass} onSubmit={handleRegister}>
               <div className={styles.username}>
-                <label htmlFor="Email">Email</label>
+                <label htmlFor="username">Username</label>
+                <input type="text" placeholder="username" onChange={(e) => setUsername(e.target.value)} required />
+              </div>
+              <div className={styles.email}>
+                <label htmlFor="username">Email</label>
                 <input type="email" placeholder="email" onChange={(e) => setEmail(e.target.value)} required />
               </div>
               <div className={styles.password}>
@@ -75,14 +87,14 @@ const Login = () => {
                 </div>
               </div>
               <div className={styles.submit}>
-                {error}
+                <p className={styles['error-message']}>{error}</p>
                 <p>
-                  Don&apos;t have an account yet ?
-                  <Link href="/register">
-                    <a> Register</a>
+                  Alredy have an account ?
+                  <Link href="/login">
+                    <a>Login</a>
                   </Link>
                 </p>
-                <button className="submit-button">{loading ? "please wait ... " : "Login"}</button>
+                <button className="submit-button">{loading ? "please wait ... " : "Register"}</button>
                 <button className="submit-button" onClick={toHomePage}>
                   Home Page
                 </button>
@@ -95,4 +107,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default Register;
