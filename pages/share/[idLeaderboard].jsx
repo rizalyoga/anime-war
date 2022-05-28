@@ -1,10 +1,11 @@
 import React from "react";
 import SharePage from "@/components/pages/sharePage/SharePage";
 
-const SharesPage = ({ data, seos }) => {
+const SharesPage = ({ propsDataShare, seos }) => {
+  console.log(propsDataShare);
   return (
     <>
-      <SharePage data={data} seos={seos} />
+      <SharePage data={propsDataShare} seos={seos} />
     </>
   );
 };
@@ -55,7 +56,7 @@ export async function getStaticProps(context) {
 
   return {
     props: {
-      data: data,
+      propsDataShare: data,
       seos,
     },
     // Next.js will attempt to re-generate the page:
