@@ -1,4 +1,4 @@
-import React from "react";
+import React,{FC} from "react";
 import LeaderBoards from "@/components/pages/leaderBoards/LeaderBoards";
 import {DataLeaderboards} from "./LeaderboardInterfaces"
 
@@ -6,7 +6,7 @@ interface PropsLeaderboard {
   propsLeaderboard: DataLeaderboards[];
 }
 
-const Leaderboard = ({ propsLeaderboard }:PropsLeaderboard) => {
+const Leaderboard: FC <PropsLeaderboard>= ({ propsLeaderboard }) => {
   
   return (
     <>

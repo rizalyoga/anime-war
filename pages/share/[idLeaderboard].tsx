@@ -1,4 +1,4 @@
-import React from "react";
+import React,{FC} from "react";
 import SharePage from "@/components/pages/sharePage/SharePage";
 import {ShareData, SeosData} from "./ShareInterfaces"
 
@@ -7,8 +7,7 @@ interface PropsDataShare {
   seos: SeosData;
 }
 
-const SharesPage = ({ propsDataShare, seos }: PropsDataShare) => {
-  
+const SharesPage: FC <PropsDataShare> = ({ propsDataShare, seos }) => {
   return (
     <>
       <SharePage data={propsDataShare} seos={seos} />
