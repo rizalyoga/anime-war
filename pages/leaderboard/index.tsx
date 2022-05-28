@@ -1,6 +1,6 @@
 import React from "react";
 import LeaderBoards from "@/components/pages/leaderBoards/LeaderBoards";
-import {DataLeaderboards} from "./interfacesLeaderboard"
+import {DataLeaderboards} from "./LeaderboardInterfaces"
 
 interface PropsLeaderboard {
   propsLeaderboard: DataLeaderboards[];
