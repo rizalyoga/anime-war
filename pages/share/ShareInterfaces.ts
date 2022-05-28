@@ -8,7 +8,7 @@ export interface GametagData {
 
 export interface ShareData {
     created_at: string;
-    gametag: GametagData[];
+    gametag: GametagData;
     hero: string;
     id:number;
     published_at: string;
@@ -21,7 +21,7 @@ export interface SeosData {
     title: string;
     description: string;
     author: string;
-    keywords: string;
+    keywords: string[];
     canonicalUrl: string;
     ogTitle: string;
     ogDescription: string;

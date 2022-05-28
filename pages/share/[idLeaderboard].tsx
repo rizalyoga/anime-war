@@ -1,8 +1,14 @@
 import React from "react";
 import SharePage from "@/components/pages/sharePage/SharePage";
+import {ShareData, SeosData} from "./ShareInterfaces"
 
-const SharesPage = ({ propsDataShare, seos }) => {
-  console.log(propsDataShare);
+interface PropsDataShare {
+  propsDataShare: ShareData;
+  seos: SeosData;
+}
+
+const SharesPage = ({ propsDataShare, seos }: PropsDataShare) => {
+  
   return (
     <>
       <SharePage data={propsDataShare} seos={seos} />
@@ -13,8 +19,8 @@ const SharesPage = ({ propsDataShare, seos }) => {
 export async function getStaticPaths() {
   const res = await fetch(`https://thrive-project-be.herokuapp.com/leaderboards`);
   const data = await res.json();
-
-  const allPathId = data.map((leaderboard) => ({ params: { idLeaderboard: `${leaderboard.id}` } }));
+  
+  const allPathId = data.map((leaderboard:ShareData) => ({ params: { idLeaderboard: `${leaderboard.id}` } }));
 
   return {
     paths: allPathId,
@@ -23,7 +29,7 @@ export async function getStaticPaths() {
   };
 }
 
-export async function getStaticProps(context) {
+export async function getStaticProps(context:any) {
   const { params } = context;
   const id = params.idLeaderboard;
 
@@ -35,7 +41,7 @@ export async function getStaticProps(context) {
 
   const data = await res.json();
 
-  const seos = {
+  const seos:SeosData = {
     title: `${data.gametag?.name || null} - ${data.hero} VS ${data.villain}`,
     description: `Player ${data.gametag?.name || null} berhasil mengalahkan Villain ${data.villain} menggunakan hero ${data.hero}`,
     author: data.gametag?.name || null,
