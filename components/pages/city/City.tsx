@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { FC,useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import { getCity, loadings } from "@/data/api";
 import CardCity from "@/components/cards/CardCity";
@@ -7,12 +7,37 @@ import Layout from "@/layout/Layout";
 import Private from "@/layout/PrivateLayout";
 import getToken from "../../../utils/getCookies";
 
-function City() {
-  const [dataCity, setDataCity] = useState([]);
-  const [loading, setLoading] = useState();
+interface ChoosenHero {
+  hero?: string;
+  idCharacter?: string;
+}
+
+interface HeroesData {
+  id: number;
+  name: string;
+}
+
+interface villainsData {
+  cityId: number;
+  id: number;
+  imgSrc: string;
+  name: string;
+}
+
+interface CityData {
+  heroes: HeroesData[];
+  id: number;
+  imgSrc: string;
+  name: string;
+  villains: villainsData[];
+}
+
+const City: FC = () => {
+  const [dataCity, setDataCity] = useState<CityData[]>([]);
+  const [loading, setLoading] = useState<boolean | null>();
 
   const router = useRouter();
-  const { hero, idCharacter } = router.query;
+  const { hero, idCharacter }: ChoosenHero = router.query;
 
   //Get City Data
   useEffect(() => {
@@ -26,12 +51,12 @@ function City() {
   }, []);
 
   //Back to Home Handler
-  const goesToHome = () => {
+  const goesToHome = (): void => {
     router.push("/home");
   };
 
   //Goes to Skill Character Page
-  const goesToSkill = () => {
+  const goesToSkill = (): void => {
     router.push(`/skill/${idCharacter}?hero=${hero}`);
   };
 

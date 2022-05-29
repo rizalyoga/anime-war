@@ -1,4 +1,4 @@
-import React from "react";
+import React, {FC} from "react";
 import Image from "next/image";
 import { useRouter } from "next/router";
 import styles from "./landing-page.module.css";
@@ -6,10 +6,10 @@ import Head from "next/head";
 import getToken from "utils/getCookies";
 import Animation from "@/components/animation/animation";
 
-const LandingPage = () => {
+const LandingPage: FC = () => {
   const router = useRouter();
 
-  const startGame = () => {
+  const startGame = ():void => {
     const token = getToken();
     if (token) {
       router.push("/home");
@@ -18,9 +18,10 @@ const LandingPage = () => {
     }
   };
 
-  const toLeaderboard = () => {
+  const toLeaderboard = (): void => {
     router.push("/leaderboard");
   };
+
   return (
     <>
       <Head>
@@ -28,15 +29,15 @@ const LandingPage = () => {
         <link rel="icon" href="/swords.png" type="image/x-icon" />
         <meta title="Anime War" />
         <meta name="description" title={"Game pertempuran antara hero dan villain bertemakan Anime"} />
-        <meta name="keywords" content={["Anime", "War", "Game"]} />
+        <meta name="keywords" content={`${["Anime", "War", "Game"]}`} />
         <link rel="canonical" href={"https://anime-war-rizalyoga.vercel.app/"} />
         <meta name="twitter:card" content={"summary"} />
         <meta name="twitter:url" content={"https://anime-war-rizalyoga.vercel.app/"} />
         <meta name="twitter:title" content={"Anime War"} />
         <meta name="twitter:description" content={"Game pertempuran antara bertemakan Anime"} />
         <meta property="og:url" content={"https://anime-war-rizalyoga.vercel.app/"} />
-        <meta property="og:image:width" content={1200} />
-        <meta property="og:image:height" content={630} />
+        <meta property="og:image:width" content={`${1200}`} />
+        <meta property="og:image:height" content={`${630}`} />
         <meta property="og:type" content={"Product"} />
         <meta property="og:title" content={"Anime War"} />
         <meta property="og:description" content={"Game pertempuran antara hero dan villain bertemakan Anime"} />
