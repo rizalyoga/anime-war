@@ -3,7 +3,12 @@ import { useRouter } from "next/router";
 import Head from "next/head";
 import NProgress from "nprogress";
 
-const Layout = ({ children, title }) => {
+export interface LayoutProps {
+  children : React.ReactNode;
+  title?: string;
+}
+
+const Layout = ({ children, title }: LayoutProps) => {
   const router = useRouter();
 
   useEffect(() => {
