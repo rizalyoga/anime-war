@@ -1,10 +1,53 @@
-import React from "react";
+import React,{FC} from "react";
 import SharePage from "@/components/pages/sharePage/SharePage";
 
-const SharesPage = ({ data, seos }) => {
+export interface GametagData {
+  created_at: string;
+  id: number;
+  name: string;
+  published_at: string;
+  updated_at: string;
+}
+
+export interface ShareData {
+  created_at: string;
+  gametag: GametagData;
+  hero: string;
+  id:number;
+  published_at: string;
+  score: number;
+  updated_at: string;
+  villain: string;
+}
+
+export interface SeosData {
+  title: string;
+  description: string;
+  author: string;
+  keywords: string[];
+  canonicalUrl: string;
+  ogTitle: string;
+  ogDescription: string;
+  ogImageUrl: string;
+  ogImageWidth: number;
+  ogImageHeight: number;
+  ogType: string;
+  ogUrl: string;
+  twitterCard: string;
+  twitterTitle: string;
+  twitterDescription: string;
+  twitterUrl: string;
+}
+
+interface PropsDataShare {
+  propsDataShare: ShareData;
+  seos: SeosData;
+}
+
+const SharesPage :FC <PropsDataShare>= ({ propsDataShare, seos }) => {
   return (
     <>
-      <SharePage data={data} seos={seos} />
+      <SharePage data={propsDataShare} seos={seos} />
     </>
   );
 };
@@ -12,8 +55,8 @@ const SharesPage = ({ data, seos }) => {
 export async function getStaticPaths() {
   const res = await fetch(`https://thrive-project-be.herokuapp.com/leaderboards`);
   const data = await res.json();
-
-  const allPathId = data.map((leaderboard) => ({ params: { idLeaderboard: `${leaderboard.id}` } }));
+  
+  const allPathId = data.map((leaderboard:ShareData) => ({ params: { idLeaderboard: `${leaderboard.id}` } }));
 
   return {
     paths: allPathId,
@@ -22,7 +65,7 @@ export async function getStaticPaths() {
   };
 }
 
-export async function getStaticProps(context) {
+export async function getStaticProps(context:any) {
   const { params } = context;
   const id = params.idLeaderboard;
 
@@ -34,7 +77,7 @@ export async function getStaticProps(context) {
 
   const data = await res.json();
 
-  const seos = {
+  const seos:SeosData = {
     title: `${data.gametag?.name || null} - ${data.hero} VS ${data.villain}`,
     description: `Player ${data.gametag?.name || null} berhasil mengalahkan Villain ${data.villain} menggunakan hero ${data.hero}`,
     author: data.gametag?.name || null,
@@ -55,7 +98,7 @@ export async function getStaticProps(context) {
 
   return {
     props: {
-      data: data,
+      propsDataShare: data,
       seos,
     },
     // Next.js will attempt to re-generate the page:

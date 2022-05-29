@@ -43,7 +43,8 @@ const Table = ({ datas, searchCharacter }) => {
     if (filterBy) {
       dataSort = _data.sort(sortBy("score", true, parseInt));
     } else {
-      dataSort = _data.map((data) => ({ ...data, totalScore: sumScore(data.leaderboards) })).sort(sortBy("totalScore", true, parseInt));
+      dataSort = _data.map((data) => ({ ...data, totalScore: sumScore(data.leaderboards) }))
+      .sort(sortBy("totalScore", true, parseInt));
     }
     const data_ = dataSort.map((data, i) => ({ ...data, num: i + 1 }));
 
@@ -102,7 +103,9 @@ const Table = ({ datas, searchCharacter }) => {
               <td>{!filterBy ? data.totalScore : data.score}</td>
               <td className={styles["date-moment"]}>
                 {!filterBy ? (
-                  <button className={styles["detail-button"]} onClick={() => selectData(data.leaderboards)}>
+                  <button 
+                    className={styles["detail-button"]} 
+                    onClick={() => selectData(data.leaderboards)}>
                     Detail
                   </button>
                 ) : (
@@ -114,7 +117,13 @@ const Table = ({ datas, searchCharacter }) => {
         </tbody>
       </table>
       <div className={styles.pagination}>
-        <Pagination className="pagination-bar" currentPage={currentPage} totalCount={datas.length} pageSize={pageSize} onPageChange={(page) => setCurrentPage(page)} />
+        <Pagination 
+          className="pagination-bar" 
+          currentPage={currentPage} 
+          totalCount={datas.length} 
+          pageSize={pageSize} 
+          onPageChange={(page) => setCurrentPage(page)} 
+        />
       </div>
       {isOpen && <ModalDetail selectedData={selectedDetailData} setIsOpen={setIsOpen} />}
     </div>

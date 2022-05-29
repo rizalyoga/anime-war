@@ -1,10 +1,16 @@
 import Cookies from "js-cookie";
+import { RegisterPayload } from "@/components/pages/register/Register";
+import { LoginPayload } from "@/components/pages/login/Login";
+
+
+const url = process.env.NEXT_PUBLIC_APP_LINK_API_2;
 
 /* -------------------------------- Register Account -------------------------------- */
-const inTwoHours = new Date(new Date().getTime() + 120 * 60 * 1000);
+const inTwoHours:Date = new Date(new Date().getTime() + 120 * 60 * 1000);
 
-export const registerAccount = async (payload) => {
-  const response = await fetch("https://thrive-project-be.herokuapp.com/auth/local/register", {
+
+export const registerAccount = async (payload:RegisterPayload) => {
+  const response = await fetch(`${url}/auth/local/register`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(payload),
@@ -13,7 +19,7 @@ export const registerAccount = async (payload) => {
   const data = await response.json();
 
   if (data.user?.confirmed === true) {
-    let auththentication = true;
+    let auththentication:boolean = true;
     Cookies.set("userAuth", data.jwt, {
       expires: inTwoHours,
     });
@@ -23,13 +29,13 @@ export const registerAccount = async (payload) => {
 
     return auththentication;
   } else {
-    return <p style={{ color: "red" }}>{data.message[0].messages[0].message}</p>;
+    return  data.message[0].messages[0].message;
   }
 };
 
 /* -------------------------------- Login Account -------------------------------- */
-export const loginAccount = async (payload) => {
-  const response = await fetch("https://thrive-project-be.herokuapp.com/auth/local", {
+export const loginAccount = async (payload:LoginPayload) => {
+  const response = await fetch(`${url}/auth/local`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(payload),
@@ -38,7 +44,7 @@ export const loginAccount = async (payload) => {
   const data = await response.json();
 
   if (data.user?.confirmed === true) {
-    let auththentication = true;
+    let auththentication:boolean = true;
 
     Cookies.set("userAuth", data.jwt, {
       expires: inTwoHours,
@@ -54,6 +60,6 @@ export const loginAccount = async (payload) => {
 
     return auththentication;
   } else {
-    return <p style={{ color: "red" }}>{data.message[0].messages[0].message}</p>;
+    return data.message[0].messages[0].message;
   }
 };

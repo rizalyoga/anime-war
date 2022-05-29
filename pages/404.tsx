@@ -1,8 +1,8 @@
-import React, { useEffect } from "react";
+import React, {FC, useEffect } from "react";
 import { useRouter } from "next/router";
 import Layout from "@/layout/Layout";
 
-function PageNotFound() {
+const  PageNotFound:FC = () => {
   const router = useRouter();
 
   //Send user back to Home page in 2 second

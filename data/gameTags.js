@@ -1,10 +1,11 @@
+const url = process.env.NEXT_PUBLIC_APP_LINK_API_2;
+
 export const newGameTag = async (payload, token) => {
-  const resp = await fetch(`https://thrive-project-be.herokuapp.com/gametags`, {
+  const response = await fetch(`${url}/gametags`, {
     method: "POST",
     headers: { "Content-Type": "application/json", Authorization: `Bearer ${token}` },
     body: JSON.stringify(payload),
   });
 
-  const data = await resp.json();
-  return data;
+  return response.json();
 };

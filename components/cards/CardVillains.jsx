@@ -52,7 +52,10 @@ const CardVillain = ({ dataVillains, dataCity }) => {
       }
     });
 
-    return RESULT == "LOSE" ? loseButtonResult() : RESULT == "WIN" ? winButtonResult(heroName, villainName) : fightButton(villainName, dataId);
+    return RESULT == "LOSE" ? 
+              loseButtonResult() :
+           RESULT == "WIN" ? 
+              winButtonResult(heroName, villainName) : fightButton(villainName, dataId);
   };
 
   return (
@@ -66,6 +69,7 @@ const CardVillain = ({ dataVillains, dataCity }) => {
               <h1>{data.name}</h1>
 
               {checkDataReusltBattle(`${hero}VS${data.name}`, hero, data.name, data.id)}
+              
             </div>
           ))
       )}

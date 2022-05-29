@@ -1,7 +1,7 @@
-import React from "react";
+import React,{FC} from "react";
 import City from "@/components/pages/city/City";
 
-const Citys = () => {
+const Citys: FC = () => {
   return (
     <div>
       <City />

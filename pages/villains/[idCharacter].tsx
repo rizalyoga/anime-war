@@ -1,7 +1,7 @@
-import React from "react";
+import React,{FC} from "react";
 import Villains from "@/components/pages/villain/Villains";
 
-const Villain = () => {
+const Villain: FC = () => {
   return (
     <>
       <Villains />

@@ -24,13 +24,15 @@ function CardCity({ dataCity }) {
               ? data.heroes
                   .filter((el) => el.id == idCharacter)
                   .map((el) => (
-                    <button key={el.id} className="choose-btn" onClick={() => goesToVillain(idCharacter, hero, data.name)}>
+                    <button key={el.id} className="choose-btn" 
+                      onClick={() => goesToVillain(idCharacter, hero, data.name)}>
                       Battle in {data.name}
                     </button>
                   ))
               : data.heroes.map((el) =>
                   el.id == idCharacter ? (
-                    <button key={el.id} className="choose-btn" onClick={() => goesToVillain(idCharacter, hero, data.name)}>
+                    <button key={el.id} className="choose-btn" 
+                      onClick={() => goesToVillain(idCharacter, hero, data.name)}>
                       Battle in {data.name}
                     </button>
                   ) : (
