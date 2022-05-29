@@ -4,9 +4,9 @@ import Layout from "@/layout/Layout";
 import styles from "./leaderboard.module.css";
 import Table from "@/components/table/Table";
 import { getDataByHero, getDataByVillain } from "@/data/leaderBoadrs";
-import {DataLeaderboards} from "../../../pages/leaderboard/index"
+import { DataLeaderboards } from "../../../pages/leaderboard/index"
 
-interface PropsData {
+export interface PropsData {
   data: DataLeaderboards[];
 }
 
@@ -18,7 +18,7 @@ interface GametagData {
   updated_at: string;
 }
 
-interface PropsDataByFilter {
+export interface PropsDataByFilter {
   created_at: string;
   gametag: GametagData;
   hero: string;
@@ -27,6 +27,7 @@ interface PropsDataByFilter {
   score: number;
   updated_at: string;
   villain: string;
+  leaderboards?: any;
 }
 
 const LeaderBoards = (data: PropsData) => {
@@ -34,7 +35,7 @@ const LeaderBoards = (data: PropsData) => {
   const [character, setCharacter] = useState<string>("");
   const router = useRouter();
   const { query } = useRouter();
-
+  
   // Set data byGametag from SSR
   // useEffect(() => {
   //   if (data.data?.length > 0 && !query.filter) {

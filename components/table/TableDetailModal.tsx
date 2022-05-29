@@ -1,8 +1,13 @@
 import React from "react";
 import styles from "./table.module.css";
 import DateMoment from "../../utils/date";
+import { ArrayLeaderboard } from "./Table"
 
-const TableDetailModal = ({ selectedData }) => {
+interface PropsSelectedData {
+  selectedData : ArrayLeaderboard[];
+}
+
+const TableDetailModal = ({ selectedData }: PropsSelectedData) => {
   return (
     <table className={styles["table-detail"]}>
       <thead className={styles["table-header"]}>
@@ -15,7 +20,7 @@ const TableDetailModal = ({ selectedData }) => {
       </thead>
       <tbody>
         {selectedData.length > 0 &&
-          selectedData.map((data, idx) => (
+          selectedData.map((data: ArrayLeaderboard, idx: number) => (
             <tr key={idx}>
               <td> {idx + 1} </td>
               <td>{data.villain}</td>

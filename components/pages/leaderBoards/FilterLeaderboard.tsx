@@ -4,14 +4,14 @@ import Layout from "@/layout/Layout";
 import styles from "./leaderboard.module.css";
 import Table from "@/components/table/Table";
 
-const FilterLeaderBoards = (props) => {
+const FilterLeaderBoards = (props: any) => {
   const router = useRouter();
-  const { query } = router();
+  const { query } = useRouter();
 
-  const toHome = () => {
+  const toHome = (): void => {
     router.push("/");
   };
-  const toHero = () => {
+  const toHero = (): void => {
     router.push("/home");
   };
 
