@@ -9,7 +9,7 @@ import Layout from "@/layout/Layout";
 import Private from "@/layout/PrivateLayout";
 import getToken from "../../../utils/getCookies";
 
-interface VillainsData {
+export interface VillainsData {
   id: number;
   imgSrc: string;
   name: string;
@@ -56,7 +56,14 @@ const Villains= () => {
               <GoesToCityButton characterId={idCharacter} characterName={hero} />
             </div>
           </div>
-          {loading ? <LoadingComponent /> : <div className="card-container">{dataVillains && <CardVillains dataVillains={dataVillains} dataCity={dataCity} />}</div>}
+            {loading ? 
+              <LoadingComponent /> 
+              : 
+              <div 
+                className="card-container">
+                  {dataVillains && <CardVillains dataVillains={dataVillains} dataCity={dataCity} />}
+              </div>
+            }
         </div>
       </Private>
     </Layout>
