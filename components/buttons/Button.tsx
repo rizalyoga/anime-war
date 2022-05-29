@@ -1,4 +1,4 @@
-import { useState,FC } from "react";
+import { useState } from "react";
 import { useRouter } from "next/router";
 import { createNewLeaderboard } from "@/data/leaderBoadrs";
 import styles from "./buttons.module.css";
@@ -14,7 +14,7 @@ interface ButtonProps {
 }
 
 // Button for goes to city page
-export const GoesToCityButton:FC <ButtonProps> = ({ characterId, characterName }) => {
+export const GoesToCityButton = ({ characterId, characterName }:ButtonProps) => {
   const router = useRouter();
 
   const goToCity = ():void => {
@@ -45,7 +45,7 @@ export const GoesToCityButton:FC <ButtonProps> = ({ characterId, characterName }
 };
 
 // Button show when palyer win the battle
-export const ButtonWin:FC <ButtonProps> = ({ heroName, villainName }) => {
+export const ButtonWin = ({ heroName, villainName } : ButtonProps) => {
   const [loading, setLoading] = useState(false);
   const router = useRouter();
 
@@ -79,7 +79,7 @@ export const ButtonWin:FC <ButtonProps> = ({ heroName, villainName }) => {
 };
 
 // Button show when palyer lose the battle
-export const ButtonLose: FC = () => {
+export const ButtonLose = () => {
   return (
     <button className={`${styles['disable-btn']} ${styles['lose-btn']} `} disabled={true}>
       You Lose

@@ -40,7 +40,7 @@ export interface SeosData {
   twitterUrl: string;
 }
 
-interface PropsDataShare {
+export interface PropsDataShare {
   propsDataShare: ShareData;
   seos: SeosData;
 }
@@ -49,7 +49,7 @@ const SharesPage :FC <PropsDataShare>= ({ propsDataShare, seos }) => {
   
   return (
     <>
-      <SharePage data={propsDataShare} seos={seos} />
+      <SharePage propsDataShare={propsDataShare} seos={seos} />
     </>
   );
 };

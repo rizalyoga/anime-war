@@ -5,10 +5,11 @@ import Image from "next/image";
 import { useRouter } from "next/router";
 import Swal from "sweetalert2";
 import SharepageLayout from "@/layout/SharepageLayout";
+import { PropsDataShare } from "../../../pages/share/[idLeaderboard]"
 import { FacebookShareButton, FacebookIcon, TwitterShareButton, TwitterIcon, WhatsappShareButton, WhatsappIcon, TelegramShareButton, TelegramIcon } from "react-share";
 
-const SharePage = ({ data, seos }) => {
-  const [curentLink, setCurentLink] = useState("");
+const SharePage = ({ propsDataShare, seos }: PropsDataShare) => {
+  const [curentLink, setCurentLink] = useState<string>("");
 
   // Funtion for get curent link page
   const router = useRouter();
@@ -20,16 +21,16 @@ const SharePage = ({ data, seos }) => {
   }, []);
 
   // Function for direct page
-  const goToLeaderboard = () => {
+  const goToLeaderboard = (): void => {
     router.push("/leaderboard");
   };
 
-  const goToHome = () => {
+  const goToHome = (): void => {
     router.push("/home");
   };
 
   // Funtion for copied curent link to clipboard
-  const copyLink = () => {
+  const copyLink = (): void => {
     navigator.clipboard.writeText(curentLink);
     const Toast = Swal.mixin({
       toast: true,
@@ -59,10 +60,10 @@ const SharePage = ({ data, seos }) => {
               </div>
               <div className={styles["desc-content"]}>
                 <h3>
-                  Player <span>{data?.gametag?.name.toUpperCase()}</span> berhasil mengalahkan Villain <span>{data?.villain.toUpperCase()}</span> menggunakan hero <span>{data?.hero.toUpperCase()}</span>
+                  Player <span>{propsDataShare?.gametag?.name.toUpperCase()}</span> berhasil mengalahkan Villain <span>{propsDataShare?.villain.toUpperCase()}</span> menggunakan hero <span>{propsDataShare?.hero.toUpperCase()}</span>
                 </h3>
                 <h2>
-                  Score : <span>{data?.score}</span>
+                  Score : <span>{propsDataShare?.score}</span>
                 </h2>
                 <input type="text" placeholder={curentLink} value={curentLink} onBlur={() => setCurentLink(window.location.href)} onChange={(e) => setCurentLink(e.target.value)} />
               </div>

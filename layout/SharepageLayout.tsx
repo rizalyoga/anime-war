@@ -1,10 +1,9 @@
 import React from "react";
 import Head from "next/head";
-import {LayoutProps} from "./Layout"
 import {SeosData} from "../pages/share/[idLeaderboard]"
 
 interface LayoutShareProps {
-  children: LayoutProps;
+  children: React.ReactNode;
   seos: SeosData;
 }
 
