@@ -1,28 +1,46 @@
 import React, { useState, useEffect, useMemo } from "react";
 import styles from "./table.module.css";
-import { headerTitle } from "./header";
+import { headerTitle, HeaderTitle } from "./header";
 import { useRouter } from "next/router";
 import Filter from "./filterInput/FilterInput";
 import DateMoment from "../../utils/date";
 import ModalDetail from "../modal/ModalLeaderboard";
 import Pagination from "../paginations/Pagination";
 import sortBy from "utils/sortBy";
+import { PropsDataByFilter} from "../pages/leaderBoards/LeaderBoards"
+import { DataLeaderboards } from "../../pages/leaderboard/index"
 
-const Table = ({ datas, searchCharacter }) => {
-  const [titleFiltered, setTitleFiltered] = useState([]);
-  const [selectedDetailData, setSelectedDetailData] = useState([]);
-  const [isOpen, setIsOpen] = useState(false);
-  const [filterGametag, setFilterGametag] = useState();
+interface PropsDatas {
+  datas: DataLeaderboards[] | PropsDataByFilter[];
+  searchCharacter: (name: string) => void;
+}
 
+export interface ArrayLeaderboard {
+  created_at: string;
+  gametag: number;
+  hero: string;
+  id: number;
+  published_at: string;
+  score: number;
+  updated_at: string;
+  villain: string;
+}
+
+const Table = ({ datas, searchCharacter }: any) => {
+  const [titleFiltered, setTitleFiltered] = useState<HeaderTitle[]>([]);
+  const [selectedDetailData, setSelectedDetailData] = useState<ArrayLeaderboard[]>([]);
+  const [isOpen, setIsOpen] = useState<boolean>(false);
+  const [filterGametag, setFilterGametag] = useState<string | null>();
+  
   const router = useRouter();
   const filterBy = router.query.filter;
 
   // States for pagination
-  let pageSize = 12;
-  const [currentPage, setCurrentPage] = useState(1);
+  let pageSize: number = 12;
+  const [currentPage, setCurrentPage] = useState<number>(1);
 
   // Function for sum the total score
-  const sumScore = (arr) => {
+  const sumScore = (arr: ArrayLeaderboard[]): number => {
     if (arr?.length == 0) {
       return 0;
     } else {
@@ -43,14 +61,14 @@ const Table = ({ datas, searchCharacter }) => {
     if (filterBy) {
       dataSort = _data.sort(sortBy("score", true, parseInt));
     } else {
-      dataSort = _data.map((data) => ({ ...data, totalScore: sumScore(data.leaderboards) }))
+      dataSort = _data.map((data: any) => ({ ...data, totalScore: sumScore(data.leaderboards) }))
       .sort(sortBy("totalScore", true, parseInt));
     }
-    const data_ = dataSort.map((data, i) => ({ ...data, num: i + 1 }));
+    const data_ = dataSort.map((data: any, i: number) => ({ ...data, num: i + 1 }));
 
     const firstPageIndex = (currentPage - 1) * pageSize;
     const lastPageIndex = firstPageIndex + pageSize;
-
+    
     return data_.slice(firstPageIndex, lastPageIndex);
   }, [datas, currentPage, filterBy]);
 
@@ -74,13 +92,13 @@ const Table = ({ datas, searchCharacter }) => {
   }, [filterBy]);
 
   // Function for set Selected Data and open Modal
-  const selectData = (detailData) => {
+  const selectData = (detailData: ArrayLeaderboard[]): void => {
     setIsOpen((prev) => !prev);
     setSelectedDetailData(detailData);
   };
 
   // Function for set filter data by gametag
-  const filterByGametag = (gametag) => {
+  const filterByGametag = (gametag: string): void => {
     setFilterGametag(gametag);
   };
 
@@ -90,13 +108,13 @@ const Table = ({ datas, searchCharacter }) => {
       <table className={styles.table}>
         <thead className="table-header">
           <tr>
-            {titleFiltered?.map((data, idx) => (
+            {titleFiltered?.map((data: HeaderTitle, idx: number) => (
               <th key={idx}>{data.title}</th>
             ))}
           </tr>
         </thead>
         <tbody>
-          {currentTableData.map((data) => (
+          {currentTableData.map((data: any) => (
             <tr key={data.id}>
               <td> {data.num} </td>
               <td>{!filterBy ? data.name : data.gametag?.name}</td>
@@ -122,7 +140,7 @@ const Table = ({ datas, searchCharacter }) => {
           currentPage={currentPage} 
           totalCount={datas.length} 
           pageSize={pageSize} 
-          onPageChange={(page) => setCurrentPage(page)} 
+          onPageChange={(page: number) => setCurrentPage(page)} 
         />
       </div>
       {isOpen && <ModalDetail selectedData={selectedDetailData} setIsOpen={setIsOpen} />}

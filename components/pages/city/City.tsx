@@ -24,7 +24,7 @@ interface villainsData {
   name: string;
 }
 
-interface CityData {
+export interface CityData {
   heroes: HeroesData[];
   id: number;
   imgSrc: string;

@@ -1,4 +1,8 @@
-export const headerTitle = [
+export interface HeaderTitle {
+  title: String;
+}
+
+export const headerTitle: HeaderTitle[] = [
   {
     title: "Rank",
   },

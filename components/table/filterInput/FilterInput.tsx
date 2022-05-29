@@ -3,7 +3,12 @@ import { useRouter } from "next/router";
 import styles from "../table.module.css";
 import { AiOutlineSearch } from "react-icons/ai";
 
-function FilterInput({ searchCharacter, filterByGametag }) {
+interface Props {
+  searchCharacter: (name: string) => void;
+  filterByGametag: (gametag: string) => void;
+}
+
+function FilterInput({ searchCharacter, filterByGametag }: Props ) {
   const router = useRouter();
   const { query } = useRouter();
 
@@ -41,7 +46,7 @@ function FilterInput({ searchCharacter, filterByGametag }) {
   }, [query.filter]);
 
   // Funtion for setting default filter select
-  const filterBy = (term) => {
+  const filterBy = (term: string) => {
     if (term == "gametag") {
       setFilter("gametag");
       router.push("/leaderboard");
@@ -52,14 +57,14 @@ function FilterInput({ searchCharacter, filterByGametag }) {
   };
 
   // function for direction url when filter selected
-  const filterRoute = (term) => {
+  const filterRoute = (term: string) => {
     if (term == "hero" || "villain") {
       router.push(`leaderboard/?filter=${term}`);
     }
   };
 
   // Funtion for start filter by character name
-  const handleSubmit = (e) => {
+  const handleSubmit = (e: React.SyntheticEvent) => {
     e.preventDefault();
     searchCharacter(nameCharacter);
   };
@@ -69,15 +74,20 @@ function FilterInput({ searchCharacter, filterByGametag }) {
     filterByGametag(gametag);
   }, [gametag]);
 
+  // hidden style
+  const hiddenStyles: React.CSSProperties  = {
+    display: "none"
+  }
+
   return (
     <div className={styles["top-content"]}>
-      <div className={styles["left-content"]} style={hidden ? { display: "none" } : null}>
+      <div className={styles["left-content"]} style={hidden ? hiddenStyles : undefined}>
         <form onSubmit={handleSubmit}>
           <input type="search" value={nameCharacter} placeholder="input search" onChange={(e) => setNameCharacter(e.target.value)} />
           <AiOutlineSearch className={styles.icon} onClick={handleSubmit} />
         </form>
       </div>
-      <div className={styles["mid-content"]} style={hidden ? { display: "none" } : null}>
+      <div className={styles["mid-content"]} style={hidden ? hiddenStyles : undefined} >
         <h4>{nameCharacter ? `Hasil Search : ${nameCharacter.toUpperCase()}` : "Input charcater name first"} </h4>
       </div>
       {/* <input type="search" value={gametag} onChange={(e) => setGametag(e.target.value)} placeholder="player name" /> */}
