@@ -1,4 +1,5 @@
 import React, { FC } from "react";
+import {GetServerSideProps} from "next"
 import LeaderBoards from "@/components/pages/leaderBoards/LeaderBoards";
 
 export interface DataHistoryBattle {
@@ -34,7 +35,7 @@ const Leaderboard: FC <PropsLeaderboard>= ({ propsLeaderboard }) => {
   );
 };
 
-export async function getServerSideProps (context:any) {
+export const getServerSideProps: GetServerSideProps = async (context:any) => {
   const query = context.query;
   // const token = req.cookies.userAuth;
 

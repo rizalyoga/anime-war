@@ -2,8 +2,9 @@ import React, { useEffect } from "react";
 import { useRouter } from "next/router";
 import Navbar from "@/components/navbar/Navbar";
 import token from "../utils/getCookies";
+import {LayoutProps} from "./Layout"
 
-const PrivateLayout = ({ children }) => {
+const PrivateLayout = ({ children }: LayoutProps) => {
   const router = useRouter();
 
   useEffect(() => {

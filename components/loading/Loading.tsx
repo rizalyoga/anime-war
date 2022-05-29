@@ -1,8 +1,10 @@
 import React from "react";
+import {FC} from "react"
 import styles from "./loading.module.css";
 import Image from "next/image";
 
-const Loading = () => {
+
+const Loading: FC = () => {
   return (
     <div className={styles["container-loading"]}>
       {/* // <h1 className={styles["loading"]}>Please Wait...</h1> */}

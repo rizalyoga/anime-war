@@ -1,7 +1,7 @@
 import React from "react";
 import styles from "./animation.module.css";
 
-const Animation = ({ children }) => {
+const Animation = ({ children }:{children:React.ReactNode}) => {
   return (
     <div className={styles.area}>
       <ul className={styles.circles}>

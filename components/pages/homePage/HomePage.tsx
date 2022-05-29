@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect,FC } from "react";
 import { getAllData, loadings } from "@/data/api";
 import Card from "@/components/cards/Card";
 import { GoesToCityButton } from "@/components/buttons/Button";
@@ -8,15 +8,24 @@ import Layout from "@/layout/Layout";
 import Private from "@/layout/PrivateLayout";
 import getToken from "../../../utils/getCookies";
 
-const HomePage = () => {
-  const [dataCharacter, setDataCharacter] = useState([]);
-  const [dataSkill] = useState([]);
-  const [chooseCharacter, setChooseCharacter] = useState("");
-  const [idCaracter, setIdCharacter] = useState("");
-  const [loading, setLoading] = useState();
+interface DataHeroCharacter {
+  age: number;
+  id: number;
+  imgSrc: string;
+  name: string;
+  origin: string;
+}
+
+const HomePage: FC = () => {
+  const [dataCharacter, setDataCharacter] = useState<DataHeroCharacter[]>([]);
+  const [dataSkill] = useState<any>([]);
+  const [chooseCharacter, setChooseCharacter] = useState<string>("");
+  const [idCaracter, setIdCharacter] = useState<string>("");
+  const [loading, setLoading] = useState<boolean | null>();
+  
 
   // HANDLE CHOOSEN CHARACTER
-  const chooseTheCharacter = (name, id) => {
+  const chooseTheCharacter = (name: string, id: string): void => {
     setChooseCharacter(name);
     setIdCharacter(id);
   };
@@ -33,7 +42,7 @@ const HomePage = () => {
   }, []);
 
   // RESET GAME HANDLER
-  const resetGame = () => {
+  const resetGame = (): void => {
     confirmationtAlert();
   };
 

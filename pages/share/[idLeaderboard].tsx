@@ -1,4 +1,5 @@
 import React,{FC} from "react";
+import { GetStaticProps, GetStaticPaths } from 'next'
 import SharePage from "@/components/pages/sharePage/SharePage";
 
 export interface GametagData {
@@ -45,6 +46,7 @@ interface PropsDataShare {
 }
 
 const SharesPage :FC <PropsDataShare>= ({ propsDataShare, seos }) => {
+  
   return (
     <>
       <SharePage data={propsDataShare} seos={seos} />
@@ -52,7 +54,7 @@ const SharesPage :FC <PropsDataShare>= ({ propsDataShare, seos }) => {
   );
 };
 
-export async function getStaticPaths() {
+export const getStaticPaths: GetStaticPaths = async ()=> {
   const res = await fetch(`https://thrive-project-be.herokuapp.com/leaderboards`);
   const data = await res.json();
   
@@ -65,7 +67,7 @@ export async function getStaticPaths() {
   };
 }
 
-export async function getStaticProps(context:any) {
+export const getStaticProps: GetStaticProps = async (context:any)=> {
   const { params } = context;
   const id = params.idLeaderboard;
 
