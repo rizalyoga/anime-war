@@ -4,21 +4,41 @@ import { useRouter } from "next/router";
 import { ButtonLose, ButtonWin } from "../buttons/Button";
 import getTagname from "../../utils/getTagname";
 
-const CardVillain = ({ dataVillains, dataCity }) => {
-  const [isOpen, setIsOpen] = useState(false);
-  const [idVillain, setIdVillain] = useState("");
+//Interfaces
+import {CityData} from "../pages/city/City"
+import {VillainsData} from "../pages/villain/Villains"
+
+interface PropsVillains {
+  dataVillains: VillainsData[];
+  dataCity: CityData[];
+}
+
+interface DataBattleMemory {
+  heroHP: number;
+  villainHP: number;
+  versus: string;
+}
+
+interface Query {
+  hero?: string;
+  city?: string;
+}
+
+const CardVillain = ({ dataVillains, dataCity }: PropsVillains) => {
+  const [isOpen, setIsOpen] = useState<boolean>(false);
+  const [idVillain, setIdVillain] = useState<string>("");
 
   const router = useRouter();
-  const { hero, city } = router.query;
+  const { hero, city }: Query = router.query;
 
   // Choose villain Handler
-  const choosingVillain = (id) => {
+  const choosingVillain = (id: number) => {
     setIsOpen(true);
-    setIdVillain(id);
+    setIdVillain(id.toString());
   };
 
   // Button Component
-  const winButtonResult = (heroName, villainName) => {
+  const winButtonResult = (heroName: string, villainName: string) => {
     return <ButtonWin heroName={heroName} villainName={villainName} />;
   };
 
@@ -26,7 +46,7 @@ const CardVillain = ({ dataVillains, dataCity }) => {
     return <ButtonLose />;
   };
 
-  const fightButton = (villainName, dataId) => {
+  const fightButton = (villainName: string, dataId: number) => {
     return (
       <button className="choose-btn" onClick={() => choosingVillain(dataId)}>
         Fight {villainName}
@@ -35,10 +55,10 @@ const CardVillain = ({ dataVillains, dataCity }) => {
   };
 
   // Check battle data in localStorage
-  const checkDataReusltBattle = (value, heroName, villainName, dataId) => {
-    const tagname = getTagname();
-    const dataBattleSaved = JSON.parse(localStorage.getItem(tagname));
-    const RESULT = "";
+  const checkDataReusltBattle = (value: string, heroName: string, villainName: string, dataId: number) => {
+    const tagname: string | undefined = getTagname();
+    const dataBattleSaved: DataBattleMemory[] = JSON.parse(localStorage.getItem(tagname as string) || '{}');
+    let RESULT: string = "";
 
     if (!dataBattleSaved) return fightButton(villainName, dataId);
 
@@ -68,7 +88,7 @@ const CardVillain = ({ dataVillains, dataCity }) => {
               <img className="image" src={data.imgSrc} alt="avatar" />
               <h1>{data.name}</h1>
 
-              {checkDataReusltBattle(`${hero}VS${data.name}`, hero, data.name, data.id)}
+              {checkDataReusltBattle(`${hero}VS${data.name}`, hero as string, data.name, data.id)}
               
             </div>
           ))
