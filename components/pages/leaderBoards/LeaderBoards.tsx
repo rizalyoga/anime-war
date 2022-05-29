@@ -4,10 +4,34 @@ import Layout from "@/layout/Layout";
 import styles from "./leaderboard.module.css";
 import Table from "@/components/table/Table";
 import { getDataByHero, getDataByVillain } from "@/data/leaderBoadrs";
+import {DataLeaderboards} from "../../../pages/leaderboard/index"
 
-const LeaderBoards = (data) => {
-  const [dataLeaderBoard, setDataLeaderBoard] = useState([]);
-  const [character, setCharacter] = useState("");
+interface PropsData {
+  data: DataLeaderboards[];
+}
+
+interface GametagData {
+  created_at: string;
+  id: number
+  name: string;
+  published_at: string;
+  updated_at: string;
+}
+
+interface PropsDataByFilter {
+  created_at: string;
+  gametag: GametagData;
+  hero: string;
+  id: number;
+  published_at: string;
+  score: number;
+  updated_at: string;
+  villain: string;
+}
+
+const LeaderBoards = (data: PropsData) => {
+  const [dataLeaderBoard, setDataLeaderBoard] = useState<PropsDataByFilter[]>([]);
+  const [character, setCharacter] = useState<string>("");
   const router = useRouter();
   const { query } = useRouter();
 
@@ -35,16 +59,16 @@ const LeaderBoards = (data) => {
   }, [character]);
 
   // Function for search character
-  const searchCharacter = (name) => {
+  const searchCharacter = (name: string): void => {
     setCharacter(name);
   };
 
   // Funtion for Direction page
-  const toHome = () => {
+  const toHome = (): void => {
     router.push("/");
   };
 
-  const toHero = () => {
+  const toHero = (): void => {
     router.push("/home");
   };
 
@@ -59,7 +83,10 @@ const LeaderBoards = (data) => {
           </div>
         </div>
         <div className={styles["table-container"]}>
-          <Table searchCharacter={searchCharacter} datas={data.data?.length > 0 && !query.filter ? data.data : dataLeaderBoard} />
+          <Table 
+            searchCharacter={searchCharacter} 
+            datas={data.data?.length > 0 && !query.filter ? data.data : dataLeaderBoard
+          } />
         </div>
       </div>
     </Layout>
