@@ -1,8 +1,8 @@
+import React, {FC} from "react";
 import Home from "@/components/pages/homePage/HomePage";
 
-import React from "react";
 
-const HomePage = () => {
+const HomePage: FC = () => {
   return (
     <>
       <Home />
