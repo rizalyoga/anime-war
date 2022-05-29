@@ -6,18 +6,18 @@ import Cookies from "js-cookie";
 import getTagname from "../../utils/getTagname";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { CgClose } from "react-icons/cg";
-import Sidebar from "./Sidebar.jsx";
+import Sidebar from "./Sidebar";
 
 const Navbar = () => {
-  const [username, setUsername] = useState("");
-  const [nickname, setNickname] = useState("");
-  const [isShow, setIsShow] = useState(false);
+  const [username, setUsername] = useState<string>("");
+  const [nickname, setNickname] = useState<string>("");
+  const [isShow, setIsShow] = useState<boolean>(false);
 
   const router = useRouter();
 
   useEffect(() => {
-    const username = Cookies.get("username");
-    const nicknames = getTagname();
+    const username: string | undefined = Cookies.get("username");
+    const nicknames: string | undefined = getTagname();
 
     if (username) {
       setUsername(username.toUpperCase());
@@ -28,19 +28,19 @@ const Navbar = () => {
     }
   }, []);
 
-  const doLogout = () => {
+  const doLogout = (): void => {
     logoutConfirm();
   };
 
-  const toLeadBoard = () => {
+  const toLeadBoard = (): void => {
     router.push("/leaderboard");
   };
 
-  const createNickname = () => {
+  const createNickname = (): void => {
     createGameTag();
   };
 
-  const showSidebar = () => {
+  const showSidebar = (): void => {
     setIsShow((prev) => !prev);
   };
 
@@ -58,7 +58,15 @@ const Navbar = () => {
             <p onClick={toLeadBoard}>Leaderboard</p>
             <p onClick={createNickname}>Gametag</p>
             <p onClick={doLogout}>Log out</p>
-            {isShow ? <CgClose className={styles["close-button"]} onClick={showSidebar} /> : <GiHamburgerMenu className={styles["menu-button"]} onClick={showSidebar} />}
+              {isShow ? 
+                <CgClose 
+                  className={styles["close-button"]} 
+                  onClick={showSidebar} /> 
+                  : 
+                <GiHamburgerMenu 
+                  className={styles["menu-button"]}
+                  onClick={showSidebar} 
+              />}
           </div>
         </div>
       </div>

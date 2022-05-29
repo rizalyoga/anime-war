@@ -12,10 +12,10 @@ function FilterInput({ searchCharacter, filterByGametag }: Props ) {
   const router = useRouter();
   const { query } = useRouter();
 
-  const [filter, setFilter] = useState(query.filter ? query.filter : "gametag");
-  const [nameCharacter, setNameCharacter] = useState("");
-  const [hidden, setHidden] = useState(false);
-  const [gametag, setGametag] = useState("");
+  const [filter, setFilter] = useState<string | string[]>(query.filter ? query.filter : "gametag");
+  const [nameCharacter, setNameCharacter] = useState<string>("");
+  const [hidden, setHidden] = useState<boolean>(false);
+  const [gametag, setGametag] = useState<string>("");
 
   // Funtion for initialize value in searchCharacter
   const initializeCharacter = () => {
@@ -46,7 +46,7 @@ function FilterInput({ searchCharacter, filterByGametag }: Props ) {
   }, [query.filter]);
 
   // Funtion for setting default filter select
-  const filterBy = (term: string) => {
+  const filterBy = (term: string): void => {
     if (term == "gametag") {
       setFilter("gametag");
       router.push("/leaderboard");
@@ -57,14 +57,14 @@ function FilterInput({ searchCharacter, filterByGametag }: Props ) {
   };
 
   // function for direction url when filter selected
-  const filterRoute = (term: string) => {
+  const filterRoute = (term: string): void => {
     if (term == "hero" || "villain") {
       router.push(`leaderboard/?filter=${term}`);
     }
   };
 
   // Funtion for start filter by character name
-  const handleSubmit = (e: React.SyntheticEvent) => {
+  const handleSubmit = (e: React.SyntheticEvent): void => {
     e.preventDefault();
     searchCharacter(nameCharacter);
   };

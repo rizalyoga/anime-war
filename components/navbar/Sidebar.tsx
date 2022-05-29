@@ -3,18 +3,18 @@ import styles from "./sidebar.module.css";
 import { logoutConfirm, createGameTag } from "../alerts/alert";
 import { useRouter } from "next/router";
 
-const Sidebar = ({ isShow }) => {
+const Sidebar = ({ isShow }:{isShow: boolean}) => {
   const router = useRouter();
 
-  const doLogout = () => {
+  const doLogout = (): void => {
     logoutConfirm();
   };
 
-  const toLeadBoard = () => {
+  const toLeadBoard = (): void => {
     router.push("/leaderboard");
   };
 
-  const createNickname = () => {
+  const createNickname = (): void => {
     createGameTag();
   };
 
