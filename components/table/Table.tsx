@@ -7,6 +7,8 @@ import DateMoment from "../../utils/date";
 import ModalDetail from "../modal/ModalLeaderboard";
 import Pagination from "../paginations/Pagination";
 import sortBy from "utils/sortBy";
+
+// Interfaces
 import { PropsDataByFilter} from "../pages/leaderBoards/LeaderBoards"
 import { DataLeaderboards } from "../../pages/leaderboard/index"
 
@@ -141,6 +143,7 @@ const Table = ({ datas, searchCharacter }: any) => {
           totalCount={datas.length} 
           pageSize={pageSize} 
           onPageChange={(page: number) => setCurrentPage(page)} 
+          siblingCount = {1}
         />
       </div>
       {isOpen && <ModalDetail selectedData={selectedDetailData} setIsOpen={setIsOpen} />}
