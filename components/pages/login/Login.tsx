@@ -1,4 +1,4 @@
-import React, { useState, useEffect,FC,MouseEventHandler } from "react";
+import React, { useState, useEffect, MouseEventHandler } from "react";
 import styles from "@/styles/form.module.css";
 import Layout from "@/layout/Layout";
 import { useRouter } from "next/router";
@@ -13,7 +13,7 @@ export interface LoginPayload {
   password: string;
 }
 
-const Login: FC = () => {
+const Login = () => {
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const [error, setError] = useState<string>("");

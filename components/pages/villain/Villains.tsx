@@ -9,12 +9,24 @@ import Layout from "@/layout/Layout";
 import Private from "@/layout/PrivateLayout";
 import getToken from "../../../utils/getCookies";
 
-function Villains() {
-  const [dataVillains, setDataVillains] = useState([]);
-  const [loading, setLoading] = useState();
+interface VillainsData {
+  id: number;
+  imgSrc: string;
+  name: string;
+}
+
+interface Query {
+  idCharacter? :string;
+  hero? :string;
+  city? :string;
+}
+
+const Villains= () => {
+  const [dataVillains, setDataVillains] = useState<VillainsData[]>([]);
+  const [loading, setLoading] = useState<boolean | null>();
 
   const router = useRouter();
-  const { idCharacter, hero, city } = router.query;
+  const { idCharacter, hero, city }: Query = router.query;
 
   //Get Villains Data
   useEffect(() => {
