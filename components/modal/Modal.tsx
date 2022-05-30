@@ -61,7 +61,7 @@ const Modal = ({ setIsOpen, idVillain }: PropsVillainSelected) => {
       const tagname: string | undefined = getTagname();
       const checkDataBattle = JSON.parse(localStorage.getItem(tagname as string) || "{}");
 
-      const syncData = () => {
+      const syncData = (): void => {
         if (checkDataBattle) {
           let dataFinded = false;
           checkDataBattle.forEach((data: DataBattleMemory, i: number) => {
@@ -90,12 +90,12 @@ const Modal = ({ setIsOpen, idVillain }: PropsVillainSelected) => {
   }, [dataVillain, dataCity]);
 
   // Close Modal Handler
-  const closeModal = () => {
+  const closeModal = (): void => {
     setIsOpen(false);
   };
 
   // Even Handler when fight is ended
-  const fightEndhandler = (villainHP: number, heroHP: number) => {
+  const fightEndhandler = (villainHP: number, heroHP: number): void => {
     heroHP == 0 ? setStatusBattle("YOU LOSE") : villainHP == 0 ? setStatusBattle("YOU WIN") : null;
     setTimeout(() => {
       heroHP == 0 ? resultAlert("Sorry You LOSE 😭") : villainHP == 0 ? resultAlert("Congratulations, You WIN 🎉") : null;
@@ -104,7 +104,7 @@ const Modal = ({ setIsOpen, idVillain }: PropsVillainSelected) => {
   };
 
   // Battle Handler
-  const startBattle = (HPHero: number, HPVillain: number) => {
+  const startBattle = (HPHero: number, HPVillain: number): void => {
     if (HPHero === 0 || HPVillain === 0) {
       villainHP == 0 ? setStatusBattle("YOU WIN") : heroHP == 0 ? setStatusBattle("YOU LOSE") : setStatusBattle("THE FIGHT IS ON");
       villainHP == 0 ? alert("YOU WIN") : heroHP == 0 ? alert("YOU LOSE") : null;
@@ -120,13 +120,21 @@ const Modal = ({ setIsOpen, idVillain }: PropsVillainSelected) => {
       postFight(payload)
         .then((response) => {
           //set hit status battle, WIN or LOSE from response
-          response.heroHP < heroHP! ? setStatusBattle("YOU LOSE, YOUR HP -10%") : response.villainHP < villainHP! ? setStatusBattle("YOU WIN, VILLAIN HP -10%") : null;
+          response.heroHP < heroHP! ? 
+            setStatusBattle("YOU LOSE, YOUR HP -10%") 
+            : 
+          response.villainHP < villainHP! ? 
+            setStatusBattle("YOU WIN, VILLAIN HP -10%") 
+            : null;
 
           //set bar hero and villain HP from response
           setVillainHP(response.villainHP), setHeroHP(response.heroHP);
 
           //close modal and show alert when the fight is end
-          response.heroHP == 0 || response.villainHP == 0 ? fightEndhandler(response.villainHP, response.heroHP) : null;
+          response.heroHP == 0 || response.villainHP == 0 ? 
+            fightEndhandler(response.villainHP, response.heroHP) 
+            : 
+            null;
 
           //set final status battle, WIN or LOSE from response
           // response.heroHP == 0 ? setStatusBattle("YOU LOSE") : response.villainHP == 0 ? setStatusBattle("YOU WIN") : null;
@@ -142,7 +150,7 @@ const Modal = ({ setIsOpen, idVillain }: PropsVillainSelected) => {
             dataSaveBattle = JSON.parse(localStorage.getItem(tagname as string) || "{}");
           }
 
-          const checkData = (newData: DataBattleMemory) => {
+          const checkData = (newData: DataBattleMemory): void => {
             if (dataSaveBattle.length == 0) {
               dataSaveBattle.push(newData);
             } else {
@@ -162,7 +170,11 @@ const Modal = ({ setIsOpen, idVillain }: PropsVillainSelected) => {
             }
           };
 
-          checkData({ versus: `${hero}VS${dataVillain[0]?.name}`, villainHP: response.villainHP, heroHP: response.heroHP });
+          checkData(
+            { versus: `${hero}VS${dataVillain[0]?.name}`, 
+              villainHP: response.villainHP, 
+              heroHP: response.heroHP
+            });
           window.localStorage.setItem(tagname as string, JSON.stringify(dataSaveBattle));
         })
         .then(() =>

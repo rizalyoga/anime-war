@@ -80,8 +80,8 @@ export const createGameTag = () => {
     showCancelButton: true,
     confirmButtonText: "Create",
     showLoaderOnConfirm: true,
-    preConfirm: (nickname) => {
-      let tagname = "";
+    preConfirm: (nickname: string) => {
+      let tagname: string = "";
 
       if (nickname.length <= 0) {
         Swal.fire({ title: "Please insert tagname first", icon: "warning" });
@@ -94,7 +94,7 @@ export const createGameTag = () => {
       }
 
       const payload = { name: tagname };
-      const token = Cookies.get("userAuth");
+      const token: string | undefined= Cookies.get("userAuth");
 
       newGameTag(payload, token).then((response) => {
         if (response.statusCode == 400) {
