@@ -1,5 +1,5 @@
 const getTagname = () => {
-  const tagname = localStorage.getItem("nickname");
+  const tagname: string | null = localStorage.getItem("nickname");
 
   if (tagname) {
     return tagname;

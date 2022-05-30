@@ -1,13 +1,21 @@
 import { useMemo } from "react";
 
+interface PaginaetionParameter {
+  totalCount: number;
+  pageSize: number;
+  currentPage: number;
+  siblingCount: number
+}
+
+
 export const DOTS = "...";
 
-const range = (start, end) => {
+const range = (start: number, end: number) => {
   let length = end - start + 1;
   return Array.from({ length }, (_, idx) => idx + start);
 };
 
-export const usePagination = ({ totalCount, pageSize, siblingCount = 1, currentPage }) => {
+export const usePagination = ({ totalCount, pageSize, siblingCount = 1, currentPage }: PaginaetionParameter) => {
   const paginationRange = useMemo(() => {
     const totalPageCount = Math.ceil(totalCount / pageSize);
 

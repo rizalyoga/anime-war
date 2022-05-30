@@ -32,7 +32,7 @@ interface VillainData {
 
 const Modal = ({ setIsOpen, idVillain }: PropsVillainSelected) => {
   const [dataVillain, setDataVillain] = useState<VillainData[]>([]);
-  const [heroHP, setHeroHP] = useState<number | null>();
+  const [heroHP, setHeroHP] = useState<number | null | undefined>();
   const [villainHP, setVillainHP] = useState<number | null>();
   const [loading, setLoading] = useState<boolean | null>();
   const [loadingButton, setLoadingButton] = useState<boolean>(false);
@@ -59,12 +59,13 @@ const Modal = ({ setIsOpen, idVillain }: PropsVillainSelected) => {
       // Check and set HP bar when there is fight data in local storage
 
       const tagname: string | undefined = getTagname();
-      const checkDataBattle = JSON.parse(localStorage.getItem(tagname as string) || "{}");
+      const checkDataBattle: DataBattleMemory[]= JSON.parse(localStorage.getItem(tagname as string) || "[]");
+      
+      const syncData = (): void => {        
+        if (checkDataBattle.length > 0) {
+          let dataFinded: boolean = false;
 
-      const syncData = (): void => {
-        if (checkDataBattle) {
-          let dataFinded = false;
-          checkDataBattle.forEach((data: DataBattleMemory, i: number) => {
+          checkDataBattle.length > 0 && checkDataBattle.forEach((data: any, i: number) => {
             if (data.versus == `${hero}VS${dataVillain[0]?.name}`) {
               dataFinded = true;
               setVillainHP(checkDataBattle[i].villainHP);
@@ -154,8 +155,8 @@ const Modal = ({ setIsOpen, idVillain }: PropsVillainSelected) => {
             if (dataSaveBattle.length == 0) {
               dataSaveBattle.push(newData);
             } else {
-              let finded = false;
-              dataSaveBattle.forEach((data, i) => {
+              let finded: boolean = false;
+              dataSaveBattle.length > 0 && dataSaveBattle.forEach((data: DataBattleMemory, i:number) => {
                 if (data.versus == newData.versus) {
                   dataSaveBattle[i].versus = newData.versus;
                   dataSaveBattle[i].villainHP = newData.villainHP;
@@ -175,6 +176,7 @@ const Modal = ({ setIsOpen, idVillain }: PropsVillainSelected) => {
               villainHP: response.villainHP, 
               heroHP: response.heroHP
             });
+            
           window.localStorage.setItem(tagname as string, JSON.stringify(dataSaveBattle));
         })
         .then(() =>
@@ -216,7 +218,7 @@ const Modal = ({ setIsOpen, idVillain }: PropsVillainSelected) => {
                   <p className={styles.statusHP}>{villainHP} %</p>
                   <div 
                     className={styles.progressBar} 
-                    style={{ width: `${villainHP}%`, background: `${expVillainCheck(villainHP)}` }}>
+                    style={{ width: `${villainHP}%`, background: `${expVillainCheck(villainHP!)}` }}>
                   </div>
                 </div>
 
@@ -230,7 +232,7 @@ const Modal = ({ setIsOpen, idVillain }: PropsVillainSelected) => {
                   <p className={styles.statusHP}>{heroHP} %</p>
                   <div 
                     className={styles.progressBar} 
-                    style={{ width: `${heroHP}%`, background: `${expHeroCheck(heroHP)}` }}>
+                    style={{ width: `${heroHP}%`, background: `${expHeroCheck(heroHP!)}` }}>
 
                 </div>
                 </div>

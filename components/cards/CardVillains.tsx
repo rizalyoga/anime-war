@@ -15,8 +15,8 @@ interface PropsVillains {
 
 export interface DataBattleMemory {
   heroHP: number;
-  villainHP: number;
   versus: string;
+  villainHP: number;
 }
 
 interface Query {
@@ -61,10 +61,11 @@ const CardVillain = ({ dataVillains, dataCity }: PropsVillains) => {
 
     const dataBattleSaved: DataBattleMemory[] = JSON.parse(localStorage.getItem(tagname as string) || '{}');
     let RESULT: string = "";
+    
 
     if (!dataBattleSaved) return fightButton(villainName, dataId);
-
-    dataBattleSaved.map((data) => {
+   
+    dataBattleSaved.length > 0 && dataBattleSaved.map((data: any) => {
       if (data.versus == value) {
         if (data.villainHP == 0) {
           RESULT = "WIN";
@@ -77,7 +78,9 @@ const CardVillain = ({ dataVillains, dataCity }: PropsVillains) => {
     return RESULT == "LOSE" ? 
               loseButtonResult() :
            RESULT == "WIN" ? 
-              winButtonResult(heroName, villainName) : fightButton(villainName, dataId);
+              winButtonResult(heroName, villainName) 
+          : 
+              fightButton(villainName, dataId);
   };
 
   return (
