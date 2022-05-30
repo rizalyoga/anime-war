@@ -46,16 +46,16 @@ export const GoesToCityButton = ({ characterId, characterName }:ButtonProps) => 
 
 // Button show when palyer win the battle
 export const ButtonWin = ({ heroName, villainName } : ButtonProps) => {
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState<boolean>(false);
   const router = useRouter();
 
   const goToSharePage = ():void => {
     setLoading((prev) => !prev);
 
-    createNewLeaderboard(heroName, villainName).then((response) => {
+    createNewLeaderboard(heroName!, villainName!).then((response) => {
       setLoading((prev) => !prev);
       if (response.statusCode) {
-        updateDataBattle(heroName, villainName, response.message);
+        updateDataBattle(heroName!, villainName!, response.message);
       } else {
         router.push(`/share/${response.id}`);
       }

@@ -5,7 +5,7 @@ import Cookies from "js-cookie";
 import getTagname from "../../utils/getTagname";
 
 /* ------------------- // Modal for show result of battle ------------------- */
-export const resultAlert = (status) => {
+export const resultAlert = (status: string) => {
   return Swal.fire({
     title: status,
     width: 600,
@@ -33,8 +33,8 @@ export const confirmationtAlert = () => {
     background: `linear-gradient(rgba(4,9,30,0.5), rgba(4,9,30,0.5)), url(/assets/all_star_sweet.webp)`,
   }).then((result) => {
     if (result.isConfirmed) {
-      const tagname = getTagname();
-      localStorage.removeItem(tagname);
+      const tagname: string | undefined = getTagname();
+      localStorage.removeItem(tagname as string);
 
       Swal.fire({
         title: "Battle data has been reset",
@@ -80,8 +80,8 @@ export const createGameTag = () => {
     showCancelButton: true,
     confirmButtonText: "Create",
     showLoaderOnConfirm: true,
-    preConfirm: (nickname) => {
-      let tagname = "";
+    preConfirm: (nickname: string) => {
+      let tagname: string = "";
 
       if (nickname.length <= 0) {
         Swal.fire({ title: "Please insert tagname first", icon: "warning" });
@@ -94,7 +94,7 @@ export const createGameTag = () => {
       }
 
       const payload = { name: tagname };
-      const token = Cookies.get("userAuth");
+      const token: string | undefined= Cookies.get("userAuth");
 
       newGameTag(payload, token).then((response) => {
         if (response.statusCode == 400) {
@@ -103,8 +103,8 @@ export const createGameTag = () => {
             title: `Oops, Sorry gametag gagal dibuat, ${response.message}`,
           });
         } else {
-          const tagname = getTagname();
-          localStorage.removeItem(tagname);
+          const tagname: string | undefined = getTagname();
+          localStorage.removeItem(tagname as string);
 
           localStorage.setItem("nickname", response.name);
           localStorage.setItem("nicknameId", response.id);
@@ -121,10 +121,10 @@ export const createGameTag = () => {
 };
 
 /* ----------------- // Modal for Update result battle alert ---------------- */
-export const updateDataBattle = (heroName, villainName, message) => {
+export const updateDataBattle = (heroName: string, villainName: string, message: string) => {
   const regex = /\d+/g;
-  const numberId = message.match(regex);
-  const idBattle = parseInt(numberId[0]);
+  const numberId: RegExpMatchArray | null = message.match(regex);
+  const idBattle: number | null = parseInt(numberId![0]);
 
   Swal.fire({
     title: "Record Battle Alredy Exist",

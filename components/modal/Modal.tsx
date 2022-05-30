@@ -8,18 +8,40 @@ import { resultAlert } from "../alerts/alert";
 import getTagname from "utils/getTagname";
 import { expVillainCheck, expHeroCheck } from "../../utils/expBattleCheck";
 
-const Modal = ({ setIsOpen, idVillain }) => {
-  const [dataVillain, setDataVillain] = useState([]);
-  const [heroHP, setHeroHP] = useState();
-  const [villainHP, setVillainHP] = useState();
-  const [loading, setLoading] = useState();
-  const [loadingButton, setLoadingButton] = useState(false);
-  const [statusBattle, setStatusBattle] = useState("READY");
-  const [imageSource, setImageSource] = useState("");
+//Interfaces 
+import { DataBattleMemory } from "../cards/CardVillains"
+import { CityData } from "../pages/city/City"
+
+interface PropsVillainSelected {
+  setIsOpen: (e: boolean) => void;
+  idVillain: string;
+}
+
+interface Query {
+  hero?: string;
+  city?: string;
+}
+
+interface VillainData {
+  cityID: number;
+  id: number;
+  imgSrc: string;
+  maxHP: number;
+  name: string;
+}
+
+const Modal = ({ setIsOpen, idVillain }: PropsVillainSelected) => {
+  const [dataVillain, setDataVillain] = useState<VillainData[]>([]);
+  const [heroHP, setHeroHP] = useState<number | null | undefined>();
+  const [villainHP, setVillainHP] = useState<number | null>();
+  const [loading, setLoading] = useState<boolean | null>();
+  const [loadingButton, setLoadingButton] = useState<boolean>(false);
+  const [statusBattle, setStatusBattle] = useState<string>("READY");
+  const [imageSource, setImageSource] = useState<string>("");
 
   const router = useRouter();
 
-  const { hero, city } = router.query;
+  const { hero, city }: Query = router.query;
 
   const { dataCity } = useGetCity();
 
@@ -36,13 +58,14 @@ const Modal = ({ setIsOpen, idVillain }) => {
     if (dataVillain[0]?.name && dataCity) {
       // Check and set HP bar when there is fight data in local storage
 
-      const tagname = getTagname();
-      const checkDataBattle = JSON.parse(localStorage.getItem(tagname));
+      const tagname: string | undefined = getTagname();
+      const checkDataBattle: DataBattleMemory[]= JSON.parse(localStorage.getItem(tagname as string) || "[]");
+      
+      const syncData = (): void => {        
+        if (checkDataBattle.length > 0) {
+          let dataFinded: boolean = false;
 
-      const syncData = () => {
-        if (checkDataBattle) {
-          let dataFinded = false;
-          checkDataBattle.forEach((data, i) => {
+          checkDataBattle.length > 0 && checkDataBattle.forEach((data: any, i: number) => {
             if (data.versus == `${hero}VS${dataVillain[0]?.name}`) {
               dataFinded = true;
               setVillainHP(checkDataBattle[i].villainHP);
@@ -63,17 +86,17 @@ const Modal = ({ setIsOpen, idVillain }) => {
       syncData();
 
       // Filter background Modal that match with city name and set to imageSource state
-      dataCity.forEach((el) => (el.name == city ? setImageSource(el.imgSrc) : null));
+      dataCity.forEach((el: CityData) => (el.name == city ? setImageSource(el.imgSrc) : null));
     }
   }, [dataVillain, dataCity]);
 
   // Close Modal Handler
-  const closeModal = () => {
+  const closeModal = (): void => {
     setIsOpen(false);
   };
 
   // Even Handler when fight is ended
-  const fightEndhandler = (villainHP, heroHP) => {
+  const fightEndhandler = (villainHP: number, heroHP: number): void => {
     heroHP == 0 ? setStatusBattle("YOU LOSE") : villainHP == 0 ? setStatusBattle("YOU WIN") : null;
     setTimeout(() => {
       heroHP == 0 ? resultAlert("Sorry You LOSE 😭") : villainHP == 0 ? resultAlert("Congratulations, You WIN 🎉") : null;
@@ -82,7 +105,7 @@ const Modal = ({ setIsOpen, idVillain }) => {
   };
 
   // Battle Handler
-  const startBattle = (HPHero, HPVillain) => {
+  const startBattle = (HPHero: number, HPVillain: number): void => {
     if (HPHero === 0 || HPVillain === 0) {
       villainHP == 0 ? setStatusBattle("YOU WIN") : heroHP == 0 ? setStatusBattle("YOU LOSE") : setStatusBattle("THE FIGHT IS ON");
       villainHP == 0 ? alert("YOU WIN") : heroHP == 0 ? alert("YOU LOSE") : null;
@@ -98,34 +121,42 @@ const Modal = ({ setIsOpen, idVillain }) => {
       postFight(payload)
         .then((response) => {
           //set hit status battle, WIN or LOSE from response
-          response.heroHP < heroHP ? setStatusBattle("YOU LOSE, YOUR HP -10%") : response.villainHP < villainHP ? setStatusBattle("YOU WIN, VILLAIN HP -10%") : null;
+          response.heroHP < heroHP! ? 
+            setStatusBattle("YOU LOSE, YOUR HP -10%") 
+            : 
+          response.villainHP < villainHP! ? 
+            setStatusBattle("YOU WIN, VILLAIN HP -10%") 
+            : null;
 
           //set bar hero and villain HP from response
           setVillainHP(response.villainHP), setHeroHP(response.heroHP);
 
           //close modal and show alert when the fight is end
-          response.heroHP == 0 || response.villainHP == 0 ? fightEndhandler(response.villainHP, response.heroHP) : null;
+          response.heroHP == 0 || response.villainHP == 0 ? 
+            fightEndhandler(response.villainHP, response.heroHP) 
+            : 
+            null;
 
           //set final status battle, WIN or LOSE from response
           // response.heroHP == 0 ? setStatusBattle("YOU LOSE") : response.villainHP == 0 ? setStatusBattle("YOU WIN") : null;
 
           //save data battle in local storage
 
-          const tagname = getTagname();
-          const initialName = localStorage.getItem(tagname);
+          const tagname: string | undefined = getTagname();
+          const initialName = localStorage.getItem(tagname as string);
 
-          let dataSaveBattle = [];
+          let dataSaveBattle: DataBattleMemory[] = [];
 
           if (initialName) {
-            dataSaveBattle = JSON.parse(localStorage.getItem(tagname));
+            dataSaveBattle = JSON.parse(localStorage.getItem(tagname as string) || "{}");
           }
 
-          const checkData = (newData) => {
+          const checkData = (newData: DataBattleMemory): void => {
             if (dataSaveBattle.length == 0) {
               dataSaveBattle.push(newData);
             } else {
-              let finded = false;
-              dataSaveBattle.forEach((data, i) => {
+              let finded: boolean = false;
+              dataSaveBattle.length > 0 && dataSaveBattle.forEach((data: DataBattleMemory, i:number) => {
                 if (data.versus == newData.versus) {
                   dataSaveBattle[i].versus = newData.versus;
                   dataSaveBattle[i].villainHP = newData.villainHP;
@@ -140,8 +171,13 @@ const Modal = ({ setIsOpen, idVillain }) => {
             }
           };
 
-          checkData({ versus: `${hero}VS${dataVillain[0]?.name}`, villainHP: response.villainHP, heroHP: response.heroHP });
-          window.localStorage.setItem(tagname, JSON.stringify(dataSaveBattle));
+          checkData(
+            { versus: `${hero}VS${dataVillain[0]?.name}`, 
+              villainHP: response.villainHP, 
+              heroHP: response.heroHP
+            });
+            
+          window.localStorage.setItem(tagname as string, JSON.stringify(dataSaveBattle));
         })
         .then(() =>
           setTimeout(() => {
@@ -182,7 +218,7 @@ const Modal = ({ setIsOpen, idVillain }) => {
                   <p className={styles.statusHP}>{villainHP} %</p>
                   <div 
                     className={styles.progressBar} 
-                    style={{ width: `${villainHP}%`, background: `${expVillainCheck(villainHP)}` }}>
+                    style={{ width: `${villainHP}%`, background: `${expVillainCheck(villainHP!)}` }}>
                   </div>
                 </div>
 
@@ -196,7 +232,7 @@ const Modal = ({ setIsOpen, idVillain }) => {
                   <p className={styles.statusHP}>{heroHP} %</p>
                   <div 
                     className={styles.progressBar} 
-                    style={{ width: `${heroHP}%`, background: `${expHeroCheck(heroHP)}` }}>
+                    style={{ width: `${heroHP}%`, background: `${expHeroCheck(heroHP!)}` }}>
 
                 </div>
                 </div>
@@ -210,7 +246,7 @@ const Modal = ({ setIsOpen, idVillain }) => {
                       className={loadingButton ? styles.disableBtn : styles.fightBtn} 
                       disabled={loadingButton ? true : false} 
                       onClick={() => 
-                        startBattle(heroHP, villainHP ? villainHP : villainHP == 0 ? 0 : dataVillain[0].maxHP)}>
+                        startBattle(heroHP!, villainHP ? villainHP : villainHP == 0 ? 0 : dataVillain[0].maxHP)}>
                       {loadingButton ? "Wait" : "Fight"}
                     </button>
 

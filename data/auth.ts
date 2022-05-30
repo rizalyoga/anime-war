@@ -3,10 +3,10 @@ import { RegisterPayload } from "@/components/pages/register/Register";
 import { LoginPayload } from "@/components/pages/login/Login";
 
 
-const url = process.env.NEXT_PUBLIC_APP_LINK_API_2;
+const url: string | undefined = process.env.NEXT_PUBLIC_APP_LINK_API_2;
 
 /* -------------------------------- Register Account -------------------------------- */
-const inTwoHours:Date = new Date(new Date().getTime() + 120 * 60 * 1000);
+const inTwoHours: Date = new Date(new Date().getTime() + 120 * 60 * 1000);
 
 
 export const registerAccount = async (payload:RegisterPayload) => {
@@ -19,7 +19,7 @@ export const registerAccount = async (payload:RegisterPayload) => {
   const data = await response.json();
 
   if (data.user?.confirmed === true) {
-    let auththentication:boolean = true;
+    let auththentication: boolean = true;
     Cookies.set("userAuth", data.jwt, {
       expires: inTwoHours,
     });
@@ -44,7 +44,7 @@ export const loginAccount = async (payload:LoginPayload) => {
   const data = await response.json();
 
   if (data.user?.confirmed === true) {
-    let auththentication:boolean = true;
+    let auththentication: boolean = true;
 
     Cookies.set("userAuth", data.jwt, {
       expires: inTwoHours,
