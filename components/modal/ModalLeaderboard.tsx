@@ -3,7 +3,16 @@ import { RiCloseLine } from "react-icons/ri";
 import styles from "./modal.module.css";
 import TableDetailModal from "../table/TableDetailModal";
 
-const ModalLeaderboard = ({ selectedData, setIsOpen }) => {
+// Interfaces
+import {ArrayLeaderboard} from "../table/Table"
+
+
+interface PropsSelectedData {
+  selectedData: ArrayLeaderboard[];
+  setIsOpen: (e: boolean) => void;
+}
+
+const ModalLeaderboard = ({ selectedData, setIsOpen }: PropsSelectedData) => {
   return (
     <>
       <div className={styles.darkBG} onClick={() => setIsOpen(false)} />

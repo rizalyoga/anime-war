@@ -13,7 +13,7 @@ interface PropsVillains {
   dataCity: CityData[];
 }
 
-interface DataBattleMemory {
+export interface DataBattleMemory {
   heroHP: number;
   villainHP: number;
   versus: string;
@@ -56,7 +56,9 @@ const CardVillain = ({ dataVillains, dataCity }: PropsVillains) => {
 
   // Check battle data in localStorage
   const checkDataReusltBattle = (value: string, heroName: string, villainName: string, dataId: number) => {
+    
     const tagname: string | undefined = getTagname();
+
     const dataBattleSaved: DataBattleMemory[] = JSON.parse(localStorage.getItem(tagname as string) || '{}');
     let RESULT: string = "";
 
