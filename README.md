@@ -16,6 +16,8 @@ Here is a working live demo : https://anime-war-rizalyoga.vercel.app/
 
 ## 🎥 Video Demo
 
+https://user-images.githubusercontent.com/28485636/194340288-9e7a2a74-0e23-4f84-b144-cd01c47da8bb.mp4
+
 ## 🖼️ Pages
 
 ### Homepage
