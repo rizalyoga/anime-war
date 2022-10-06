@@ -43,6 +43,8 @@ https://user-images.githubusercontent.com/28485636/194340288-9e7a2a74-0e23-4f84-
 - Fight with chosen villain
 - Share the results of the fight to several social media
 - See your ranking on the leaderboard
+- reset game
+- logout account
 
 ## 🧰 Run in locale
 
