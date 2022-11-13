@@ -1,12 +1,10 @@
-import React, { FC, lazy, Suspense } from "react";
+import React, { FC } from "react";
 import Image from "next/image";
 import { useRouter } from "next/router";
 import styles from "./landing-page.module.css";
 import Head from "next/head";
 import getToken from "utils/getCookies";
-import Loading from "@/components/loading/Loading";
-
-const Animation = lazy(() => import("@/components/animation/animation"));
+import Animation from "@/components/animation/animation";
 
 const LandingPage: FC = () => {
   const router = useRouter();
@@ -75,33 +73,30 @@ const LandingPage: FC = () => {
         />
       </Head>
       <div className={styles.container}>
-        <Suspense fallback={<Loading />}>
-          <Animation>
-            <div className={styles["image-container"]}>
-              <Image
-                src="/assets/anime-war.webp"
-                alt="logo"
-                height={350}
-                width={850}
-                priority
-              />
-            </div>
-            <button
-              className={styles["start-game"]}
-              role="button"
-              onClick={startGame}
-            >
-              START GAME
-            </button>
-            {/* <button
+        <Animation>
+          <div className={styles["image-container"]}>
+            <Image
+              src="/assets/anime-war.webp"
+              alt="logo"
+              height={350}
+              width={850}
+            />
+          </div>
+          <button
+            className={styles["start-game"]}
+            role="button"
+            onClick={startGame}
+          >
+            START GAME
+          </button>
+          {/* <button
             className={styles["start-game"]}
             role="button"
             onClick={toLeaderboard}
           >
             Leader Board
           </button> */}
-          </Animation>
-        </Suspense>
+        </Animation>
       </div>
     </>
   );
