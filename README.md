@@ -8,7 +8,8 @@
 
 # ANIME WAR
 
-> ANIME WAR is a website with the theme of fighting games between Anime characters such as Dragonball, Naruto & Doraemon
+> ANIME WAR is a website with the theme of fighting games between Anime characters such as Dragonball, Naruto & Doraemon.
+> Note : when logging in for the first time, it will take about 30 seconds. this is because deploy backend using heroku
 
 ## ✨ Demo
 
